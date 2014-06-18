@@ -5,8 +5,16 @@ import "global.js" as Global
 Item {
     id: board
 
+    //mouse entered one piece
     signal mouseEntered(int spriteID)
+
+    //mouse exited one piece
     signal mouseExited(int spriteID)
+
+    //piece clicked
+    signal mouseClicked(int spriteID)
+
+    signal scoreChanged(int count)
 
     property var sprites: []
 
@@ -41,53 +49,82 @@ Item {
     }
 
 
-    onMouseEntered: {
-        var index = -1;
+    function getSpriteIndex(spriteID) {
         for(var i=0; i<sprites.length; i++) {
             if(sprites[i].spriteID === spriteID) {
-                index = i;
+                return i;
             }
         }
+        return -1;
+    }
 
-
+    onMouseEntered: {
+        var index = getSpriteIndex(spriteID);
         var x = index % nx;
         var y = Math.floor(index / nx);
-        fillAnimation(x, y, sprites[index].color, true);
+
+        var count = selectSprites(x, y, sprites[index].color, false);
+
+        if(count > 1) {
+            selectSprites(x, y, sprites[index].color, true);
+        }
     }
 
     onMouseExited: {
-        var index = -1;
-        for(var i=0; i<sprites.length; i++) {
-            if(sprites[i].spriteID === spriteID) {
-                index = i;
-            }
-        }
-
+        var index = getSpriteIndex(spriteID);
 
         var x = index % nx;
         var y = Math.floor(index / nx);
-        fillAnimation(x, y, sprites[index].color, false);
+
+        selectSprites(x, y, sprites[index].color, false);
     }
 
 
-    function fillAnimation(x, y, color, isSelected) {
-        if(x < 0 || y < 0) return;
-        if(x >= nx || y >= ny) return;
+    onMouseClicked: {
+        var index = getSpriteIndex(spriteID);
 
-        var i = y * nx + x;
+        var x = index % nx;
+        var y = Math.floor(index / nx);
 
-        var sprite = sprites[i];
-        if(sprite.color === color) {
-            if(sprite.isSelected !== isSelected) {
-                sprite.isSelected = isSelected;
+        var count = selectSprites(x, y, sprites[index].color, false);
 
-                fillAnimation(x-1, y, color, isSelected);
-                fillAnimation(x, y-1, color, isSelected);
-                fillAnimation(x+1, y, color, isSelected);
-                fillAnimation(x, y+1, color, isSelected);
-            }
+        if(count > 0) {
+            scoreChanged(count);
+        }
+    }
+
+
+    function selectSprites(x, y, color, isSelected, isInitialized) {
+        if(!isInitialized) {
+            resetCounters();
         }
 
+        if(x < 0 || y < 0) return 0;
+        if(x >= nx || y >= ny) return 0;
+
+        var i = y * nx + x;
+        var count = 0;
+
+
+        var sprite = sprites[i];
+        if(sprite.color === color && ! sprite.isCounted) {
+            sprite.isSelected = isSelected;
+            sprite.isCounted = true;
+
+            count ++;
+            count += selectSprites(x-1, y, color, isSelected, true);
+            count += selectSprites(x, y-1, color, isSelected, true);
+            count += selectSprites(x+1, y, color, isSelected, true);
+            count += selectSprites(x, y+1, color, isSelected, true);
+        }
+
+        return count;
+    }
+
+    function resetCounters() {
+        for(var i=0; i<sprites.length; i++) {
+            sprites[i].isCounted = false
+        }
     }
 
 
@@ -106,6 +143,7 @@ Item {
                 sprite.spriteID = y * nx + x;
                 sprite.mouseEntered.connect(mouseEntered)
                 sprite.mouseExited.connect(mouseExited)
+                sprite.mouseClicked.connect(mouseClicked)
                 sprites.push(sprite)
             }
         }

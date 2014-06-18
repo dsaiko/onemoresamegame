@@ -9,9 +9,11 @@ Item {
     property int rotation: -1
     property int spriteID: -1
     property bool isSelected: false
+    property bool isCounted: false
 
     signal mouseEntered(int spriteID)
     signal mouseExited(int spriteID)
+    signal mouseClicked(int spriteID)
 
 
     signal startAnimation
@@ -29,9 +31,9 @@ Item {
     onRotationChanged: {
         var r = rotation % 8;
 
-        sprites[r].opacity = 1
+        sprites[r].visible = true;
         for(var i=0; i< sprites.length; i++) {
-            if(i !== r) sprites[i].opacity = 0
+            if(i !== r) sprites[i].visible = false;
         }
     }
 
@@ -47,7 +49,8 @@ Item {
         id: imageFactory
         Image{
             anchors.fill: piece
-            opacity: 0
+            visible: false
+            smooth: true
         }
     }
 
@@ -58,6 +61,7 @@ Item {
         x: - parent.width / 5
         y: - parent.height / 5
         opacity: 0
+        smooth: true
         source: Global.spritePath+"star.png"
         z: 1
     }
@@ -167,6 +171,10 @@ Item {
 
         onExited: {
                 mouseExited(spriteID);
+        }
+
+        onClicked: {
+                mouseClicked(spriteID);
         }
     }
 

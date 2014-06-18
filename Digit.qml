@@ -13,13 +13,14 @@ Item {
         id: image0
         anchors.fill: parent;
         source: Global.digitsPath+"-.png"
+        smooth: true
     }
-
 
     Image {
         id: image1
         anchors.fill: parent;
         source: Global.digitsPath+"-.png"
+        smooth: true
     }
 
     SequentialAnimation {

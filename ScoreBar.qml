@@ -68,14 +68,4 @@ Item {
 
         score = 0
     }
-
-    MouseArea {
-        anchors.fill: parent
-
-
-        onClicked: {
-            score = score + 1;
-        }
-
-    }
 }
