@@ -20,5 +20,8 @@
 *.out
 *.app
 
+#QT
+Makefile
 *.pro.user
+qrc_qml.cpp
 
