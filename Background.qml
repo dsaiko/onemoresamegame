@@ -33,7 +33,7 @@ Item {
     }
 
     Component.onCompleted: {
-        for(var i=0; i < 300; i++) {
+        for(var i=0; i < 500; i++) {
             var sprite = spriteFactory.createObject(background);
             squares.push(sprite)
         }

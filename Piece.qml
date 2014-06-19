@@ -1,4 +1,6 @@
 import QtQuick 2.2
+import QtQuick.Particles 2.0
+
 import "global.js" as Global
 
 Item {
@@ -14,6 +16,8 @@ Item {
     signal mouseEntered(int spriteID)
     signal mouseExited(int spriteID)
     signal mouseClicked(int spriteID)
+
+    signal destroyPiece
 
 
     signal startAnimation
@@ -44,6 +48,7 @@ Item {
             animation.stop();
         }
     }
+
 
     Component {
         id: imageFactory
@@ -175,6 +180,67 @@ Item {
 
         onClicked: {
                 mouseClicked(spriteID);
+        }
+    }
+
+    onDestroyPiece: {
+        animation.stop()
+        destroyAnimation.start()
+    }
+
+    SequentialAnimation {
+
+        id: destroyAnimation;
+        loops: 1;
+
+
+        NumberAnimation {
+                 target: piece
+                 properties: "scale"
+                 from: 1
+                 to: 1.1
+                 duration: Math.random() * 250
+                 easing {type: Easing.OutQuad}
+        }
+
+         ParallelAnimation {
+
+             ScriptAction {
+                 script: { particles.burst(50); }
+            }
+
+            NumberAnimation {
+                     target: piece
+                     properties: "scale"
+                     from: 1.1
+                     to: 0
+                     duration: 400
+                     easing {type: Easing.InQuad}
+            }
+        }
+
+        onStopped: {
+            piece.destroy();
+        }
+
+    }
+
+    ParticleSystem {
+        id: particleSystem
+
+        anchors.centerIn: parent
+        ImageParticle {
+            source: Global.spritePath+piece.color+"_dust.png"
+            rotationVelocityVariation: 360
+        }
+
+        Emitter {
+            id: particles
+            anchors.centerIn: parent
+            emitRate: 0
+            lifeSpan: 400
+            velocity: AngleDirection {angleVariation: 360; magnitude: piece.width * 6; magnitudeVariation: piece.width}
+            size: piece.width / 4
         }
     }
 

@@ -30,11 +30,12 @@ Item {
         for(var y = 0; y < ny; y++) {
             for(var x = 0; x< nx; x++ ) {
                 var sprite =  sprites[y * nx + x];
-
-                sprite.x = x * cx;
-                sprite.y = y * cy;
-                sprite.width = cx;
-                sprite.height = cy;
+                if(sprite) {
+                    sprite.x = x * cx;
+                    sprite.y = y * cy;
+                    sprite.width = cx;
+                    sprite.height = cy;
+                }
             }
         }
 
@@ -51,7 +52,7 @@ Item {
 
     function getSpriteIndex(spriteID) {
         for(var i=0; i<sprites.length; i++) {
-            if(sprites[i].spriteID === spriteID) {
+            if(sprites[i] && sprites[i].spriteID === spriteID) {
                 return i;
             }
         }
@@ -60,36 +61,48 @@ Item {
 
     onMouseEntered: {
         var index = getSpriteIndex(spriteID);
-        var x = index % nx;
-        var y = Math.floor(index / nx);
+        if(sprites[index]) {
+            var x = index % nx;
+            var y = Math.floor(index / nx);
 
-        var count = selectSprites(x, y, sprites[index].color, false);
+            var count = selectSprites(x, y, sprites[index].color, false);
 
-        if(count > 1) {
-            selectSprites(x, y, sprites[index].color, true);
+            if(count > 1) {
+                selectSprites(x, y, sprites[index].color, true);
+            }
         }
     }
 
     onMouseExited: {
         var index = getSpriteIndex(spriteID);
+        if(sprites[index]) {
+            var x = index % nx;
+            var y = Math.floor(index / nx);
 
-        var x = index % nx;
-        var y = Math.floor(index / nx);
-
-        selectSprites(x, y, sprites[index].color, false);
+            selectSprites(x, y, sprites[index].color, false);
+        }
     }
 
 
     onMouseClicked: {
         var index = getSpriteIndex(spriteID);
+        if(sprites[index]) {
 
-        var x = index % nx;
-        var y = Math.floor(index / nx);
+            var x = index % nx;
+            var y = Math.floor(index / nx);
 
-        var count = selectSprites(x, y, sprites[index].color, false);
+            var count = selectSprites(x, y, sprites[index].color, true);
 
-        if(count > 0) {
-            scoreChanged(count);
+            if(count > 1) {
+                for(var i=0; i<sprites.length; i++) {
+                    if(sprites[i] && sprites[i].isCounted) {
+                        sprites[i].destroyPiece();
+                        sprites[i] = null;
+                    }
+                }
+
+                scoreChanged(count);
+            }
         }
     }
 
@@ -107,7 +120,7 @@ Item {
 
 
         var sprite = sprites[i];
-        if(sprite.color === color && ! sprite.isCounted) {
+        if(sprite && sprite.color === color && ! sprite.isCounted) {
             sprite.isSelected = isSelected;
             sprite.isCounted = true;
 
@@ -123,7 +136,7 @@ Item {
 
     function resetCounters() {
         for(var i=0; i<sprites.length; i++) {
-            sprites[i].isCounted = false
+            if(sprites[i]) sprites[i].isCounted = false
         }
     }
 
@@ -131,7 +144,6 @@ Item {
     Component {
         id: pieceFactory
         Piece {
-
         }
     }
 

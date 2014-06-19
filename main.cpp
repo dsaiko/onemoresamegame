@@ -6,6 +6,7 @@
  * TODO: counter - keep aspect ratio
  * TODO: animation, settings
  * TODO: performance, test fullscreen 75*50
+ * TODO: sound
   */
 
 int main(int argc, char *argv[])
