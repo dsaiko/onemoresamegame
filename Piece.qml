@@ -12,12 +12,17 @@ Item {
     property int spriteID: -1
     property bool isSelected: false
     property bool isCounted: false
+    property bool isDestroying: false
+    property bool spawned: false
+
 
     signal mouseEntered(int spriteID)
     signal mouseExited(int spriteID)
     signal mouseClicked(int spriteID)
 
     signal destroyPiece
+
+    signal pieceDestroyed(int spriteID)
 
 
     signal startAnimation
@@ -83,6 +88,15 @@ Item {
         shine.start()
     }
 
+    Behavior on y {
+        SpringAnimation{ spring: 4; damping: 0.3 }
+    }
+
+    Behavior on x {
+        enabled: true;
+        SpringAnimation{ spring: 2; damping: 0.2 }
+    }
+
     SequentialAnimation {
         id: animation;
         loops: Animation.Infinite;
@@ -122,7 +136,7 @@ Item {
         id: shine;
         loops: 1;
 
-        property int delay: Math.random() * 2000; // * 60 + 10000;
+        property int delay: Math.random() * 5000; // * 60 + 10000;
         property int duration: Math.random() * 400 + 200;
 
 
@@ -158,7 +172,7 @@ Item {
         }
 
         onStopped: {
-            shine.delay = Math.random() * 2000;
+            shine.delay = Math.random() * 5000;
             shine.duration = Math.random() * 400 + 200;
             shine.start();
         }
@@ -199,7 +213,7 @@ Item {
                  properties: "scale"
                  from: 1
                  to: 1.1
-                 duration: Math.random() * 250
+                 duration: Math.random() * 100
                  easing {type: Easing.OutQuad}
         }
 
@@ -214,13 +228,17 @@ Item {
                      properties: "scale"
                      from: 1.1
                      to: 0
-                     duration: 400
+                     duration: 300
                      easing {type: Easing.InQuad}
             }
         }
 
+       onStarted: {
+             isDestroying = true;
+       }
+
         onStopped: {
-            piece.destroy();
+            pieceDestroyed(spriteID);
         }
 
     }
@@ -239,8 +257,8 @@ Item {
             anchors.centerIn: parent
             emitRate: 0
             lifeSpan: 400
-            velocity: AngleDirection {angleVariation: 360; magnitude: piece.width * 6; magnitudeVariation: piece.width}
-            size: piece.width / 4
+            velocity: AngleDirection {angleVariation: 360; magnitude: piece.width * 5; magnitudeVariation: piece.width}
+            size: piece.width / 2
         }
     }
 

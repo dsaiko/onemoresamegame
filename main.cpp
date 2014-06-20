@@ -7,6 +7,7 @@
  * TODO: animation, settings
  * TODO: performance, test fullscreen 75*50
  * TODO: sound
+ * TODO: beautifull the code
   */
 
 int main(int argc, char *argv[])

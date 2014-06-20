@@ -15,6 +15,9 @@ Item {
     signal mouseClicked(int spriteID)
 
     signal scoreChanged(int count)
+    signal doubleScore
+
+    signal pieceDestroyed(int spriteID)
 
     property var sprites: []
 
@@ -22,10 +25,13 @@ Item {
     property int ny: 15
 
 
+    property int cx: board.width / nx;
+    property int cy: board.height / ny;
+
     function resize() {
 
-        var cx = board.width / nx;
-        var cy = board.height / ny;
+        cx = board.width / nx;
+        cy = board.height / ny;
 
         for(var y = 0; y < ny; y++) {
             for(var x = 0; x< nx; x++ ) {
@@ -84,6 +90,29 @@ Item {
     }
 
 
+    onPieceDestroyed: {
+        var index = getSpriteIndex(spriteID);
+        if(sprites[index]) {
+            sprites[index].destroy();
+            sprites[index] = null;
+
+
+            var count = 0;
+            for(var i=0; i<sprites.length; i++) {
+                if(sprites[i] && sprites[i].isD) {
+                    count ++;
+                }
+            }
+
+            if(count == 0) {
+                fallDown()
+                fallLeft()
+            }
+        }
+
+
+    }
+
     onMouseClicked: {
         var index = getSpriteIndex(spriteID);
         if(sprites[index]) {
@@ -91,13 +120,13 @@ Item {
             var x = index % nx;
             var y = Math.floor(index / nx);
 
-            var count = selectSprites(x, y, sprites[index].color, true);
+            var count = selectSprites(x, y, sprites[index].color, false);
 
             if(count > 1) {
                 for(var i=0; i<sprites.length; i++) {
                     if(sprites[i] && sprites[i].isCounted) {
+                        sprites[i].isSelected = true
                         sprites[i].destroyPiece();
-                        sprites[i] = null;
                     }
                 }
 
@@ -141,6 +170,66 @@ Item {
     }
 
 
+    function fallDown() {
+        for(var x = nx -1; x >= 0; x--) {
+            for(var y = ny - 2; y >=0; y --) {
+                var i = y*nx + x;
+                if(sprites[i]) {
+
+                    var tempY = y;
+                    var tempI = i;
+
+                    while(tempY < ny - 1) {
+                        if(sprites[tempI + nx]) break;
+                        tempI += nx;
+                        tempY ++;
+                    }
+
+                    //can we fall down?
+                    if(tempY != y) {
+                        var sprite = sprites[i];
+                        sprite.y = tempY * cy;
+                        sprites[i] = null;
+                        sprites[tempI] = sprite;
+                    }
+                }
+            }
+        }
+    }
+
+    function fallLeft() {
+        for(var x = 0; x < nx; x++) {
+            var count = 0;
+
+            for(var y = 0; y < ny; y++) {
+                var i = y*nx + x;
+                if(sprites[i]) {
+                    count ++;
+                    break;
+                }
+            }
+
+            if(count == 0) {
+                doubleScore();
+                for(var ix = x + 1; ix < nx; ix++) {
+                    for(var y = 0; y < ny; y++) {
+                        var i = y*nx + ix;
+
+                        var sprite = sprites[i];
+                        if(sprite) {
+                            sprite.spawned = true;
+                            sprite.x = (ix -1) * cx;
+                            sprites[i] = null;
+                            sprites[i-1] = sprite;
+                            sprite.spawned = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     Component {
         id: pieceFactory
         Piece {
@@ -156,6 +245,7 @@ Item {
                 sprite.mouseEntered.connect(mouseEntered)
                 sprite.mouseExited.connect(mouseExited)
                 sprite.mouseClicked.connect(mouseClicked)
+                sprite.pieceDestroyed.connect(pieceDestroyed)
                 sprites.push(sprite)
             }
         }

@@ -8,8 +8,6 @@ import QtQuick.Controls.Styles 1.2
 ApplicationWindow {
     visible: true
 
-    signal scoreChanged(int count)
-
     height: Screen.height / 2
     width: Screen.height / 3
 
@@ -35,12 +33,9 @@ ApplicationWindow {
          anchors.top: parent.top
     }
 
-    onScoreChanged: {
-        scoreBar.score += (count - 1) * (count - 1)
-    }
-
     Component.onCompleted: {
-        board.scoreChanged.connect(scoreChanged);
+        board.scoreChanged.connect(scoreBar.scoreAdded);
+        board.doubleScore.connect(scoreBar.doubleScore);
     }
 
 }
