@@ -23,5 +23,6 @@
 #QT
 Makefile
 *.pro.user
+*.pro.user.*
 qrc_qml.cpp
 

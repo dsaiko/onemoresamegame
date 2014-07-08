@@ -8,6 +8,10 @@
         <file>Board.qml</file>
         <file>Piece.qml</file>
         <file>global.js</file>
+        <file>background.js</file>
+        <file>scorebar.js</file>
+        <file>piece.js</file>
+        <file>board.js</file>
     </qresource>
     <qresource prefix="/images">
         <file>digits/digit-0.png</file>

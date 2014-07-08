@@ -1,6 +1,7 @@
-import QtQuick 2.2
+import QtQuick 2.0
 
 Rectangle {
+
     width: rscale * parent.width / 10 + parent.width / 30
     height: width
 

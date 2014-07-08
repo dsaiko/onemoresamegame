@@ -1,71 +1,32 @@
-import QtQuick 2.2
+import QtQuick 2.0
 import QtQuick.Particles 2.0
 
 import "global.js" as Global
+import "piece.js" as Piece
 
 Item {
     id: piece
 
-    readonly property int color : Math.floor(Math.random() * 4)
-    property var sprites: []
-    property int rotation: -1
-    property int spriteID: -1
+    property int pieceIndex: -1
+    readonly property int color: Piece.color;
+
     property bool isSelected: false
     property bool isCounted: false
     property bool isDestroying: false
     property bool spawned: false
 
-
-    signal mouseEntered(int spriteID)
-    signal mouseExited(int spriteID)
-    signal mouseClicked(int spriteID)
+    signal mouseClicked(int pieceIndex)
+    signal mouseEntered(int pieceIndex)
 
     signal destroyPiece
+    signal pieceDestroyed(int pieceIndex)
 
-    signal pieceDestroyed(int spriteID)
+    Component.onCompleted: Piece.create();
 
-
-    signal startAnimation
-    signal stopAnimation
-
-    onStartAnimation: {
-        animation.start()
-    }
-
-    onStopAnimation: {
-        animation.stop()
-    }
-
-
-    onRotationChanged: {
-        var r = rotation % 8;
-
-        sprites[r].visible = true;
-        for(var i=0; i< sprites.length; i++) {
-            if(i !== r) sprites[i].visible = false;
-        }
-    }
-
-    onIsSelectedChanged: {
-        if(isSelected) {
-            animation.start();
-        } else {
-            animation.stop();
-        }
-    }
-
-
-    Component {
-        id: imageFactory
-        Image{
-            anchors.fill: piece
-            visible: false
-            smooth: true
-        }
-    }
+    onIsSelectedChanged: Piece.onSelectionChange();
 
     Image {
-        id: star
+        id: shiningStar
         width: parent.width
         height: parent.height
         x: - parent.width / 5
@@ -76,24 +37,12 @@ Item {
         z: 1
     }
 
-    Component.onCompleted: {
-        for(var i=0; i<8; i++) {
-            var image = imageFactory.createObject(this);
-            image.source = Global.spritePath+color+"_"+i+".png";
-            sprites.push(image);
-        }
-
-
-        rotation = Math.floor(Math.random() * 8)
-        shine.start()
-    }
-
     Behavior on y {
         SpringAnimation{ spring: 4; damping: 0.3 }
     }
 
     Behavior on x {
-        enabled: true;
+        enabled: spawned;
         SpringAnimation{ spring: 2; damping: 0.2 }
     }
 
@@ -105,7 +54,7 @@ Item {
         }
 
         ScriptAction {
-            script: { rotation ++;  }
+            script: Piece.rotateSprite();
         }
 
         onStopped: {
@@ -126,7 +75,7 @@ Item {
         }
 
         ScriptAction {
-            script: { rotation ++;  }
+            script: Piece.rotateSprite();
         }
     }
 
@@ -145,7 +94,7 @@ Item {
         ParallelAnimation {
             SequentialAnimation {
                 NumberAnimation {
-                         target: star
+                         target: shiningStar
                          properties: "opacity"
                          from: 0
                          to: 0.8
@@ -153,7 +102,7 @@ Item {
                          easing {type: Easing.InOutBounce}
                 }
                 NumberAnimation {
-                         target: star
+                         target: shiningStar
                          properties: "opacity"
                          from: 0.8
                          to: 0
@@ -162,7 +111,7 @@ Item {
                 }
             }
             NumberAnimation {
-                     target: star
+                     target: shiningStar
                      properties: "scale"
                      from: 0
                      to: 0.6
@@ -182,19 +131,11 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        hoverEnabled: true
 
-        onEntered: {
-                mouseEntered(spriteID);
-        }
+        hoverEnabled: !PlatformDetails.isMobile;
+        onEntered:    if(!PlatformDetails.isMobile) mouseEntered(pieceIndex);
 
-        onExited: {
-                mouseExited(spriteID);
-        }
-
-        onClicked: {
-                mouseClicked(spriteID);
-        }
+        onClicked:  mouseClicked(pieceIndex);
     }
 
     onDestroyPiece: {
@@ -220,7 +161,7 @@ Item {
          ParallelAnimation {
 
              ScriptAction {
-                 script: { particles.burst(50); }
+                 script: particles.burst(50);
             }
 
             NumberAnimation {
@@ -233,14 +174,9 @@ Item {
             }
         }
 
-       onStarted: {
-             isDestroying = true;
-       }
+       onStarted: isDestroying = true;
 
-        onStopped: {
-            pieceDestroyed(spriteID);
-        }
-
+       onStopped: pieceDestroyed(pieceIndex);
     }
 
     ParticleSystem {
@@ -248,7 +184,7 @@ Item {
 
         anchors.centerIn: parent
         ImageParticle {
-            source: Global.spritePath+piece.color+"_dust.png"
+            source: Global.spritePath + Piece.color + "_dust.png"
             rotationVelocityVariation: 360
         }
 

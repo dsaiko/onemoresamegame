@@ -1,13 +1,11 @@
-import QtQuick 2.2
+import QtQuick 2.0
 
 import "global.js" as Global
 
 Item {
     property alias source: image1.source
 
-    onSourceChanged: {
-      animation.start();
-    }
+    onSourceChanged: animation.start();
 
     Image {
         id: image0
@@ -25,6 +23,7 @@ Item {
 
     SequentialAnimation {
         id: animation
+
         PropertyAnimation {
             target: image1
             properties: "opacity"
@@ -32,6 +31,7 @@ Item {
             to: 0.2
             duration: 80
         }
+
         PropertyAnimation {
             target: image1
             properties: "opacity"
