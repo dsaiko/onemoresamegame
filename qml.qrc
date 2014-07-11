@@ -12,6 +12,8 @@
         <file>scorebar.js</file>
         <file>piece.js</file>
         <file>board.js</file>
+        <file>main.cpp</file>
+        <file>platform-details.h</file>
     </qresource>
     <qresource prefix="/images">
         <file>digits/digit-0.png</file>
@@ -63,5 +65,9 @@
         <file>sprites/sprite_1_dust.png</file>
         <file>sprites/sprite_2_dust.png</file>
         <file>sprites/sprite_3_dust.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/icon.png</file>
+        <file>icons/icon.ico</file>
     </qresource>
 </RCC>

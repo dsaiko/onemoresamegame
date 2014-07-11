@@ -15,5 +15,4 @@ function resize() {
         sprite.x = (1.5 * width * sprite.rx) - width / 4
         sprite.y = (1.5 * height * sprite.ry) - height / 4
     }
-
 }

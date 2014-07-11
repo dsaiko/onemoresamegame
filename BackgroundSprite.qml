@@ -11,6 +11,4 @@ Rectangle {
     readonly property real ry: Math.random()
 
     readonly property real rscale: Math.random()
-
-
 }
