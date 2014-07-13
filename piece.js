@@ -2,7 +2,7 @@ Qt.include("global.js")
 
 var sprites = [];
 var rotation = Math.floor(Math.random() * 8);
-var color =  Math.floor(Math.random() * 4);
+var color =  Math.floor(Math.random() * 2);
 
 function create() {
     for(var i=0; i<8; i++) {

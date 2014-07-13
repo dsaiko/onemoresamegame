@@ -12,8 +12,9 @@
  * TODO: performance, test fullscreen 75*50
  * TODO: sound
  * TODO: beautifull the code, licence etc
- * TODO: android deployment
-  */
+ * TODO: android deployment + android layouts
+ * TODO: onMouseOut
+ */
 
 int main(int argc, char *argv[])
 {

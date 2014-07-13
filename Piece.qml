@@ -11,12 +11,13 @@ Item {
     readonly property int color: Piece.color;
 
     property bool isSelected: false
-    property bool isCounted: false
+    property int  selectionID: 0
+    property bool xAnimationEnabled: false
     property bool isDestroying: false
-    property bool spawned: false
 
     signal mouseClicked(int pieceIndex)
     signal mouseEntered(int pieceIndex)
+    signal mouseExited(int pieceIndex)
 
     signal destroyPiece
     signal pieceDestroyed(int pieceIndex)
@@ -38,17 +39,24 @@ Item {
     }
 
     Behavior on y {
-        SpringAnimation{ spring: 4; damping: 0.3 }
+        SpringAnimation{
+            spring: 4;
+            damping: 0.3
+        }
     }
 
     Behavior on x {
-        enabled: spawned;
-        SpringAnimation{ spring: 2; damping: 0.2 }
+        enabled: xAnimationEnabled;
+        SpringAnimation{
+            spring: 2;
+            damping: 0.2
+        }
     }
 
     SequentialAnimation {
         id: animation;
         loops: Animation.Infinite;
+
         PropertyAnimation {
             duration: 30;
         }
@@ -134,6 +142,7 @@ Item {
 
         hoverEnabled: !PlatformDetails.isMobile;
         onEntered:    if(!PlatformDetails.isMobile) mouseEntered(pieceIndex);
+        onExited:     if(!PlatformDetails.isMobile) mouseExited(pieceIndex);
 
         onClicked:  mouseClicked(pieceIndex);
     }
@@ -174,9 +183,8 @@ Item {
             }
         }
 
-       onStarted: isDestroying = true;
-
-       onStopped: pieceDestroyed(pieceIndex);
+         onStarted: isDestroying = true;
+         onStopped: pieceDestroyed(pieceIndex);
     }
 
     ParticleSystem {
