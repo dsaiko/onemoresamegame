@@ -4,13 +4,35 @@ Qt.include("global.js")
 var sprites = [];
 var globalSelectionID = 1;
 
+
+var numberOfColors = 4;
+var offsetY = 0;
+
+
 function create() {
+
+    var colors = [1,2,3,4,5];
+    var shapes = [1,2,3,4,5];
+
+    shuffle(colors);
+    shuffle(shapes);
+
     var component = Qt.createComponent("Piece.qml");
 
     for(var y = 0; y < ny; y++) {
         var row = []
         for(var x = 0; x< nx; x++ ) {
+
+            var rnd = Math.floor(Math.random() * numberOfColors);
+
+
             var sprite = component.createObject(board);
+
+
+            sprite.color = colors[rnd];
+            sprite.shape = shapes[rnd];
+            sprite.source =  spritePath+"piece_color_"+colors[rnd]+"_shape_"+shapes[rnd]+".png";
+
             sprite.pieceIndex = y * nx + x;
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
@@ -22,20 +44,25 @@ function create() {
 }
 
 function resize() {
-    cx = board.width / nx;
-    cy = board.height / ny;
+    cx = Math.min(board.width / nx, board.height / ny) ;
+    cy = cx;
+
+    //force bottom alignment of the board
+    offsetY = board.height - ny * cy;
 
     for(var y = 0; y < ny; y++) {
         for(var x = 0; x< nx; x++ ) {
             var sprite =  sprites[y * nx + x];
             if(sprite) {
                 sprite.x = x * cx;
-                sprite.y = y * cy;
+                sprite.y = offsetY + y * cy;
                 sprite.width = cx;
                 sprite.height = cy;
             }
         }
     }
+    resized();
+
 }
 
 function onMouseExited(pieceIndex) {
@@ -82,7 +109,7 @@ function onMouseClicked(pieceIndex) {
             }
         }
 
-        scoreChanged(count);
+        scoreChanged(count, numberOfColors);
     } else {
         //first click
         onMouseEntered(pieceIndex);
@@ -197,7 +224,7 @@ function fallDown() {
                     sprites[i] = null;
                     sprites[tempI] = sprite;
                     sprites[tempI].pieceIndex = tempI;
-                    sprite.y = tempY * cy;
+                    sprite.y = offsetY + tempY * cy;
                 }
             }
         }

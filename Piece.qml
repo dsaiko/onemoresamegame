@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Particles 2.0
 
 import "global.js" as Global
@@ -8,7 +8,11 @@ Item {
     id: piece
 
     property int pieceIndex: -1
-    readonly property int color: Piece.color;
+
+    property int color: 0;
+    property int shape: 0;
+    property alias source: sprite.source
+    property alias mouseArea: mouseArea
 
     property bool isSelected: false
     property int  selectionID: 0
@@ -26,15 +30,36 @@ Item {
 
     onIsSelectedChanged: Piece.onSelectionChange();
 
+    Rectangle {
+        id: spriteRect;
+        anchors.fill: parent
+        border.color: "black";
+        opacity: 0.7
+        scale: 0.95
+        visible: false;
+
+    }
+
+    Image {
+        id: sprite
+        anchors.fill: parent
+        opacity: 0.8
+        mipmap: true
+    }
+
+
+
+    onSourceChanged: Piece.setScale()
+    onWidthChanged: Piece.setScale()
+    onHeightChanged: Piece.setScale()
+
     Image {
         id: shiningStar
-        width: parent.width
-        height: parent.height
-        x: - parent.width / 5
-        y: - parent.height / 5
+        width: parent.width / 2
+        height: parent.height / 2
         opacity: 0
         smooth: true
-        source: Global.spritePath+"star.png"
+        source: Global.spritePath+"shine.png"
         z: 1
     }
 
@@ -53,47 +78,12 @@ Item {
         }
     }
 
-    SequentialAnimation {
-        id: animation;
-        loops: Animation.Infinite;
-
-        PropertyAnimation {
-            duration: 30;
-        }
-
-        ScriptAction {
-            script: Piece.rotateSprite();
-        }
-
-        onStopped: {
-            stopAnimation.start()
-        }
-
-        onStarted: {
-            stopAnimation.stop()
-        }
-
-    }
-
-    SequentialAnimation {
-        id: stopAnimation;
-        loops: 4;
-        PropertyAnimation {
-            duration: 40;
-        }
-
-        ScriptAction {
-            script: Piece.rotateSprite();
-        }
-    }
-
-
 
     SequentialAnimation {
         id: shine;
         loops: 1;
 
-        property int delay: Math.random() * 5000; // * 60 + 10000;
+        property int delay: Math.random() * 6000; // * 60 + 10000;
         property int duration: Math.random() * 400 + 200;
 
 
@@ -129,7 +119,7 @@ Item {
         }
 
         onStopped: {
-            shine.delay = Math.random() * 5000;
+            shine.delay = Math.random() * 6000;
             shine.duration = Math.random() * 400 + 200;
             shine.start();
         }
@@ -148,7 +138,6 @@ Item {
     }
 
     onDestroyPiece: {
-        animation.stop()
         destroyAnimation.start()
     }
 
@@ -192,7 +181,7 @@ Item {
 
         anchors.centerIn: parent
         ImageParticle {
-            source: Global.spritePath + Piece.color + "_dust.png"
+            source: Global.spritePath + "piece_color_"+ piece.color + "_dust.png"
             rotationVelocityVariation: 360
         }
 

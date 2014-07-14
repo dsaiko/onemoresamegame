@@ -1,36 +1,67 @@
 Qt.include("global.js")
 
-var sprites = [];
-var rotation = Math.floor(Math.random() * 8);
-var color =  Math.floor(Math.random() * 2);
+var rotation = 0;
 
 function create() {
-    for(var i=0; i<8; i++) {
-        var image = Qt.createQmlObject('import QtQuick 2.0; Image {anchors.fill: piece; visible: false; smooth: true}', piece);
-        image.source = spritePath + color + "_" + i + ".png";
-        sprites.push(image);
-    }
-
-    rotateSprite();
     shine.start()
 }
 
-function rotateSprite() {
-    rotation ++;
 
-    var r = rotation % 8;
-
-    sprites[r].visible = true;
-
-    for(var i=0; i< sprites.length; i++) {
-        if(i !== r) sprites[i].visible = false;
-    }
+function isShapeStar() {
+    return shape === 4;
 }
+
+function isShapeSquare() {
+    return shape === 1;
+}
+
+function isShapeCircle() {
+    return shape === 2;
+}
+
+function isShapeTriangle() {
+    return shape === 3;
+}
+
+function isShapePentagon() {
+    return shape === 5;
+}
+
 
 function onSelectionChange() {
     if(isSelected) {
-        animation.start();
+        sprite.opacity = 1;
+        spriteRect.visible = true;
     } else {
-        animation.stop();
+        sprite.opacity = 0.8
+        spriteRect.visible = false;
     }
+}
+
+
+function setScale() {
+    if(isShapeStar()) {
+        sprite.scale = 1;
+        shiningStar.x = piece.width / 8;
+        shiningStar.y = piece.height / 8;
+    } else
+    if(isShapeSquare()) {
+        sprite.scale = 0.8;
+        shiningStar.x = - piece.width / 15;
+        shiningStar.y = 0;
+    } else
+    if(isShapeCircle()) {
+        sprite.scale = 0.9;
+        shiningStar.x = 0;
+        shiningStar.y = 0;
+    } else
+    if (isShapeTriangle()) {
+        sprite.scale = 0.85;
+        shiningStar.x = piece.width / 10;
+        shiningStar.y = piece.height / 6;
+    } else
+    if(isShapePentagon()) {
+        sprite.scale = 0.9;
+    }
+
 }

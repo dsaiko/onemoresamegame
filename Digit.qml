@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 import "global.js" as Global
 
@@ -8,17 +8,10 @@ Item {
     onSourceChanged: animation.start();
 
     Image {
-        id: image0
-        anchors.fill: parent;
-        source: Global.digitsPath+"-.png"
-        smooth: true
-    }
-
-    Image {
         id: image1
         anchors.fill: parent;
         source: Global.digitsPath+"-.png"
-        smooth: true
+        mipmap: true
     }
 
     SequentialAnimation {

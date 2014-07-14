@@ -5,14 +5,17 @@ var digits = [];
 
 var totalScore = 0;
 var lastAdition = 0;
+var numberofDigits = 60;
 
 
 function resize() {
+    var cx = scoreBar.height * 200 / 314;
+
     for(var i=0; i<digits.length; i++) {
         var digit = digits[i];
-        digit.x = i * (width / digits.length)
+        digit.x = scoreBar.width - ((i+1) * cx)
         digit.y = 0;
-        digit.width = width / digits.length
+        digit.width = cx
         digit.height = height
     }
 }
@@ -21,51 +24,45 @@ function resize() {
 function create() {
     var component = Qt.createComponent("Digit.qml");
 
-    for(var i=0; i < 15; i++) {
+    for(var i=0; i < numberofDigits; i++) {
         var digit = component.createObject(scoreBar);
         digits.push(digit)
     }
 
-    addScore(0);
+    addScore(0, 1);
 }
 
 
-function addScore(count) {
+function addScore(count, numberOfColors) {
 
     lastAdition = count;
-    if(lastAdition > 0) { //check overflow
-        totalScore += (count - 1) * (count - 1);
+    if(count > 0) { //check overflow
+        totalScore += Math.pow(count - 1, numberOfColors - 1);
     }
 
     var n = totalScore;
-    var digitCount = 0;
 
-    for(var i=digits.length -1; i>=0; i--) {
-        var charpos = digits.length - i;
-        if(digits[i]) {
-            var digit = digits[i];
+    for(var i=0; i < digits.length; i++) {
+        var digit = digits[i];
 
-            if (n !== 0 && charpos % 4 === 0) {
-                digit.source = digitsPath+"_.png";
+        if(i>0 && i % 3 == 0 && n > 0) {
+            digit.source = digitsPath+"_.png";
+        } else {
+            var d = n % 10;
+            n = Math.floor(n / 10);
+
+            if(n == 0 && d == 0 && i > 0) {
+                //no more characters to print
+                digit.source = digitsPath+"-.png";
             } else {
-                var d = n % 10;
-                if(d < 0) { //large nubmer overflow
-                    d = -d;
-                }
-
-                n = Math.floor(n / 10);
-
-                if(d === 0 && n === 0 && digitCount > 0) {
-                    digit.source = digitsPath+"-.png";
-                } else {
-                    digit.source = digitsPath+d+".png";
-                    digitCount ++;
-                }
+                digit.source = digitsPath+d+".png";
             }
         }
+
+
     }
 }
 
 function doubleScore() {
-    addScore(lastAdition);
+    addScore(lastAdition, 2);
 }

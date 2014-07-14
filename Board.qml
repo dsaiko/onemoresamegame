@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 import "global.js" as Global
 import "board.js" as Board
@@ -29,15 +29,16 @@ Item {
     signal mouseClicked(int pieceIndex)
     signal mouseEntered(int pieceIndex)
     signal mouseExited(int pieceIndex)
+    signal resized
 
-    signal scoreChanged(int count)
+    signal scoreChanged(int count, int numberOfColors)
     signal doubleScore
 
     signal pieceDestroyed(int pieceIndex)
 
 
-    property int nx: 5
-    property int ny: 10
+    property int nx: 15
+    property int ny: 25
 
 
     property int cx: board.width / nx;

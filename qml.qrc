@@ -12,8 +12,6 @@
         <file>scorebar.js</file>
         <file>piece.js</file>
         <file>board.js</file>
-        <file>main.cpp</file>
-        <file>platform-details.h</file>
     </qresource>
     <qresource prefix="/images">
         <file>digits/digit-0.png</file>
@@ -28,43 +26,38 @@
         <file>digits/digit-9.png</file>
         <file>digits/digit-_.png</file>
         <file>digits/digit--.png</file>
-        <file>sprites/sprite_0_0.png</file>
-        <file>sprites/sprite_0_1.png</file>
-        <file>sprites/sprite_0_2.png</file>
-        <file>sprites/sprite_0_3.png</file>
-        <file>sprites/sprite_0_4.png</file>
-        <file>sprites/sprite_0_5.png</file>
-        <file>sprites/sprite_0_6.png</file>
-        <file>sprites/sprite_0_7.png</file>
-        <file>sprites/sprite_1_0.png</file>
-        <file>sprites/sprite_1_1.png</file>
-        <file>sprites/sprite_1_2.png</file>
-        <file>sprites/sprite_1_3.png</file>
-        <file>sprites/sprite_1_4.png</file>
-        <file>sprites/sprite_1_5.png</file>
-        <file>sprites/sprite_1_6.png</file>
-        <file>sprites/sprite_1_7.png</file>
-        <file>sprites/sprite_2_0.png</file>
-        <file>sprites/sprite_2_1.png</file>
-        <file>sprites/sprite_2_2.png</file>
-        <file>sprites/sprite_2_3.png</file>
-        <file>sprites/sprite_2_4.png</file>
-        <file>sprites/sprite_2_5.png</file>
-        <file>sprites/sprite_2_6.png</file>
-        <file>sprites/sprite_2_7.png</file>
-        <file>sprites/sprite_3_0.png</file>
-        <file>sprites/sprite_3_1.png</file>
-        <file>sprites/sprite_3_2.png</file>
-        <file>sprites/sprite_3_3.png</file>
-        <file>sprites/sprite_3_4.png</file>
-        <file>sprites/sprite_3_5.png</file>
-        <file>sprites/sprite_3_6.png</file>
-        <file>sprites/sprite_3_7.png</file>
-        <file>sprites/sprite_star.png</file>
-        <file>sprites/sprite_0_dust.png</file>
-        <file>sprites/sprite_1_dust.png</file>
-        <file>sprites/sprite_2_dust.png</file>
-        <file>sprites/sprite_3_dust.png</file>
+        <file>sprites/piece_color_1_dust.png</file>
+        <file>sprites/piece_color_1_shape_1.png</file>
+        <file>sprites/piece_color_1_shape_2.png</file>
+        <file>sprites/piece_color_1_shape_3.png</file>
+        <file>sprites/piece_color_1_shape_4.png</file>
+        <file>sprites/piece_color_1_shape_5.png</file>
+        <file>sprites/piece_color_2_dust.png</file>
+        <file>sprites/piece_color_2_shape_1.png</file>
+        <file>sprites/piece_color_2_shape_2.png</file>
+        <file>sprites/piece_color_2_shape_3.png</file>
+        <file>sprites/piece_color_2_shape_4.png</file>
+        <file>sprites/piece_color_2_shape_5.png</file>
+        <file>sprites/piece_color_3_dust.png</file>
+        <file>sprites/piece_color_3_shape_1.png</file>
+        <file>sprites/piece_color_3_shape_2.png</file>
+        <file>sprites/piece_color_3_shape_3.png</file>
+        <file>sprites/piece_color_3_shape_4.png</file>
+        <file>sprites/piece_color_3_shape_5.png</file>
+        <file>sprites/piece_color_4_dust.png</file>
+        <file>sprites/piece_color_4_shape_1.png</file>
+        <file>sprites/piece_color_4_shape_2.png</file>
+        <file>sprites/piece_color_4_shape_3.png</file>
+        <file>sprites/piece_color_4_shape_4.png</file>
+        <file>sprites/piece_color_4_shape_5.png</file>
+        <file>sprites/piece_color_5_dust.png</file>
+        <file>sprites/piece_color_5_shape_1.png</file>
+        <file>sprites/piece_color_5_shape_2.png</file>
+        <file>sprites/piece_color_5_shape_3.png</file>
+        <file>sprites/piece_color_5_shape_4.png</file>
+        <file>sprites/piece_color_5_shape_5.png</file>
+        <file>sprites/shine.png</file>
+        <file>digits/digit_B.png</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/icon.png</file>
