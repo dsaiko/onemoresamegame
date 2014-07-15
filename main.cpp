@@ -14,13 +14,15 @@
  * TODO: beautifull the code, licence etc
  * TODO: android deployment + android layouts
  * TODO: onMouseOut
+ * TODO: FullScreen
+ * TODO: resize, mobile resize, mobile layout for 20x15
  */
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    PlatformDetails platformDetails;
+    PlatformDetails platformDetails(&app);
 
     app.setWindowIcon(QIcon(":/icons/icons/icon.png"));
 
@@ -31,3 +33,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+

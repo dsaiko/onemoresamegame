@@ -56,7 +56,7 @@ function setScale() {
         shiningStar.y = 0;
     } else
     if (isShapeTriangle()) {
-        sprite.scale = 0.85;
+        sprite.scale = 0.9;
         shiningStar.x = piece.width / 10;
         shiningStar.y = piece.height / 6;
     } else

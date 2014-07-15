@@ -8,6 +8,11 @@ var lastAdition = 0;
 var numberofDigits = 60;
 
 
+function resetScore() {
+    totalScore = 0;
+    addScore(0, 1);
+}
+
 function resize() {
     var cx = scoreBar.height * 200 / 314;
 
@@ -29,7 +34,7 @@ function create() {
         digits.push(digit)
     }
 
-    addScore(0, 1);
+    resetScore();
 }
 
 

@@ -12,6 +12,8 @@
         <file>scorebar.js</file>
         <file>piece.js</file>
         <file>board.js</file>
+        <file>EndOfGamePanel.qml</file>
+        <file>endofgamepanel.js</file>
     </qresource>
     <qresource prefix="/images">
         <file>digits/digit-0.png</file>
@@ -58,6 +60,14 @@
         <file>sprites/piece_color_5_shape_5.png</file>
         <file>sprites/shine.png</file>
         <file>digits/digit_B.png</file>
+        <file>sprites/happy_face.png</file>
+        <file>sprites/sad_face.png</file>
+        <file>sprites/10x15.png</file>
+        <file>sprites/20x15.png</file>
+        <file>sprites/20x30.png</file>
+        <file>sprites/btnMenu1.png</file>
+        <file>sprites/btnMenu2.png</file>
+        <file>sprites/btnMenu0.png</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/icon.png</file>

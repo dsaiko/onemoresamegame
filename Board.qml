@@ -6,23 +6,30 @@ import "board.js" as Board
 Item {
     id: board
 
-    Component.onCompleted: Board.create();
+    property int nx: 15
+    property int ny: 20
+    property int numberOfColors: 2
 
-    Rectangle {
+    signal setMenuButtonType(int type)
+    signal menuDisplay
+    signal menuHide
+    signal resetScore
+    signal newGameStarted;
+
+    Component.onCompleted: {
+        Board.init();
+        Board.create();
+    }
+
+    onNumberOfColorsChanged: Board.create();
+
+    EndOfGamePanel {
         id: endOfGamePanel
-        anchors.fill: parent
         visible: false
 
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-
-            hoverEnabled: !PlatformDetails.isMobile;
-        }
-
-        color: "gray"
-        opacity: 0.5
-        z: 2
+        onStartGameEasy: Board.startGameEasy()
+        onStartGameMedium: Board.startGameMedium()
+        onStartGameHard: Board.startGameHard()
     }
 
     //piece clicked
@@ -36,11 +43,6 @@ Item {
 
     signal pieceDestroyed(int pieceIndex)
 
-
-    property int nx: 15
-    property int ny: 25
-
-
     property int cx: board.width / nx;
     property int cy: board.height / ny;
 
@@ -51,5 +53,7 @@ Item {
     onMouseEntered:     Board.onMouseEntered(pieceIndex);
     onMouseExited:      Board.onMouseExited(pieceIndex);
     onPieceDestroyed:   Board.destroyPiece(pieceIndex);
+    onMenuDisplay:      Board.menuDisplay();
+    onMenuHide:         Board.menuHide();
 
 }

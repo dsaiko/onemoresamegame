@@ -45,6 +45,7 @@ Item {
         anchors.fill: parent
         opacity: 0.8
         mipmap: true
+        fillMode: Image.PreserveAspectFit
     }
 
 
@@ -133,6 +134,7 @@ Item {
         hoverEnabled: !PlatformDetails.isMobile;
         onEntered:    if(!PlatformDetails.isMobile) mouseEntered(pieceIndex);
         onExited:     if(!PlatformDetails.isMobile) mouseExited(pieceIndex);
+        cursorShape:  Qt.PointingHandCursor
 
         onClicked:  mouseClicked(pieceIndex);
     }

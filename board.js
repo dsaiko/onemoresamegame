@@ -3,13 +3,92 @@ Qt.include("global.js")
 
 var sprites = [];
 var globalSelectionID = 1;
-
-
-var numberOfColors = 4;
 var offsetY = 0;
 
 
-function create() {
+function menuDisplay() {
+    endOfGamePanel.getNewImage();
+    endOfGamePanel.visible = true;
+    endOfGamePanel.y = 0;
+    setMenuButtonType(1)
+}
+
+function menuHide() {
+    endOfGamePanel.visible = true;
+    endOfGamePanel.y = - endOfGamePanel.height;
+    setMenuButtonType(2)
+}
+
+function startGameEasy() {
+    var resize = false;
+
+    endOfGamePanel.type = 0;
+    menuHide()
+    numberOfColors = 2;
+    if(nx != 10 || ny != 15) {
+        nx = 10;
+        ny = 15;
+        resize = true;
+    }
+    create(resize);
+    PlatformDetails.saveValue('defultSize', 10);
+}
+
+function startGameMedium() {
+    var resize = false;
+    endOfGamePanel.type = 0;
+    menuHide()
+    numberOfColors = 2;
+    if(nx != 20 || ny != 15) {
+        resize = true;
+        nx = 20;
+        ny = 15;
+    }
+    create(resize);
+    PlatformDetails.saveValue('defultSize', 20);
+}
+
+function startGameHard() {
+    var resize = false;
+    endOfGamePanel.type = 0;
+    menuHide()
+    numberOfColors = 2;
+    if(nx != 20 || ny != 30) {
+        resize = true;
+        nx = 20;
+        ny = 30;
+        newGameStarted();
+    }
+    create(resize);
+    PlatformDetails.saveValue('defultSize', 30);
+}
+
+function init() {
+    numberOfColors = 2;
+    var defaultSize = PlatformDetails.loadValue('defultSize', 10);
+    if(defaultSize === "20") {
+        nx = 20;
+        ny = 15;
+    } else
+    if(defaultSize === "30") {
+            nx = 20;
+            ny = 30;
+    } else {
+        nx = 10;
+        ny = 15;
+    }
+
+
+}
+
+function create(forceResize) {
+
+    //destroy all pieces first
+    for(var i=0; i<sprites.length; i++) {
+        if(sprites[i]) sprites[i].destroy();
+        sprites[i]=null;
+    }
+    sprites = [];
 
     var colors = [1,2,3,4,5];
     var shapes = [1,2,3,4,5];
@@ -41,6 +120,16 @@ function create() {
             sprites.push(sprite)
         }
     }
+
+    setMenuButtonType(2); //menu hidden
+    resetScore();
+    if(forceResize) {
+        resize();
+        newGameStarted();
+    } else {
+        resize();
+    }
+
 }
 
 function resize() {
@@ -73,6 +162,12 @@ function onMouseEntered(pieceIndex) {
     for(var i=0; i<sprites.length; i++) {
         if(sprites[i]) sprites[i].isSelected = false;
     }
+
+    if(PlatformDetails.isMobile == false && PlatformDetails.isMouseButtonPressed) {
+        // this is a fix to behaviour when pieces move and mouse stays on the same place and user clicks
+        return;
+    }
+
 
     if(pieceIndex < 0) return;
 
@@ -145,9 +240,12 @@ function destroyPiece(pieceIndex) {
 
     var count = 0;
     for(var i=0; i<sprites.length; i++) {
-        if(sprites[i] && sprites[i].isDestroying) {
-            count++;
-            break;
+        if(sprites[i]) {
+            sprites[i].isSelected = false;
+            if(sprites[i].isDestroying) {
+                count++;
+                break;
+            }
         }
     }
 
@@ -156,12 +254,20 @@ function destroyPiece(pieceIndex) {
         var morePieces = fallLeft();
 
         if(!morePieces) {
-            console.log("GOOD - GAME END");
+            //console.log("GOOD - GAME END");
+            numberOfColors ++;
         } else if(checkGameOver()) {
-            console.log("BAD - GAME END");
+            //console.log("BAD - GAME END");
+            endOfGame();
         }
     }
 }
+
+function endOfGame() {
+    endOfGamePanel.type = -1;
+    menuDisplay();
+}
+
 
 function checkGameOver() {
     var c = -1;
