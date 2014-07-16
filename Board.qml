@@ -8,7 +8,7 @@ Item {
 
     property int nx: 15
     property int ny: 20
-    property int numberOfColors: 2
+    property int level: 1
 
     signal setMenuButtonType(int type)
     signal menuDisplay
@@ -21,7 +21,7 @@ Item {
         Board.create();
     }
 
-    onNumberOfColorsChanged: Board.create();
+    onLevelChanged: Board.create();
 
     EndOfGamePanel {
         id: endOfGamePanel

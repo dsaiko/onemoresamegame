@@ -24,13 +24,14 @@ function startGameEasy() {
 
     endOfGamePanel.type = 0;
     menuHide()
-    numberOfColors = 2;
+    level = 1;
     if(nx != 10 || ny != 15) {
         nx = 10;
         ny = 15;
         resize = true;
     }
     create(resize);
+    resetScore();
     PlatformDetails.saveValue('defultSize', 10);
 }
 
@@ -38,13 +39,14 @@ function startGameMedium() {
     var resize = false;
     endOfGamePanel.type = 0;
     menuHide()
-    numberOfColors = 2;
+    level = 1;
     if(nx != 20 || ny != 15) {
         resize = true;
         nx = 20;
         ny = 15;
     }
     create(resize);
+    resetScore();
     PlatformDetails.saveValue('defultSize', 20);
 }
 
@@ -52,7 +54,7 @@ function startGameHard() {
     var resize = false;
     endOfGamePanel.type = 0;
     menuHide()
-    numberOfColors = 2;
+    level = 1;
     if(nx != 20 || ny != 30) {
         resize = true;
         nx = 20;
@@ -60,11 +62,13 @@ function startGameHard() {
         newGameStarted();
     }
     create(resize);
+    resetScore();
     PlatformDetails.saveValue('defultSize', 30);
 }
 
 function init() {
-    numberOfColors = 2;
+    level = 1;
+
     var defaultSize = PlatformDetails.loadValue('defultSize', 10);
     if(defaultSize === "20") {
         nx = 20;
@@ -98,6 +102,8 @@ function create(forceResize) {
 
     var component = Qt.createComponent("Piece.qml");
 
+    var numberOfColors = Math.min(level + 1, 5);
+
     for(var y = 0; y < ny; y++) {
         var row = []
         for(var x = 0; x< nx; x++ ) {
@@ -122,7 +128,6 @@ function create(forceResize) {
     }
 
     setMenuButtonType(2); //menu hidden
-    resetScore();
     if(forceResize) {
         resize();
         newGameStarted();
@@ -204,7 +209,7 @@ function onMouseClicked(pieceIndex) {
             }
         }
 
-        scoreChanged(count, numberOfColors);
+        scoreChanged(count, Math.min(level + 1, 5));
     } else {
         //first click
         onMouseEntered(pieceIndex);
@@ -255,7 +260,7 @@ function destroyPiece(pieceIndex) {
 
         if(!morePieces) {
             //console.log("GOOD - GAME END");
-            numberOfColors ++;
+            level ++;
         } else if(checkGameOver()) {
             //console.log("BAD - GAME END");
             endOfGame();

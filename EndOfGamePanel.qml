@@ -110,12 +110,10 @@ Item {
     Behavior on y {
         enabled: yAnimationEnabled
 
-        SequentialAnimation {
-            SpringAnimation{
-                spring: 4;
-                damping: 0.3
-                duration: 1000
-            }
+        SpringAnimation{
+            spring: 4;
+            damping: 0.3
+            duration: 1000
         }
     }
 

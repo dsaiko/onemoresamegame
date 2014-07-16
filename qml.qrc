@@ -14,6 +14,7 @@
         <file>board.js</file>
         <file>EndOfGamePanel.qml</file>
         <file>endofgamepanel.js</file>
+        <file>Level.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>digits/digit-0.png</file>
@@ -68,6 +69,17 @@
         <file>sprites/btnMenu1.png</file>
         <file>sprites/btnMenu2.png</file>
         <file>sprites/btnMenu0.png</file>
+        <file>sprites/level.png</file>
+        <file>sprites/level_0.png</file>
+        <file>sprites/level_1.png</file>
+        <file>sprites/level_2.png</file>
+        <file>sprites/level_3.png</file>
+        <file>sprites/level_4.png</file>
+        <file>sprites/level_5.png</file>
+        <file>sprites/level_6.png</file>
+        <file>sprites/level_7.png</file>
+        <file>sprites/level_8.png</file>
+        <file>sprites/level_9.png</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/icon.png</file>

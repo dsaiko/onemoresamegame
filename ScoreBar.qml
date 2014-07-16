@@ -2,7 +2,6 @@ import QtQuick 2.3
 
 
 import "scorebar.js" as ScoreBar
-
 import "global.js" as Global
 
 Item {
@@ -12,6 +11,10 @@ Item {
     signal menuHide
     signal menuDisplay
     signal resetScore
+
+    property int level: 0
+
+    clip: true
 
     Image {
         source: "/images/digits/digit_B.png";
@@ -99,6 +102,22 @@ Item {
             }
         }
 
+    }
+
+    Level {
+        id: levelPanel
+        z: 1
+
+        x: scoreBar.height;
+        y: 0;
+
+        height: scoreBar.height;
+        scale:0.9;
+    }
+
+
+    onLevelChanged: {
+        levelPanel.level = level
     }
 
     signal scoreAdded(int count, int numberOfColors)

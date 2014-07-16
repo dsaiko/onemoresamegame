@@ -15,7 +15,7 @@
  * TODO: android deployment + android layouts
  * TODO: onMouseOut
  * TODO: FullScreen
- * TODO: resize, mobile resize, mobile layout for 20x15
+ * TODO: resize, mobile resize, mobile layout for 20x15s
  */
 
 int main(int argc, char *argv[])

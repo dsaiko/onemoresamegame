@@ -28,12 +28,14 @@ ApplicationWindow {
 
          onMenuDisplay: board.menuDisplay();
          onMenuHide: board.menuHide();
+
+         level: board.level
     }
 
     Board {
          id: board
          width: parent.width
-         height: parent.height - scoreBar.height
+         height: parent.height - scoreBar.height         
          anchors.top: parent.top
 
          onSetMenuButtonType:scoreBar.menuButton.type = type
