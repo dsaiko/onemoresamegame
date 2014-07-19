@@ -1,0 +1,5 @@
+?package(onemoresamegame):needs="X11"\
+ section="Games/Puzzles"\
+ title="One More Samegame"\
+ command="/usr/games/onemoresamegame"\
+ icon="/usr/share/pixmaps/onemoresamegame.xpm"

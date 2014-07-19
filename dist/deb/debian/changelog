@@ -1,0 +1,33 @@
+onemoresamegame (0.9-1) trusty; urgency=low
+
+  * Resizing of game window simplified
+  * Migrated to QT 5.2.1 to support Ubuntu Trusty
+
+ -- Dusan Saiko <dusan.saiko@gmail.com>  Sat, 19 Jul 2014 17:26:19 +0200
+
+onemoresamegame (0.8-1) trusty; urgency=low
+
+  * Finishing levels
+  * new icon
+  * Finishing levels and multiple size
+  * major refactoring and GUI change
+  * bugfixes
+  * Code optimization
+  * Creating app icon
+  * Licence change do ASL2.0
+  * Improving code
+  * Adding platform dependent behaviour for onClick/onMouseEntered for mobile platforms without mouse cursor.
+  * Adding falling of pieces
+  * Finishing pop-up effects
+  * Finetuning image smoothing
+  * Renaming to One More SameGame
+
+ -- Dusan Saiko <dusan.saiko@gmail.com>  Wed, 16 Jul 2014 20:04:33 +0200
+
+onemoresamegame (0.1-1) trusty; urgency=low
+
+  * Initial commit
+  * Update README.md
+  * Update README.md
+
+ -- Dusan Saiko <dusan.saiko@gmail.com>  Wed, 18 Jun 2014 22:23:31 +0200

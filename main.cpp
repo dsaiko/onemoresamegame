@@ -18,6 +18,11 @@
  * TODO: FullScreen
  * TODO: resize, mobile resize, mobile layout for 20x15s
  * TODO: Window icon?!
+ * TODO: wikipedia: samegame
+ * TODO: translation - including app launcher
+ * TODO: version in header
+ * TODO: man page?
+ * TODO: ubuntu, debian, redhat/fedora
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

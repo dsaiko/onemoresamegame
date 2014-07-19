@@ -1,0 +1,17 @@
+Source: onemoresamegame
+Section: games
+Priority: extra
+Maintainer: Dusan Saiko <dusan.saiko@gmail.com>
+Build-Depends: debhelper (>= 9.2.0), desktop-file-utils, qtbase5-dev (>= 5.2.1), cdbs, qtdeclarative5-dev
+Standards-Version: 3.9.5
+Homepage: https://github.com/dsaiko/onemoresamegame
+Vcs-Git: https://github.com/dsaiko/onemoresamegame.git
+Vcs-Browser: https://github.com/dsaiko/onemoresamegame.git
+
+Package: onemoresamegame
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, qtdeclarative5-controls-plugin (>=5.2.1), qtdeclarative5-particles-plugin (>=5.2.1)
+Description: One more version of puzzle game where you select the same group of pieces
+ Not enought SameGames out there?
+ - I really do not mind playing it
+ - and I also want to test QT5 mobile development
