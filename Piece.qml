@@ -8,6 +8,8 @@ Item {
     id: piece
 
     property int pieceIndex: -1
+    property int pieceIndexX: pieceIndex % board.nx
+    property int pieceIndexY: Math.floor(pieceIndex / board.nx)
 
     property int color: 0;
     property int shape: 0;
@@ -29,6 +31,11 @@ Item {
     Component.onCompleted: Piece.create();
 
     onIsSelectedChanged: Piece.onSelectionChange();
+
+    width: Math.min(board.width / board.nx, board.height / board.ny)
+    height: width
+    x: pieceIndexX * width
+    y: board.height - (board.ny - pieceIndexY) * height
 
     Rectangle {
         id: spriteRect;

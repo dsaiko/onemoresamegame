@@ -32,31 +32,27 @@ Item {
 
         anchors.fill: parent
         color: "#ffffff"
-        opacity: 0.8
-    }
-
-    Image {
-        id: piece;
-        smooth: true
-        fillMode: Image.PreserveAspectFit
-
         opacity: 0.9
     }
 
-    Image {
+    BetterImage {
+        id: piece;
+        preserveAspectRatio: true
+    }
+
+    BetterImage {
         id: face;
         smooth: true
-        fillMode: Image.PreserveAspectFit
-
+        preserveAspectRatio: true
         opacity: 0.9
     }
 
     Item {
         id: levels;
 
-        Image {
-            smooth: true
-            fillMode: Image.PreserveAspectFit
+        BetterImage {
+            preserveAspectRatio: true
+
             source: Global.spritePath+"10x15.png";
             width: endOfGamePanel.parent.width / 3.5;
             height: endOfGamePanel.parent.height / 6
@@ -71,9 +67,8 @@ Item {
 
         }
 
-        Image {
-            smooth: true
-            fillMode: Image.PreserveAspectFit
+        BetterImage {
+            preserveAspectRatio: true
             source: Global.spritePath+"20x15.png";
             width: endOfGamePanel.parent.width / 3.5;
             height: endOfGamePanel.parent.height / 6
@@ -88,9 +83,8 @@ Item {
             }
         }
 
-        Image {
-            smooth: true
-            fillMode: Image.PreserveAspectFit
+        BetterImage {
+            preserveAspectRatio: true
             source: Global.spritePath+"20x30.png";
             width: endOfGamePanel.parent.width / 3.5;
             height: endOfGamePanel.parent.height / 6
@@ -100,7 +94,7 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: !PlatformDetails.isMobile;
                 cursorShape:  Qt.PointingHandCursor
-                onClicked: startGameHard();
+                onClicked:    startGameHard();
             }
         }
 
@@ -119,8 +113,8 @@ Item {
 
     z: 2
 
-    onWidthChanged: Panel.resize()
-    onHeightChanged: Panel.resize()
-    onVisibleChanged: Panel.onVisibleChanged();
-    onGetNewImage: Panel.onVisibleChanged();
+    onWidthChanged:     Panel.onVisibleChanged()
+    onHeightChanged:    Panel.onVisibleChanged()
+    onVisibleChanged:   Panel.onVisibleChanged()
+    onGetNewImage:      Panel.onVisibleChanged()
 }

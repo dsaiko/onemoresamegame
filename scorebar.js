@@ -24,7 +24,6 @@ function create() {
     }
 
     resetScore();
-    resize();
 }
 
 

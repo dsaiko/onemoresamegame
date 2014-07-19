@@ -1,10 +1,5 @@
 Qt.include("global.js")
 
-
-function resize() {
-    onVisibleChanged(savedShape);
-}
-
 function onVisibleChanged(savedShape) {
 
     if(!visible) {

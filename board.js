@@ -20,48 +20,40 @@ function menuHide() {
 }
 
 function startGameEasy() {
-    var resize = false;
-
     endOfGamePanel.type = 0;
     menuHide()
     level = 1;
     if(nx != 10 || ny != 15) {
         nx = 10;
         ny = 15;
-        resize = true;
     }
-    create(resize);
+    create();
     resetScore();
     PlatformDetails.saveValue('defultSize', 10);
 }
 
 function startGameMedium() {
-    var resize = false;
     endOfGamePanel.type = 0;
     menuHide()
     level = 1;
     if(nx != 20 || ny != 15) {
-        resize = true;
         nx = 20;
         ny = 15;
     }
-    create(resize);
+    create();
     resetScore();
     PlatformDetails.saveValue('defultSize', 20);
 }
 
 function startGameHard() {
-    var resize = false;
     endOfGamePanel.type = 0;
     menuHide()
     level = 1;
     if(nx != 20 || ny != 30) {
-        resize = true;
         nx = 20;
         ny = 30;
-        newGameStarted();
     }
-    create(resize);
+    create();
     resetScore();
     PlatformDetails.saveValue('defultSize', 30);
 }
@@ -85,7 +77,7 @@ function init() {
 
 }
 
-function create(forceResize) {
+function create() {
 
     //destroy all pieces first
     for(var i=0; i<sprites.length; i++) {
@@ -123,40 +115,11 @@ function create(forceResize) {
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
             sprite.pieceDestroyed.connect(pieceDestroyed)
-            sprite.y = -1000;
             sprites.push(sprite)
         }
     }
 
     setMenuButtonType(2); //menu hidden
-    if(forceResize) {
-        resize();
-        newGameStarted();
-    } else {
-        resize();
-    }
-
-}
-
-function resize() {
-    cx = Math.min(board.width / nx, board.height / ny) ;
-    cy = cx;
-
-    //force bottom alignment of the board
-    offsetY = board.height - ny * cy;
-
-    for(var y = 0; y < ny; y++) {
-        for(var x = 0; x< nx; x++ ) {
-            var sprite =  sprites[y * nx + x];
-            if(sprite) {
-                sprite.x = x * cx;
-                sprite.y = offsetY + y * cy;
-                sprite.width = cx;
-                sprite.height = cy;
-            }
-        }
-    }
-    resized();
 }
 
 function onMouseExited(pieceIndex) {
@@ -260,7 +223,7 @@ function destroyPiece(pieceIndex) {
 
         if(!morePieces) {
             //console.log("GOOD - GAME END");
-            level ++;
+            nextLevel();
         } else if(checkGameOver()) {
             //console.log("BAD - GAME END");
             endOfGame();
@@ -335,7 +298,6 @@ function fallDown() {
                     sprites[i] = null;
                     sprites[tempI] = sprite;
                     sprites[tempI].pieceIndex = tempI;
-                    sprite.y = offsetY + tempY * cy;
                 }
             }
         }
@@ -371,7 +333,6 @@ function fallLeft() {
                         sprites[i] = null;
                         sprites[i-1] = sprite;
                         sprites[i-1].pieceIndex = i - 1;
-                        sprite.x = (ix -1) * cx;
                     }
                 }
             }
@@ -386,4 +347,10 @@ function fallLeft() {
     }
 
     return true;
+}
+
+
+function onNextLevel() {
+    level ++;
+    nextLevelAnimation.start()
 }

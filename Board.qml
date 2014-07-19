@@ -14,7 +14,7 @@ Item {
     signal menuDisplay
     signal menuHide
     signal resetScore
-    signal newGameStarted;
+    signal nextLevel
 
     Component.onCompleted: {
         Board.init();
@@ -36,7 +36,6 @@ Item {
     signal mouseClicked(int pieceIndex)
     signal mouseEntered(int pieceIndex)
     signal mouseExited(int pieceIndex)
-    signal resized
 
     signal scoreChanged(int count, int numberOfColors)
     signal doubleScore
@@ -46,9 +45,6 @@ Item {
     property int cx: board.width / nx;
     property int cy: board.height / ny;
 
-
-    onWidthChanged:     Board.resize();
-    onHeightChanged:    Board.resize();
     onMouseClicked:     Board.onMouseClicked(pieceIndex);
     onMouseEntered:     Board.onMouseEntered(pieceIndex);
     onMouseExited:      Board.onMouseExited(pieceIndex);
@@ -56,4 +52,57 @@ Item {
     onMenuDisplay:      Board.menuDisplay();
     onMenuHide:         Board.menuHide();
 
+    onNextLevel: Board.onNextLevel()
+
+    ParallelAnimation {
+        id: nextLevelAnimation
+
+        property int mainDuration: 2000
+
+        PropertyAnimation {
+            target: board
+            property: "y"
+            from: - board.height
+            to: 0
+
+            easing {
+                type: Easing.OutElastic
+                amplitude: 1
+                period: 1.5
+            }
+            duration: nextLevelAnimation.mainDuration
+        }
+
+
+        PropertyAnimation {
+            target: board
+            property: "rotation"
+            from: -360
+            to: 0
+
+            easing {
+                type: Easing.OutElastic
+                amplitude: 1
+                period: 1.5
+            }
+            duration: nextLevelAnimation.mainDuration
+        }
+
+
+
+        PropertyAnimation {
+            target: board
+            property: "scale"
+            from: 0
+            to: 1
+
+            easing {
+                type: Easing.OutElastic
+                amplitude: 1
+                period: 1.5
+            }
+            duration: nextLevelAnimation.mainDuration
+        }
+
+    }
 }
