@@ -14,3 +14,5 @@ include(deployment.pri)
 
 HEADERS += \
     platform-details.h
+
+RC_FILE = onemoresamegame.rc

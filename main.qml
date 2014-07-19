@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.0
 
@@ -7,6 +7,7 @@ ApplicationWindow {
     id: mainWindow
 
     visible: true
+
 
     height: Screen.height * 2 / 3
     width: Screen.width / 2
@@ -18,6 +19,8 @@ ApplicationWindow {
 
     Background {
            anchors.fill: parent
+           antialiasing: true
+           smooth: true
     }
 
     ScoreBar {
@@ -30,6 +33,9 @@ ApplicationWindow {
          onMenuHide: board.menuHide();
 
          level: board.level
+
+         antialiasing: true
+         smooth: true
     }
 
     Board {
@@ -37,6 +43,7 @@ ApplicationWindow {
          width: parent.width
          height: parent.height - scoreBar.height         
          anchors.top: parent.top
+         opacity: 0.8
 
          onSetMenuButtonType:scoreBar.menuButton.type = type
          onResetScore: scoreBar.resetScore()

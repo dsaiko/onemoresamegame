@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QIcon>
+#include <QWindow>
 
 #include "platform-details.h"
 
@@ -16,20 +17,27 @@
  * TODO: onMouseOut
  * TODO: FullScreen
  * TODO: resize, mobile resize, mobile layout for 20x15s
+ * TODO: Window icon?!
  */
 
-int main(int argc, char *argv[])
+Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
     PlatformDetails platformDetails(&app);
 
-    app.setWindowIcon(QIcon(":/icons/icons/icon.png"));
-
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("PlatformDetails", &platformDetails);
-
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+
+    QWindowList windowList = QGuiApplication::topLevelWindows();
+
+    QIcon icon(":/icon.png");
+    for (int i = 0; i < windowList.size(); ++i) {
+        QWindow *w = windowList.at(i);
+        w->setIcon(icon);
+        //qDebug() << "Window: " << w->title();
+    }
 
     return app.exec();
 }

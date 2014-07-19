@@ -30,10 +30,8 @@ function isShapePentagon() {
 
 function onSelectionChange() {
     if(isSelected) {
-        sprite.opacity = 1;
         spriteRect.visible = true;
     } else {
-        sprite.opacity = 0.8
         spriteRect.visible = false;
     }
 }

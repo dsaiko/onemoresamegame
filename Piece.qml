@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.0
 import QtQuick.Particles 2.0
 
 import "global.js" as Global
@@ -34,18 +34,16 @@ Item {
         id: spriteRect;
         anchors.fill: parent
         border.color: "black";
-        opacity: 0.7
+        color: "white"
         scale: 0.95
         visible: false;
 
     }
 
-    Image {
+    BetterImage {
         id: sprite
         anchors.fill: parent
-        opacity: 0.8
-        mipmap: true
-        fillMode: Image.PreserveAspectFit
+        preserveAspectRatio: true
     }
 
 
@@ -54,28 +52,35 @@ Item {
     onWidthChanged: Piece.setScale()
     onHeightChanged: Piece.setScale()
 
-    Image {
+    BetterImage {
         id: shiningStar
         width: parent.width / 2
         height: parent.height / 2
         opacity: 0
-        smooth: true
         source: Global.spritePath+"shine.png"
         z: 1
     }
 
-    Behavior on y {
-        SpringAnimation{
-            spring: 4;
-            damping: 0.3
+    Behavior on x {
+        enabled: xAnimationEnabled;
+        NumberAnimation {
+            easing {
+                type: Easing.OutElastic
+                amplitude: 1
+                period: 1.5
+            }
+            duration: 1000
         }
     }
 
-    Behavior on x {
-        enabled: xAnimationEnabled;
-        SpringAnimation{
-            spring: 2;
-            damping: 0.2
+    Behavior on y {
+        NumberAnimation {
+            easing {
+                type: Easing.OutElastic
+                amplitude: 1
+                period: 1.5
+            }
+            duration: 1000
         }
     }
 
@@ -84,7 +89,7 @@ Item {
         id: shine;
         loops: 1;
 
-        property int delay: Math.random() * 6000; // * 60 + 10000;
+        property int delay: Math.random() * 10000;
         property int duration: Math.random() * 400 + 200;
 
 
@@ -120,7 +125,7 @@ Item {
         }
 
         onStopped: {
-            shine.delay = Math.random() * 6000;
+            shine.delay = Math.random() * 10000;
             shine.duration = Math.random() * 400 + 200;
             shine.start();
         }

@@ -123,6 +123,7 @@ function create(forceResize) {
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
             sprite.pieceDestroyed.connect(pieceDestroyed)
+            sprite.y = -1000;
             sprites.push(sprite)
         }
     }
@@ -156,7 +157,6 @@ function resize() {
         }
     }
     resized();
-
 }
 
 function onMouseExited(pieceIndex) {

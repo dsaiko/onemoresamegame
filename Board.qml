@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.0
 
 import "global.js" as Global
 import "board.js" as Board

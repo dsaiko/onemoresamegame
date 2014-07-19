@@ -13,28 +13,18 @@ function resetScore() {
     addScore(0, 1);
 }
 
-function resize() {
-    var cx = scoreBar.height * 200 / 314;
-
-    for(var i=0; i<digits.length; i++) {
-        var digit = digits[i];
-        digit.x = scoreBar.width - ((i+1) * cx)
-        digit.y = 0;
-        digit.width = cx
-        digit.height = height
-    }
-}
-
 
 function create() {
     var component = Qt.createComponent("Digit.qml");
 
     for(var i=0; i < numberofDigits; i++) {
         var digit = component.createObject(scoreBar);
+        digit.position = i
         digits.push(digit)
     }
 
     resetScore();
+    resize();
 }
 
 

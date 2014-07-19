@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.0
 
 import "global.js" as Global
 import "endofgamepanel.js" as Panel
@@ -37,7 +37,7 @@ Item {
 
     Image {
         id: piece;
-        mipmap: true
+        smooth: true
         fillMode: Image.PreserveAspectFit
 
         opacity: 0.9
@@ -45,7 +45,7 @@ Item {
 
     Image {
         id: face;
-        mipmap: true
+        smooth: true
         fillMode: Image.PreserveAspectFit
 
         opacity: 0.9
@@ -55,7 +55,7 @@ Item {
         id: levels;
 
         Image {
-            mipmap: true
+            smooth: true
             fillMode: Image.PreserveAspectFit
             source: Global.spritePath+"10x15.png";
             width: endOfGamePanel.parent.width / 3.5;
@@ -72,7 +72,7 @@ Item {
         }
 
         Image {
-            mipmap: true
+            smooth: true
             fillMode: Image.PreserveAspectFit
             source: Global.spritePath+"20x15.png";
             width: endOfGamePanel.parent.width / 3.5;
@@ -89,7 +89,7 @@ Item {
         }
 
         Image {
-            mipmap: true
+            smooth: true
             fillMode: Image.PreserveAspectFit
             source: Global.spritePath+"20x30.png";
             width: endOfGamePanel.parent.width / 3.5;

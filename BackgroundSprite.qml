@@ -1,14 +1,21 @@
-import QtQuick 2.3
+import QtQuick 2.0
 
 Rectangle {
 
-    width: rscale * parent.width / 10 + parent.width / 30
-    height: width
+    readonly property real rndSizeX: Math.random()
+    readonly property real rndSizeY: Math.random()
+    property real suggestedWidth: rndSizeX * parent.width / 10 + parent.width / 30
+    property real suggestedHeight: rndSizeY * parent.height / 10 + parent.height / 30
 
-    color: Qt.rgba(Math.random() * 0.2, Math.random() * 0.2, Math.random() * 0.2, Math.random() * 0.2)
+    width:  Math.min(suggestedWidth, suggestedHeight)
+    height:  Math.min(suggestedWidth, suggestedHeight)
 
-    readonly property real rx: Math.random()
-    readonly property real ry: Math.random()
 
-    readonly property real rscale: Math.random()
+    readonly property real rndX: Math.random()
+    readonly property real rndY: Math.random()
+    x: rndX * parent.width - width / 2
+    y: rndY * parent.height - height / 2
+
+    color: Qt.rgba(Math.random() * 0.2, Math.random() * 0.2, Math.random() * 0.2)
+    opacity: Math.random() * 0.2
 }

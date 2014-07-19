@@ -14,7 +14,12 @@
         <file>board.js</file>
         <file>EndOfGamePanel.qml</file>
         <file>endofgamepanel.js</file>
-        <file>Level.qml</file>
+        <file>ScoreBarLevel.qml</file>
+        <file>icon.ico</file>
+        <file>icon.png</file>
+        <file>BetterImage.qml</file>
+        <file>SlidingImage.qml</file>
+        <file>ScoreBarMenuButton.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>digits/digit-0.png</file>
@@ -80,9 +85,5 @@
         <file>sprites/level_7.png</file>
         <file>sprites/level_8.png</file>
         <file>sprites/level_9.png</file>
-    </qresource>
-    <qresource prefix="/icons">
-        <file>icons/icon.png</file>
-        <file>icons/icon.ico</file>
     </qresource>
 </RCC>
