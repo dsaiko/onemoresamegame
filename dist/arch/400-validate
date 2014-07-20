@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+namcap PKGBUILD
+ls *.pkg.tar.xz | xargs -l namcap
+
