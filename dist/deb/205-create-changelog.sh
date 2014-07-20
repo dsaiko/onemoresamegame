@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./100-env.sh
-source /etc/lsb-release
+source /etc/lsb-release 2> /dev/null
 
 cd ${DEBUILD_BUILD_DIR}
 cd ${DEBUILD_APP_NAME}

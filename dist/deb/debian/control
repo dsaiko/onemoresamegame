@@ -10,7 +10,7 @@ Vcs-Browser: https://github.com/dsaiko/onemoresamegame.git
 
 Package: onemoresamegame
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, qtdeclarative5-controls-plugin (>=5.2.1), qtdeclarative5-particles-plugin (>=5.2.1)
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dist:Depends}
 Description: One more version of puzzle game where you select the same group of pieces
  Not enought SameGames out there?
  - I really do not mind playing it

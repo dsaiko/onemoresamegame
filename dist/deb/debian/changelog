@@ -1,11 +1,11 @@
-onemoresamegame (0.9-1) trusty; urgency=low
+onemoresamegame (0.9-1) jessie; urgency=low
 
   * Resizing of game window simplified
   * Migrated to QT 5.2.1 to support Ubuntu Trusty
 
  -- Dusan Saiko <dusan.saiko@gmail.com>  Sat, 19 Jul 2014 17:26:19 +0200
 
-onemoresamegame (0.8-1) trusty; urgency=low
+onemoresamegame (0.8-1) jessie; urgency=low
 
   * Finishing levels
   * new icon
@@ -24,7 +24,7 @@ onemoresamegame (0.8-1) trusty; urgency=low
 
  -- Dusan Saiko <dusan.saiko@gmail.com>  Wed, 16 Jul 2014 20:04:33 +0200
 
-onemoresamegame (0.1-1) trusty; urgency=low
+onemoresamegame (0.1-1) jessie; urgency=low
 
   * Initial commit
   * Update README.md
