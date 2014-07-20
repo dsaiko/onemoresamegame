@@ -1,0 +1,30 @@
+2014-07-19 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.9 :
+	Resizing of game window simplified
+	Migrated to QT 5.2.1 to support Ubuntu Trusty
+
+2014-07-16 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.8 :
+	Finishing levels
+	new icon
+	Finishing levels and multiple size
+	major refactoring and GUI change
+	bugfixes
+	Code optimization
+	Creating app icon
+	Licence change do ASL2.0
+	Improving code
+	Adding platform dependent behaviour for onClick/onMouseEntered for mobile platforms without mouse cursor.
+	Adding falling of pieces
+	Finishing pop-up effects
+	Finetuning image smoothing
+	Renaming to One More SameGame
+
+2014-06-18 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.1 :
+	Initial commit
+	Update README.md
+	Update README.md
