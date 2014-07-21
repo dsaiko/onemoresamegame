@@ -1,17 +1,17 @@
 Name:           onemoresamegame
-Version:        0.9
+Version:        0.9.1
 Release:        1%{?dist}
 Summary:        One more version of a puzzle game where you select the same group of pieces
 
-License:        Apache License, Version 2.0
+License:        APSL 2.0+
 URL:            https://github.com/dsaiko/onemoresamegame
-Source0:        onemoresamegame-%{version}.tar.gz
+Source0:        https://github.com/dsaiko/onemoresamegame/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils, qt5-qtbase-devel >= 5.2.1, qt5-qtdeclarative-devel 
 Requires:       qt5-qtbase >= 5.2.1, qt5-qtdeclarative, qt5-qtquickcontrols
 
 %description
-Not enought SameGames out there?
+Not enough SameGames out there?
  - I really do not mind playing it
  - and I also want to test QT5 mobile development
 
@@ -19,7 +19,7 @@ Not enought SameGames out there?
 %setup -q
 
 %build
-qmake-qt5 CONFIG+=release
+qmake-qt5 CONFIG+=release target.path=/usr/bin
 make %{?_smp_mflags}
 
 %install
@@ -41,11 +41,19 @@ desktop-file-install                                    \
 %{_datadir}/applications/onemoresamegame.desktop
 
 %changelog
-* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.9
+* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.9.1-1
+- Finished RPM packages
+- Extending Arch package scripts
+- Finished deb packages for debian testing/jessie
+- Creating Arch installation scripts
+- Creating .deb installation scripts
+- Testing deb creation
+
+* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.9-1
 - Resizing of game window simplified
 - Migrated to QT 5.2.1 to support Ubuntu Trusty
 
-* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.8
+* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.8-1
 - Finishing levels
 - new icon
 - Finishing levels and multiple size
@@ -61,7 +69,7 @@ desktop-file-install                                    \
 - Finetuning image smoothing
 - Renaming to One More SameGame
 
-* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.1
+* Mon Jul 21 2014 Dusan Saiko <dusan.saiko@gmail.com> 0.1-1
 - Initial commit
 - Update README.md
 - Update README.md

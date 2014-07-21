@@ -12,6 +12,6 @@ Package: onemoresamegame
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dist:Depends}
 Description: One more version of a puzzle game where you select the same group of pieces
- Not enought SameGames out there?
+ Not enough SameGames out there?
  - I really do not mind playing it
  - and I also want to test QT5 mobile development

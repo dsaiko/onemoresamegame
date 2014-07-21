@@ -55,7 +55,7 @@ do
 			fi
 			
 			COUNTER="1"			
-			echo "* ${DATE} ${AUTHOR} ${TAGVERSION}" >> ${SPEC}		
+			echo "* ${DATE} ${AUTHOR} ${TAGVERSION}-1" >> ${SPEC}		
 		fi
   fi
 

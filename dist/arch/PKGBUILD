@@ -1,7 +1,7 @@
 # Maintainer: Dusan Saiko <dusan.saiko ..at.. gmail ..dot.. com>
 
 pkgname=onemoresamegame
-pkgver=0.9
+pkgver=0.9.1
 pkgrel=1
 
 pkgdesc="One more version of a puzzle game where you select the same group of pieces."
@@ -16,15 +16,10 @@ license=('Apache')
 depends=("qt5-base>=5.2.1" "qt5-declarative>" "qt5-graphicaleffects>" "qt5-quickcontrols>" "qt5-script>")
 
 source=(
-	'https://github.com/dsaiko/onemoresamegame/archive/0.9.tar.gz'
-	'onemoresamegame.png'
-	'onemoresamegame.desktop'
-	
+	'https://github.com/dsaiko/onemoresamegame/archive/0.9.1.tar.gz'
 )
 
-sha256sums=('1ef35d9157b2e7ca80c786b0117df140e1d4b2c63dda07d5ffe3618b6d2dfa89'
-            '158434d13d7b0b407d71384b68f61da88eaa56cd0bd5066d785709614aaaa451'
-            'f74cd9b18098ad82a92514fb4bf05da29ffde8b91956a3dfca12b6ff038f9143')
+sha256sums=('75f87ec0719a8b60a4d476ed511b8f222ada1a20d6ce551755066290f9806409')
 
 build() {
 	 cd "${srcdir}"
@@ -37,13 +32,14 @@ build() {
 package() {
 	cd "${srcdir}"
 	cd "${pkgname}-${pkgver}"
+
 	
 	install -d -m 755 "${pkgdir}/usr/bin"
 	install -d -m 755 "${pkgdir}/usr/share/pixmaps"
 	install -d -m 755 "${pkgdir}/usr/share/applications"
 	
-	install -m 755 "${srcdir}/onemoresamegame.desktop" "${pkgdir}/usr/share/applications/"
-	install -m 755 "${srcdir}/onemoresamegame.png" "${pkgdir}/usr/share/pixmaps/"
+	install -m 755 "./dist/arch/onemoresamegame.desktop" "${pkgdir}/usr/share/applications/"
+	install -m 755 "./icon.png" "${pkgdir}/usr/share/pixmaps/onemoresamegame.png"
 	install -m 755 ./onemoresamegame "${pkgdir}/usr/bin/"
 }
 
