@@ -4,7 +4,7 @@ pkgname=onemoresamegame
 pkgver=0.9
 pkgrel=1
 
-pkgdesc="One more version of puzzle game where you select the same group of pieces."
+pkgdesc="One more version of a puzzle game where you select the same group of pieces."
 url="https://github.com/dsaiko/onemoresamegame"
 
 changelog=$pkgname.changelog
@@ -24,7 +24,7 @@ source=(
 
 sha256sums=('1ef35d9157b2e7ca80c786b0117df140e1d4b2c63dda07d5ffe3618b6d2dfa89'
             '158434d13d7b0b407d71384b68f61da88eaa56cd0bd5066d785709614aaaa451'
-            'e6c250be7da0d0406b3a919db29a08c9a3878c2989e505ef290e64bdd9f043d2')
+            'f74cd9b18098ad82a92514fb4bf05da29ffde8b91956a3dfca12b6ff038f9143')
 
 build() {
 	 cd "${srcdir}"

@@ -12,7 +12,7 @@ mv ${DEBUILD_APP_NAME} ${DEBUILD_APP_NAME}-${version}
 
 cd *
 
-rm -rf .git .gitignore docs debian
+rm -rf .git
 cd ..
 
 tar czf ${DEBUILD_APP_NAME}-${version}.tar.gz ${DEBUILD_APP_NAME}-${version}
