@@ -13,7 +13,7 @@ ApplicationWindow {
 
     minimumWidth: 200
     minimumHeight: 300
-    title: qsTr("One More SameGame")
+    title: qsTr("One More SameGame") + " " + PlatformDetails.appVersion
 
     Background {
            anchors.fill: parent

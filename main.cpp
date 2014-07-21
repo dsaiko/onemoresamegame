@@ -30,18 +30,21 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     PlatformDetails platformDetails(&app);
+    QIcon icon(":/icon.png");
+
+#if QT_VERSION >= 0x050301
+    app.setWindowIcon(icon);
+#endif
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("PlatformDetails", &platformDetails);
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
+    //workaround for Qt 5.2 to set window icon
     QWindowList windowList = QGuiApplication::topLevelWindows();
-
-    QIcon icon(":/icon.png");
     for (int i = 0; i < windowList.size(); ++i) {
         QWindow *w = windowList.at(i);
         w->setIcon(icon);
-        //qDebug() << "Window: " << w->title();
     }
 
     return app.exec();

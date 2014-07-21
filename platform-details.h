@@ -11,6 +11,7 @@ class PlatformDetails : public QObject
 
 public:
 
+    #define APP_BUILD_VERSION   "0.9.2-SNAPSHOT"
 
     PlatformDetails(QObject *parent) :QObject(parent), settings("OneMoreSamegame", "onemoresamegame")
     {
@@ -18,6 +19,7 @@ public:
 
 
     Q_PROPERTY(bool isMobile READ isMobile CONSTANT)
+    Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
     Q_PROPERTY(bool isMouseButtonPressed READ isMouseButtonPressed CONSTANT)
 
     Q_INVOKABLE void saveValue(const QString & key, const QVariant & value) {
@@ -37,6 +39,10 @@ public:
 #else
    return false;
 #endif
+    }
+
+    QString appVersion() {
+        return APP_BUILD_VERSION;
     }
 
     bool isMouseButtonPressed() {
