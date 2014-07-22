@@ -232,7 +232,11 @@ function destroyPiece(pieceIndex) {
 }
 
 function endOfGame() {
-    endOfGamePanel.type = -1;
+    if(level > 1) {
+        endOfGamePanel.type = 1;
+    } else {
+        endOfGamePanel.type = -1;
+    }
     menuDisplay();
 }
 
@@ -352,5 +356,6 @@ function fallLeft() {
 
 function onNextLevel() {
     level ++;
+    endOfGamePanel.visible = false
     nextLevelAnimation.start()
 }

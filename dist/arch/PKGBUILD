@@ -38,7 +38,7 @@ package() {
 	install -d -m 755 "${pkgdir}/usr/share/pixmaps"
 	install -d -m 755 "${pkgdir}/usr/share/applications"
 	
-	install -m 755 "./dist/arch/onemoresamegame.desktop" "${pkgdir}/usr/share/applications/"
+	install -m 755 "./onemoresamegame.desktop" "${pkgdir}/usr/share/applications/"
 	install -m 755 "./icon.png" "${pkgdir}/usr/share/pixmaps/onemoresamegame.png"
 	install -m 755 ./onemoresamegame "${pkgdir}/usr/bin/"
 }

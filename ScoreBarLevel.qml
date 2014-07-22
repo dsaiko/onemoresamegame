@@ -9,13 +9,13 @@ Item {
 
     BetterImage {
         id: levelLabel
-        source: Global.spritePath+"level.png";
-        x: 0;
-        y: 0;
-        height: scoreBar.height;
+        source: Global.spritePath+"level.png"
+        x: 0
+        y: 0
+        height: scoreBar.height
 
-        marginTop: 0.05;
-        marginBottom: marginTop;
+        marginTop: 0.05
+        marginBottom: marginTop
     }
 
     SlidingImage {
@@ -23,33 +23,33 @@ Item {
 
         source: Global.spritePath+"level_0.png";
 
-        x: levelLabel.width;
-        y: 0;
+        x: levelLabel.width
+        y: 0
 
-        height: scoreBar.height;
-        marginTop: 0.05;
-        marginBottom: marginTop;
+        height: scoreBar.height
+        marginTop: 0.05
+        marginBottom: marginTop
     }
 
     SlidingImage {
         id: digit2
 
-        source: Global.spritePath+"level_1.png";
+        source: Global.spritePath+"level_1.png"
 
-        x: levelLabel.width + digit1.width;
+        x: levelLabel.width + digit1.width
         y: 0;
 
-        height: scoreBar.height;
-        marginTop: 0.05;
-        marginBottom: marginTop;
+        height: scoreBar.height
+        marginTop: 0.05
+        marginBottom: marginTop
     }
 
     onLevelChanged: {
-        var n = level;
-        if(n > 99) n = 99;
-        if(n < 1) n = 1;
+        var n = level
+        if(n > 99) n = 99
+        if(n < 1) n = 1
 
-        digit1.source = Global.spritePath+"level_"+Math.floor(n / 10)+".png";
-        digit2.source = Global.spritePath+"level_"+Math.floor(n % 10)+".png";
+        digit1.source = Global.spritePath+"level_"+Math.floor(n / 10)+".png"
+        digit2.source = Global.spritePath+"level_"+Math.floor(n % 10)+".png"
     }
 }

@@ -8,5 +8,5 @@ Item {
     id: background
 
     anchors.fill: parent
-    Component.onCompleted: Background.create();
+    Component.onCompleted: Background.create()
 }

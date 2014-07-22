@@ -133,7 +133,7 @@ Item {
 
         onStopped: {
             shine.delay = Math.random() * 10000;
-            shine.duration = Math.random() * 400 + 200;
+            shine.duration = Math.random() * 400 + 200
             shine.start();
         }
     }

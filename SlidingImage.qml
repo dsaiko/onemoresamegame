@@ -4,18 +4,18 @@ Item {
 
     id: slidingImage
 
-    property alias source: img0.source
+    property alias  source:         img0.source
 
-    property real margin: 0
-    property real marginLeft: 0;
-    property real marginRight: 0;
-    property real marginTop: 0;
-    property real marginBottom: 0;
+    property real   margin:         0
+    property real   marginLeft:     0
+    property real   marginRight:    0
+    property real   marginTop:      0
+    property real   marginBottom:   0
 
     width: img0.width
 
     BetterImage {
-        id: img0;
+        id: img0
         height: parent.height
 
         margin: parent.margin

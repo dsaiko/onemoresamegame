@@ -53,8 +53,8 @@ Item {
         BetterImage {
             preserveAspectRatio: true
 
-            source: Global.spritePath+"10x15.png";
-            width: endOfGamePanel.parent.width / 3.5;
+            source: Global.spritePath+"10x15.png"
+            width: endOfGamePanel.parent.width / 3.5
             height: endOfGamePanel.parent.height / 6
             x: (endOfGamePanel.parent.width - width) / 2
             y: endOfGamePanel.parent.height  * 3 / 8
@@ -69,8 +69,8 @@ Item {
 
         BetterImage {
             preserveAspectRatio: true
-            source: Global.spritePath+"20x15.png";
-            width: endOfGamePanel.parent.width / 3.5;
+            source: Global.spritePath+"20x15.png"
+            width: endOfGamePanel.parent.width / 3.5
             height: endOfGamePanel.parent.height / 6
             x: (endOfGamePanel.parent.width - width) / 2
             y: endOfGamePanel.parent.height  * 4.5 / 8
@@ -85,20 +85,18 @@ Item {
 
         BetterImage {
             preserveAspectRatio: true
-            source: Global.spritePath+"20x30.png";
-            width: endOfGamePanel.parent.width / 3.5;
+            source: Global.spritePath+"20x30.png"
+            width: endOfGamePanel.parent.width / 3.5
             height: endOfGamePanel.parent.height / 6
             x: (endOfGamePanel.parent.width - width) / 2
             y: endOfGamePanel.parent.height  * 6 / 8
             MouseArea {
                 anchors.fill: parent
-                hoverEnabled: !PlatformDetails.isMobile;
+                hoverEnabled: !PlatformDetails.isMobile
                 cursorShape:  Qt.PointingHandCursor
-                onClicked:    startGameHard();
+                onClicked:    startGameHard()
             }
         }
-
-
     }
 
     Behavior on y {

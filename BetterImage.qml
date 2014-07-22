@@ -4,16 +4,16 @@ import QtQuick 2.0
 Item {
     id: betterImage
 
-    property alias source : image.source
+    property alias source:              image.source
     property bool  preserveAspectRatio: false
-    property alias originalSize: backupImage.sourceSize
+    property alias originalSize:        backupImage.sourceSize
 
     //this should be better than scaling of the image
-    property real margin: 0
-    property real marginLeft: 0;
-    property real marginRight: 0;
-    property real marginTop: 0;
-    property real marginBottom: 0;
+    property real margin:       0
+    property real marginLeft:   0
+    property real marginRight:  0
+    property real marginTop:    0
+    property real marginBottom: 0
 
     width: height * backupImage.sourceSize.width / backupImage.sourceSize.height
     //height: width * backupImage.sourceSize.height / backupImage.sourceSize.width

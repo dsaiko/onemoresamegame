@@ -6,8 +6,8 @@ import "board.js" as Board
 Item {
     id: board
 
-    property int nx: 15
-    property int ny: 20
+    property int nx:    15
+    property int ny:    20
     property int level: 1
 
     signal setMenuButtonType(int type)
@@ -21,7 +21,7 @@ Item {
         Board.create();
     }
 
-    onLevelChanged: Board.create();
+    onLevelChanged: Board.create()
 
     EndOfGamePanel {
         id: endOfGamePanel
@@ -45,12 +45,12 @@ Item {
     property int cx: board.width / nx;
     property int cy: board.height / ny;
 
-    onMouseClicked:     Board.onMouseClicked(pieceIndex);
-    onMouseEntered:     Board.onMouseEntered(pieceIndex);
-    onMouseExited:      Board.onMouseExited(pieceIndex);
-    onPieceDestroyed:   Board.destroyPiece(pieceIndex);
-    onMenuDisplay:      Board.menuDisplay();
-    onMenuHide:         Board.menuHide();
+    onMouseClicked:     Board.onMouseClicked(pieceIndex)
+    onMouseEntered:     Board.onMouseEntered(pieceIndex)
+    onMouseExited:      Board.onMouseExited(pieceIndex)
+    onPieceDestroyed:   Board.destroyPiece(pieceIndex)
+    onMenuDisplay:      Board.menuDisplay()
+    onMenuHide:         Board.menuHide()
 
     onNextLevel: Board.onNextLevel()
 
