@@ -13,23 +13,8 @@ function onVisibleChanged(savedShape) {
         return;
     }
 
-    //shift top if resizing
-    if(Math.floor(y) < -10) {
-        yAnimationEnabled = false;
-        if(endOfGamePanel.parent && endOfGamePanel.parent.height) {
-            //at start, height is not initialized
-            y = - endOfGamePanel.parent.height;
-        } else {
-            y = -3000;
-        }
-        yAnimationEnabled = true;
-    }
-
-
     //get random piece
     var shape = Math.floor(Math.random()*5) + 1;
-    if(savedShape) shape = savedShape;
-    endOfGamePanel.savedShape = shape;
 
     var color = Math.floor(Math.random()*5) + 1;
 
@@ -74,8 +59,5 @@ function onVisibleChanged(savedShape) {
             face.y = piece.y + cx / 3;
    }
 
-
-    if(!savedShape) {
-        piece.source = spritePath+"piece_color_"+color+"_shape_"+shape+".png";
-    }
+   piece.source = spritePath+"piece_color_"+color+"_shape_"+shape+".png";
 }

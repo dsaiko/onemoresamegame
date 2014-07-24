@@ -7,21 +7,25 @@ var offsetY = 0;
 
 
 function menuDisplay() {
-    endOfGamePanel.getNewImage();
-    endOfGamePanel.visible = true;
-    endOfGamePanel.y = 0;
-    setMenuButtonType(1)
-}
-
-function menuHide() {
-    endOfGamePanel.visible = true;
-    endOfGamePanel.y = - endOfGamePanel.height;
-    setMenuButtonType(2)
+    endOfGamePanel.yAnimationEnabled = false
+    if(!endOfGamePanel.visible || endOfGamePanel.y < -10 ) {
+        endOfGamePanel.requestHiding = false;
+        endOfGamePanel.y = - endOfGamePanel.height;
+        endOfGamePanel.yAnimationEnabled = true
+        endOfGamePanel.visible = true;
+        endOfGamePanel.getNewImage();
+        endOfGamePanel.y = 0;
+    } else {
+        endOfGamePanel.requestHiding = true;
+        endOfGamePanel.yAnimationEnabled = true
+        endOfGamePanel.visible = true;
+        endOfGamePanel.y = - endOfGamePanel.height;
+    }
 }
 
 function startGameEasy() {
     endOfGamePanel.type = 0;
-    menuHide()
+    menuDisplay(false)
     level = 1;
     if(nx != 10 || ny != 15) {
         nx = 10;
@@ -34,7 +38,7 @@ function startGameEasy() {
 
 function startGameMedium() {
     endOfGamePanel.type = 0;
-    menuHide()
+    menuDisplay(false)
     level = 1;
     if(nx != 20 || ny != 15) {
         nx = 20;
@@ -47,7 +51,7 @@ function startGameMedium() {
 
 function startGameHard() {
     endOfGamePanel.type = 0;
-    menuHide()
+    menuDisplay(false)
     level = 1;
     if(nx != 20 || ny != 30) {
         nx = 20;
@@ -118,8 +122,6 @@ function create() {
             sprites.push(sprite)
         }
     }
-
-    setMenuButtonType(2); //menu hidden
 }
 
 function onMouseExited(pieceIndex) {
@@ -356,6 +358,5 @@ function fallLeft() {
 
 function onNextLevel() {
     level ++;
-    endOfGamePanel.visible = false
     nextLevelAnimation.start()
 }

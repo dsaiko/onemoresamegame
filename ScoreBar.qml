@@ -27,7 +27,6 @@ Item {
         id: menuButton
 
         onMenuDisplay: scoreBar.menuDisplay()
-        onMenuHide: scoreBar.menuHide()
     }
 
     ScoreBarLevel {

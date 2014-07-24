@@ -10,9 +10,7 @@ Item {
     property int ny:    20
     property int level: 1
 
-    signal setMenuButtonType(int type)
     signal menuDisplay
-    signal menuHide
     signal resetScore
     signal nextLevel
 
@@ -49,8 +47,7 @@ Item {
     onMouseEntered:     Board.onMouseEntered(pieceIndex)
     onMouseExited:      Board.onMouseExited(pieceIndex)
     onPieceDestroyed:   Board.destroyPiece(pieceIndex)
-    onMenuDisplay:      Board.menuDisplay()
-    onMenuHide:         Board.menuHide()
+    onMenuDisplay:      Board.menuDisplay()   
 
     onNextLevel: Board.onNextLevel()
 

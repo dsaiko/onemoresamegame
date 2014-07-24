@@ -71,9 +71,6 @@
         <file>sprites/10x15.png</file>
         <file>sprites/20x15.png</file>
         <file>sprites/20x30.png</file>
-        <file>sprites/btnMenu1.png</file>
-        <file>sprites/btnMenu2.png</file>
-        <file>sprites/btnMenu0.png</file>
         <file>sprites/level.png</file>
         <file>sprites/level_0.png</file>
         <file>sprites/level_1.png</file>
@@ -85,5 +82,6 @@
         <file>sprites/level_7.png</file>
         <file>sprites/level_8.png</file>
         <file>sprites/level_9.png</file>
+        <file>sprites/btnMenu.png</file>
     </qresource>
 </RCC>

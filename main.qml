@@ -25,8 +25,8 @@ ApplicationWindow {
          height: parent.height / 20
          anchors.bottom: parent.bottom
 
-         onMenuDisplay: board.menuDisplay();
-         onMenuHide: board.menuHide();
+         onMenuDisplay: board.menuDisplay()
+         onMenuHide: board.menuDisplay()
 
          level: board.level
     }
@@ -39,7 +39,6 @@ ApplicationWindow {
          y:0
          opacity: 0.8
 
-         onSetMenuButtonType:scoreBar.menuButton.type = type
          onResetScore: scoreBar.resetScore()
          onScoreChanged: scoreBar.scoreAdded(count, numberOfColors)
          onDoubleScore: scoreBar.doubleScore()

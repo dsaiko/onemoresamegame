@@ -7,8 +7,8 @@ Item {
 
     //0 - start of the game 1 - win -1 - loss
     property int type: 0
-    property int savedShape: 0;
     property bool yAnimationEnabled: true
+    property bool requestHiding: false
 
     signal getNewImage()
 
@@ -16,6 +16,8 @@ Item {
     width: parent.width
     height: parent.height
     x: 0
+    y: -parent.height
+    visible: false
 
 
     signal startGameEasy
@@ -100,19 +102,29 @@ Item {
     }
 
     Behavior on y {
+
         enabled: yAnimationEnabled
 
-        SpringAnimation{
-            spring: 4;
-            damping: 0.3
-            duration: 1000
+        PropertyAnimation {
+            property: "y"
+
+            duration: 750
+
+            easing {
+                type: Easing.InOutBack
+                amplitude: 1
+                period: .5
+            }
+
+            onRunningChanged: {
+                if(running == false && endOfGamePanel.requestHiding) {
+                    endOfGamePanel.visible = false
+                }
+            }
         }
     }
 
     z: 2
 
-    onWidthChanged:     Panel.onVisibleChanged()
-    onHeightChanged:    Panel.onVisibleChanged()
-    onVisibleChanged:   Panel.onVisibleChanged()
     onGetNewImage:      Panel.onVisibleChanged()
 }
