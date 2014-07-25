@@ -2,6 +2,8 @@ Qt.include("global.js")
 
 function onVisibleChanged(savedShape) {
 
+    return;
+
     if(!visible) {
         if(menuPanel.parent && menuPanel.parent.height) {
             //at start, height is not initialized
@@ -25,6 +27,7 @@ function onVisibleChanged(savedShape) {
     piece.y = (menuPanel.height )/ 10
 
     if(type == 1) {
+
         face.source = spritePath+"happy_face.png";
         face.visible = true;
     } else if(type == -1){
@@ -61,3 +64,5 @@ function onVisibleChanged(savedShape) {
 
    piece.source = spritePath+"piece_color_"+color+"_shape_"+shape+".png";
 }
+
+

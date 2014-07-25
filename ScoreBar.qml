@@ -23,10 +23,16 @@ Item {
     }
 
 
-    ScoreBarMenuButton {
+    PushButton {
         id: menuButton
 
-        onMenuDisplay: scoreBar.menuDisplay()
+        height: scoreBar.height
+        width: scoreBar.height
+        margin: 0.1
+
+        source: Global.spritePath+"btnMenu.png"
+
+        onClicked: scoreBar.menuDisplay()
     }
 
     ScoreBarLevel {

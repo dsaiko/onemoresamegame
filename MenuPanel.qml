@@ -3,7 +3,7 @@ import QtQuick 2.0
 import "global.js" as Global
 import "menupanel.js" as Panel
 
-Item {
+Rectangle {
 
     //0 - start of the game 1 - win -1 - loss
     property int type: 0
@@ -18,88 +18,97 @@ Item {
     x: 0
     y: -parent.height
     visible: false
-
+    color: "#e1e1e1"
 
     signal startGameEasy
     signal startGameMedium
     signal startGameHard
 
-    Rectangle {
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
 
-            hoverEnabled: !PlatformDetails.isMobile;
-        }
-
+    MenuPanelBackground {
         anchors.fill: parent
-        color: "#ffffff"
-        opacity: 0.9
     }
 
-    BetterImage {
-        id: piece;
-        preserveAspectRatio: true
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+
+        //disabling hover on underlaying pieces
+        hoverEnabled: !PlatformDetails.isMobile;
     }
 
-    BetterImage {
-        id: face;
-        smooth: true
-        preserveAspectRatio: true
-        opacity: 0.9
+    MenuPanelButtons {
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        width: parent.width
+        height: parent.height
     }
 
-    Item {
-        id: levels;
 
-        BetterImage {
-            preserveAspectRatio: true
+//    BetterImage {
+//        id: piece;
+//        preserveAspectRatio: true
+//    }
 
-            source: Global.spritePath+"10x15.png"
-            width: menuPanel.parent.width / 3.5
-            height: menuPanel.parent.height / 6
-            x: (menuPanel.parent.width - width) / 2
-            y: menuPanel.parent.height  * 3 / 8
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: !PlatformDetails.isMobile;
-                cursorShape:  Qt.PointingHandCursor
-                onClicked: startGameEasy();
-            }
+//    BetterImage {
+//        id: face;
+//        smooth: true
+//        preserveAspectRatio: true
+//        opacity: 1
+//    }
 
-        }
+//    Item {
+//        id: levels;
 
-        BetterImage {
-            preserveAspectRatio: true
-            source: Global.spritePath+"20x15.png"
-            width: menuPanel.parent.width / 3.5
-            height: menuPanel.parent.height / 6
-            x: (menuPanel.parent.width - width) / 2
-            y: menuPanel.parent.height  * 4.5 / 8
+//        BetterImage {
+//            preserveAspectRatio: true
 
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: !PlatformDetails.isMobile;
-                cursorShape:  Qt.PointingHandCursor
-                onClicked: startGameMedium();
-            }
-        }
+//            source: Global.spritePath+"10x15.png"
+//            width: menuPanel.parent.width / 3.5
+//            height: menuPanel.parent.height / 6
+//            x: (menuPanel.parent.width - width) / 2
+//            y: menuPanel.parent.height  * 3 / 8
+//            MouseArea {
+//                anchors.fill: parent
+//                hoverEnabled: !PlatformDetails.isMobile;
+//                cursorShape:  Qt.PointingHandCursor
+//                onClicked: startGameEasy();
+//            }
 
-        BetterImage {
-            preserveAspectRatio: true
-            source: Global.spritePath+"20x30.png"
-            width: menuPanel.parent.width / 3.5
-            height: menuPanel.parent.height / 6
-            x: (menuPanel.parent.width - width) / 2
-            y: menuPanel.parent.height  * 6 / 8
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: !PlatformDetails.isMobile
-                cursorShape:  Qt.PointingHandCursor
-                onClicked:    startGameHard()
-            }
-        }
-    }
+//        }
+
+//        BetterImage {
+//            preserveAspectRatio: true
+//            source: Global.spritePath+"20x15.png"
+//            width: menuPanel.parent.width / 3.5
+//            height: menuPanel.parent.height / 6
+//            x: (menuPanel.parent.width - width) / 2
+//            y: menuPanel.parent.height  * 4.5 / 8
+
+//            MouseArea {
+//                anchors.fill: parent
+//                hoverEnabled: !PlatformDetails.isMobile;
+//                cursorShape:  Qt.PointingHandCursor
+//                onClicked: startGameMedium();
+//            }
+//        }
+
+//        BetterImage {
+//            preserveAspectRatio: true
+//            source: Global.spritePath+"20x30.png"
+//            width: menuPanel.parent.width / 3.5
+//            height: menuPanel.parent.height / 6
+//            x: (menuPanel.parent.width - width) / 2
+//            y: menuPanel.parent.height  * 6 / 8
+//            MouseArea {
+//                anchors.fill: parent
+//                hoverEnabled: !PlatformDetails.isMobile
+//                cursorShape:  Qt.PointingHandCursor
+//                onClicked:    startGameHard()
+//            }
+//        }
+//    }
 
     Behavior on y {
 

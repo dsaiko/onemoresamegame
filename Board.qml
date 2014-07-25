@@ -24,6 +24,7 @@ Item {
     MenuPanel {
         id: menuPanel
         visible: false
+        opacity: 0.95
 
         onStartGameEasy: Board.startGameEasy()
         onStartGameMedium: Board.startGameMedium()

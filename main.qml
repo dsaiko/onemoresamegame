@@ -37,7 +37,6 @@ ApplicationWindow {
          height: parent.height - scoreBar.height
          x:0
          y:0
-         opacity: 0.8
 
          onResetScore: scoreBar.resetScore()
          onScoreChanged: scoreBar.scoreAdded(count, numberOfColors)

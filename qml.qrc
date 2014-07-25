@@ -19,7 +19,9 @@
         <file>icon.png</file>
         <file>BetterImage.qml</file>
         <file>SlidingImage.qml</file>
-        <file>ScoreBarMenuButton.qml</file>
+        <file>PushButton.qml</file>
+        <file>MenuPanelBackground.qml</file>
+        <file>MenuPanelButtons.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>sprites/piece_color_1_dust.png</file>
@@ -85,5 +87,10 @@
         <file>sprites/digit-_.png</file>
         <file>sprites/digit--.png</file>
         <file>sprites/digit_B.png</file>
+        <file>sprites/menubg_3.png</file>
+        <file>sprites/menubg_4.png</file>
+        <file>sprites/btnMenuQuit.png</file>
+        <file>sprites/btnMenuScores.png</file>
+        <file>sprites/btnMenuUpdates.png</file>
     </qresource>
 </RCC>

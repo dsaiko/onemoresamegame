@@ -113,6 +113,7 @@ function create() {
             sprite.color = colors[rnd];
             sprite.shape = shapes[rnd];
             sprite.source =  spritePath+"piece_color_"+colors[rnd]+"_shape_"+shapes[rnd]+".png";
+            sprite.opacity=0.8
 
             sprite.pieceIndex = y * nx + x;
             sprite.mouseClicked.connect(mouseClicked)
