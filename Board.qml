@@ -21,8 +21,8 @@ Item {
 
     onLevelChanged: Board.create()
 
-    EndOfGamePanel {
-        id: endOfGamePanel
+    MenuPanel {
+        id: menuPanel
         visible: false
 
         onStartGameEasy: Board.startGameEasy()

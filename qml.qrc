@@ -12,8 +12,8 @@
         <file>scorebar.js</file>
         <file>piece.js</file>
         <file>board.js</file>
-        <file>EndOfGamePanel.qml</file>
-        <file>endofgamepanel.js</file>
+        <file>MenuPanel.qml</file>
+        <file>menupanel.js</file>
         <file>ScoreBarLevel.qml</file>
         <file>icon.ico</file>
         <file>icon.png</file>
@@ -22,18 +22,6 @@
         <file>ScoreBarMenuButton.qml</file>
     </qresource>
     <qresource prefix="/images">
-        <file>digits/digit-0.png</file>
-        <file>digits/digit-1.png</file>
-        <file>digits/digit-2.png</file>
-        <file>digits/digit-3.png</file>
-        <file>digits/digit-4.png</file>
-        <file>digits/digit-5.png</file>
-        <file>digits/digit-6.png</file>
-        <file>digits/digit-7.png</file>
-        <file>digits/digit-8.png</file>
-        <file>digits/digit-9.png</file>
-        <file>digits/digit-_.png</file>
-        <file>digits/digit--.png</file>
         <file>sprites/piece_color_1_dust.png</file>
         <file>sprites/piece_color_1_shape_1.png</file>
         <file>sprites/piece_color_1_shape_2.png</file>
@@ -65,7 +53,6 @@
         <file>sprites/piece_color_5_shape_4.png</file>
         <file>sprites/piece_color_5_shape_5.png</file>
         <file>sprites/shine.png</file>
-        <file>digits/digit_B.png</file>
         <file>sprites/happy_face.png</file>
         <file>sprites/sad_face.png</file>
         <file>sprites/10x15.png</file>
@@ -83,5 +70,20 @@
         <file>sprites/level_8.png</file>
         <file>sprites/level_9.png</file>
         <file>sprites/btnMenu.png</file>
+        <file>sprites/menubg_1.png</file>
+        <file>sprites/menubg_2.png</file>
+        <file>sprites/digit-0.png</file>
+        <file>sprites/digit-1.png</file>
+        <file>sprites/digit-2.png</file>
+        <file>sprites/digit-3.png</file>
+        <file>sprites/digit-4.png</file>
+        <file>sprites/digit-5.png</file>
+        <file>sprites/digit-6.png</file>
+        <file>sprites/digit-7.png</file>
+        <file>sprites/digit-8.png</file>
+        <file>sprites/digit-9.png</file>
+        <file>sprites/digit-_.png</file>
+        <file>sprites/digit--.png</file>
+        <file>sprites/digit_B.png</file>
     </qresource>
 </RCC>

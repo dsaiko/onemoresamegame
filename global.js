@@ -1,7 +1,7 @@
 .pragma library
 
 
-var digitsPath = "/images/digits/digit-";
+var digitsPath = "/images/sprites/digit-";
 var spritePath = "/images/sprites/";
 
 //http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array

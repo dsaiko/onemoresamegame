@@ -18,7 +18,7 @@ Item {
 
     Image {
         id: scorebarBackground
-        source: "/images/digits/digit_B.png";
+        source: "/images/sprites/digit_B.png";
         anchors.fill: parent
     }
 

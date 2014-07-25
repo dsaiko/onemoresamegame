@@ -3,9 +3,9 @@ Qt.include("global.js")
 function onVisibleChanged(savedShape) {
 
     if(!visible) {
-        if(endOfGamePanel.parent && endOfGamePanel.parent.height) {
+        if(menuPanel.parent && menuPanel.parent.height) {
             //at start, height is not initialized
-            y = - endOfGamePanel.parent.height;
+            y = - menuPanel.parent.height;
         } else {
             y = -3000;
         }
@@ -18,11 +18,11 @@ function onVisibleChanged(savedShape) {
 
     var color = Math.floor(Math.random()*5) + 1;
 
-    var cx  = Math.min(endOfGamePanel.width / 3, endOfGamePanel.height / 4);
+    var cx  = Math.min(menuPanel.width / 3, menuPanel.height / 4);
     piece.width = cx;
     piece.height = cx;
-    piece.x = (endOfGamePanel.width - cx) / 2
-    piece.y = (endOfGamePanel.height )/ 10
+    piece.x = (menuPanel.width - cx) / 2
+    piece.y = (menuPanel.height )/ 10
 
     if(type == 1) {
         face.source = spritePath+"happy_face.png";
@@ -41,21 +41,21 @@ function onVisibleChanged(savedShape) {
         var cx2 = (cx * 2) / 3;
         face.width = cx2;
         face.height = cx2;
-        face.x = (endOfGamePanel.width - cx2) / 2
+        face.x = (menuPanel.width - cx2) / 2
         face.y = piece.y + cx / 5;
     } else if (shape == 3){
         //triagnle
         var cx2 = (cx * 2) / 5;
         face.width = cx2;
         face.height = cx2;
-        face.x = (endOfGamePanel.width - cx2) / 2
+        face.x = (menuPanel.width - cx2) / 2
         face.y = piece.y + cx / 2;
     } else if (shape == 4){
             //star
             var cx2 = (cx * 2) / 5;
             face.width = cx2;
             face.height = cx2;
-            face.x = (endOfGamePanel.width - cx2) / 2
+            face.x = (menuPanel.width - cx2) / 2
             face.y = piece.y + cx / 3;
    }
 

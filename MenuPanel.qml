@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 import "global.js" as Global
-import "endofgamepanel.js" as Panel
+import "menupanel.js" as Panel
 
 Item {
 
@@ -12,7 +12,7 @@ Item {
 
     signal getNewImage()
 
-    id: endOfGamePanel
+    id: menuPanel
     width: parent.width
     height: parent.height
     x: 0
@@ -56,10 +56,10 @@ Item {
             preserveAspectRatio: true
 
             source: Global.spritePath+"10x15.png"
-            width: endOfGamePanel.parent.width / 3.5
-            height: endOfGamePanel.parent.height / 6
-            x: (endOfGamePanel.parent.width - width) / 2
-            y: endOfGamePanel.parent.height  * 3 / 8
+            width: menuPanel.parent.width / 3.5
+            height: menuPanel.parent.height / 6
+            x: (menuPanel.parent.width - width) / 2
+            y: menuPanel.parent.height  * 3 / 8
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: !PlatformDetails.isMobile;
@@ -72,10 +72,10 @@ Item {
         BetterImage {
             preserveAspectRatio: true
             source: Global.spritePath+"20x15.png"
-            width: endOfGamePanel.parent.width / 3.5
-            height: endOfGamePanel.parent.height / 6
-            x: (endOfGamePanel.parent.width - width) / 2
-            y: endOfGamePanel.parent.height  * 4.5 / 8
+            width: menuPanel.parent.width / 3.5
+            height: menuPanel.parent.height / 6
+            x: (menuPanel.parent.width - width) / 2
+            y: menuPanel.parent.height  * 4.5 / 8
 
             MouseArea {
                 anchors.fill: parent
@@ -88,10 +88,10 @@ Item {
         BetterImage {
             preserveAspectRatio: true
             source: Global.spritePath+"20x30.png"
-            width: endOfGamePanel.parent.width / 3.5
-            height: endOfGamePanel.parent.height / 6
-            x: (endOfGamePanel.parent.width - width) / 2
-            y: endOfGamePanel.parent.height  * 6 / 8
+            width: menuPanel.parent.width / 3.5
+            height: menuPanel.parent.height / 6
+            x: (menuPanel.parent.width - width) / 2
+            y: menuPanel.parent.height  * 6 / 8
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: !PlatformDetails.isMobile
@@ -117,8 +117,8 @@ Item {
             }
 
             onRunningChanged: {
-                if(running == false && endOfGamePanel.requestHiding) {
-                    endOfGamePanel.visible = false
+                if(running == false && menuPanel.requestHiding) {
+                    menuPanel.visible = false
                 }
             }
         }
