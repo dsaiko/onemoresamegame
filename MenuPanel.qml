@@ -39,10 +39,15 @@ Rectangle {
     }
 
     MenuPanelButtons {
+        id: panelButtons
         anchors.horizontalCenter: parent.horizontalCenter
 
         width: parent.width
         height: parent.height
+    }
+
+    MenuPanelGames {
+        id: panelGames
     }
 
 

@@ -22,6 +22,7 @@
         <file>PushButton.qml</file>
         <file>MenuPanelBackground.qml</file>
         <file>MenuPanelButtons.qml</file>
+        <file>MenuPanelGames.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>sprites/piece_color_1_dust.png</file>
@@ -92,5 +93,9 @@
         <file>sprites/btnMenuQuit.png</file>
         <file>sprites/btnMenuScores.png</file>
         <file>sprites/btnMenuUpdates.png</file>
+        <file>sprites/btnGame1a.png</file>
+        <file>sprites/btnGame2a.png</file>
+        <file>sprites/btnGame3a.png</file>
+        <file>sprites/btnGame4a.png</file>
     </qresource>
 </RCC>

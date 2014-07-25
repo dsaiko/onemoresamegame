@@ -79,7 +79,6 @@ Item {
 
             antialiasing: true
             smooth: true
-            renderType: Text.NativeRendering
             style: Text.Raised
             styleColor: "transparent"
             textFormat: Text.StyledText
