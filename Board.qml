@@ -26,9 +26,11 @@ Item {
         visible: false
         opacity: 0.95
 
-        onStartGameEasy: Board.startGameEasy()
-        onStartGameMedium: Board.startGameMedium()
-        onStartGameHard: Board.startGameHard()
+
+        onStartGame10x15: Board.startGame(10,15)
+        onStartGame20x15: Board.startGame(20,15)
+        onStartGame20x30: Board.startGame(20,30)
+        onStartGame40x30: Board.startGame(40,30)
     }
 
     //piece clicked

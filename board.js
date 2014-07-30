@@ -23,62 +23,37 @@ function menuDisplay() {
     }
 }
 
-function startGameEasy() {
+
+function startGame(x, y) {
     menuPanel.type = 0;
     menuDisplay(false)
     level = 1;
-    if(nx != 10 || ny != 15) {
-        nx = 10;
-        ny = 15;
-    }
+    nx = x;
+    ny = y;
     create();
     resetScore();
-    PlatformDetails.saveValue('defultSize', 10);
+    PlatformDetails.saveValue('defultSize', x+'x'+y);
 }
 
-function startGameMedium() {
-    menuPanel.type = 0;
-    menuDisplay(false)
-    level = 1;
-    if(nx != 20 || ny != 15) {
-        nx = 20;
-        ny = 15;
-    }
-    create();
-    resetScore();
-    PlatformDetails.saveValue('defultSize', 20);
-}
-
-function startGameHard() {
-    menuPanel.type = 0;
-    menuDisplay(false)
-    level = 1;
-    if(nx != 20 || ny != 30) {
-        nx = 20;
-        ny = 30;
-    }
-    create();
-    resetScore();
-    PlatformDetails.saveValue('defultSize', 30);
-}
 
 function init() {
     level = 1;
 
-    var defaultSize = PlatformDetails.loadValue('defultSize', 10);
-    if(defaultSize === "20") {
+    var defaultSize = PlatformDetails.loadValue('defultSize', "10x15");
+
+    if(defaultSize === "20x15") {
         nx = 20;
         ny = 15;
-    } else
-    if(defaultSize === "30") {
-            nx = 20;
-            ny = 30;
+    } else if(defaultSize === "20x30") {
+        nx = 20;
+        ny = 30;
+    } else if(defaultSize === "40x30") {
+        nx = 40;
+        ny = 30;
     } else {
         nx = 10;
         ny = 15;
     }
-
-
 }
 
 function create() {

@@ -8,6 +8,7 @@ Item {
 
     property alias source: img.source
     property alias image: img
+    property alias originalSize: img.originalSize
     property alias margin: img.margin
 
     property string text

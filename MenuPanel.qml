@@ -4,15 +4,16 @@ import "global.js" as Global
 import "menupanel.js" as Panel
 
 Rectangle {
+    id: menuPanel
+
 
     //0 - start of the game 1 - win -1 - loss
     property int type: 0
     property bool yAnimationEnabled: true
     property bool requestHiding: false
 
-    signal getNewImage()
+    signal getNewImage
 
-    id: menuPanel
     width: parent.width
     height: parent.height
     x: 0
@@ -20,9 +21,10 @@ Rectangle {
     visible: false
     color: "#e1e1e1"
 
-    signal startGameEasy
-    signal startGameMedium
-    signal startGameHard
+    signal startGame10x15
+    signal startGame20x15
+    signal startGame20x30
+    signal startGame40x30
 
 
     MenuPanelBackground {
@@ -48,72 +50,14 @@ Rectangle {
 
     MenuPanelGames {
         id: panelGames
+
+        type: menuPanel.type
+
+        onStartGame10x15: menuPanel.startGame10x15()
+        onStartGame20x15: menuPanel.startGame20x15()
+        onStartGame20x30: menuPanel.startGame20x30()
+        onStartGame40x30: menuPanel.startGame40x30()
     }
-
-
-//    BetterImage {
-//        id: piece;
-//        preserveAspectRatio: true
-//    }
-
-//    BetterImage {
-//        id: face;
-//        smooth: true
-//        preserveAspectRatio: true
-//        opacity: 1
-//    }
-
-//    Item {
-//        id: levels;
-
-//        BetterImage {
-//            preserveAspectRatio: true
-
-//            source: Global.spritePath+"10x15.png"
-//            width: menuPanel.parent.width / 3.5
-//            height: menuPanel.parent.height / 6
-//            x: (menuPanel.parent.width - width) / 2
-//            y: menuPanel.parent.height  * 3 / 8
-//            MouseArea {
-//                anchors.fill: parent
-//                hoverEnabled: !PlatformDetails.isMobile;
-//                cursorShape:  Qt.PointingHandCursor
-//                onClicked: startGameEasy();
-//            }
-
-//        }
-
-//        BetterImage {
-//            preserveAspectRatio: true
-//            source: Global.spritePath+"20x15.png"
-//            width: menuPanel.parent.width / 3.5
-//            height: menuPanel.parent.height / 6
-//            x: (menuPanel.parent.width - width) / 2
-//            y: menuPanel.parent.height  * 4.5 / 8
-
-//            MouseArea {
-//                anchors.fill: parent
-//                hoverEnabled: !PlatformDetails.isMobile;
-//                cursorShape:  Qt.PointingHandCursor
-//                onClicked: startGameMedium();
-//            }
-//        }
-
-//        BetterImage {
-//            preserveAspectRatio: true
-//            source: Global.spritePath+"20x30.png"
-//            width: menuPanel.parent.width / 3.5
-//            height: menuPanel.parent.height / 6
-//            x: (menuPanel.parent.width - width) / 2
-//            y: menuPanel.parent.height  * 6 / 8
-//            MouseArea {
-//                anchors.fill: parent
-//                hoverEnabled: !PlatformDetails.isMobile
-//                cursorShape:  Qt.PointingHandCursor
-//                onClicked:    startGameHard()
-//            }
-//        }
-//    }
 
     Behavior on y {
 
@@ -140,5 +84,5 @@ Rectangle {
 
     z: 2
 
-    onGetNewImage:      Panel.onVisibleChanged()
+    onGetNewImage:      panelGames.getNewImage()
 }

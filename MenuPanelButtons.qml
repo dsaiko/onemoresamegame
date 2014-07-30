@@ -24,7 +24,7 @@ Item {
             id: btn1
 
             width: horizontalLayout ? Math.min(buttons.width / 3, buttons.height / 3) : Math.min(buttons.parent.width * 0.9, (buttons.width / 2) / (sideRatio * 1.3))
-            height: width * image.originalSize.height / image.originalSize.width
+            height: width * originalSize.height / originalSize.width
 
             y: horizontalLayout ? btn2.y : btn2.y - 1.2 * height
             x: horizontalLayout ? spacing : centerX - width / 2
@@ -38,7 +38,7 @@ Item {
             id: btn2
 
             height: btn1.height
-            width: height * image.originalSize.width / image.originalSize.height
+            width: height * originalSize.width / originalSize.height
 
             y: horizontalLayout ? btn3.y : btn3.y - 1.2 * height
             x: horizontalLayout ? btn1.x + btn1.width + spacing : centerX - width / 2
@@ -51,7 +51,7 @@ Item {
             id: btn3
 
             height: btn1.height
-            width: height * image.originalSize.width / image.originalSize.height
+            width: height * originalSize.width / originalSize.height
 
             y: parent.height - 2 * height
             x: horizontalLayout ? btn2.x + btn2.width + spacing : centerX - width / 2
