@@ -12,7 +12,7 @@ DATE=
 TAGVERSION=
 COUNTER=
 
-CHANGELOG=${PKGNAME}.changelog
+CHANGELOG=CHANGELOG
 rm ${CHANGELOG} 2>/dev/null
 
 while read line

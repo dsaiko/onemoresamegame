@@ -1,3 +1,5 @@
-debian/pixmaps/onemoresamegame.png usr/share/pixmaps
-debian/pixmaps/onemoresamegame.xpm usr/share/pixmaps
-debian/usr/share/applications/onemoresamegame.desktop usr/share/applications
+#!/usr/bin/dh-exec
+
+onemoresamegame.png usr/share/pixmaps
+onemoresamegame.xpm usr/share/pixmaps
+onemoresamegame.desktop usr/share/applications

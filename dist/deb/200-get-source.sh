@@ -13,6 +13,10 @@ LATEST=$(git describe --tags $(git rev-list --tags --max-count=1))
 git checkout ${LATEST}
 
 sed -i 's/\/opt\/$${TARGET}\/bin/\/usr\/games/' deployment.pri
+sed -i 's/Exec=.*/Exec=\/usr\/games\/onemoresamegame/' onemoresamegame.desktop
+
+cp icon.png onemoresamegame.png
+convert -geometry 32x32 onemoresamegame.png onemoresamegame.xpm
 
 
 

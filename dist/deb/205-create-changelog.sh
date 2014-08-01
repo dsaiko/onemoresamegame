@@ -63,3 +63,6 @@ rm changelog-git
 
 cd ..
 cp debian/changelog ${DEBUILD_SCRIPT_DIR}/debian/
+rm debian/changelog
+rm -rf debian
+

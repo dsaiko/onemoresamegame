@@ -1,3 +1,17 @@
+2014-08-01 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.9.2 :
+	Redesigned game start buttons
+	Menu buttons layout
+	Designing new Menu Panel
+	Menu panel buttons.
+	Changing images source structure
+	Menu button redesign
+	Code optimizing
+	Introducint post-commit hook to tag version numbers
+	Adding GIT version numbering
+	Small dist scripts fixes
+
 2014-07-21 Dusan Saiko <dusan.saiko@gmail.com>
 
      * 0.9.1 :

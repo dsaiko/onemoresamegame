@@ -12,7 +12,7 @@ find . -mindepth 1 -maxdepth 1 -not -name "${DEBUILD_APP_NAME}-${VERSION}.tar.gz
 tar xzf ${DEBUILD_APP_NAME}-${VERSION}.tar.gz
 cd ${DEBUILD_APP_NAME}-${VERSION}
 
-dh_make -c ${DEBUILD_LICENCE} --createorig --single
+dh_make -c ${DEBUILD_LICENCE} --single -f ../${DEBUILD_APP_NAME}-${VERSION}.tar.gz
 
 cd debian
 rm *.ex *.EX

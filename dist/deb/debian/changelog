@@ -1,11 +1,37 @@
-onemoresamegame (0.9-1) jessie; urgency=low
+onemoresamegame (0.9.2-1) trusty; urgency=low
+
+  * Redesigned game start buttons
+  * Menu buttons layout
+  * Designing new Menu Panel
+  * Menu panel buttons.
+  * Changing images source structure
+  * Menu button redesign
+  * Code optimizing
+  * Introducint post-commit hook to tag version numbers
+  * Adding GIT version numbering
+  * Small dist scripts fixes
+
+ -- Dusan Saiko <dusan.saiko@gmail.com>  Fri, 1 Aug 2014 17:06:24 +0200
+
+onemoresamegame (0.9.1-1) trusty; urgency=low
+
+  * Finished RPM packages
+  * Extending Arch package scripts
+  * Finished deb packages for debian testing/jessie
+  * Creating Arch installation scripts
+  * Creating .deb installation scripts
+  * Testing deb creation
+
+ -- Dusan Saiko <dusan.saiko@gmail.com>  Mon, 21 Jul 2014 21:11:49 +0200
+
+onemoresamegame (0.9-1) trusty; urgency=low
 
   * Resizing of game window simplified
   * Migrated to QT 5.2.1 to support Ubuntu Trusty
 
  -- Dusan Saiko <dusan.saiko@gmail.com>  Sat, 19 Jul 2014 17:26:19 +0200
 
-onemoresamegame (0.8-1) jessie; urgency=low
+onemoresamegame (0.8-1) trusty; urgency=low
 
   * Finishing levels
   * new icon
@@ -24,7 +50,7 @@ onemoresamegame (0.8-1) jessie; urgency=low
 
  -- Dusan Saiko <dusan.saiko@gmail.com>  Wed, 16 Jul 2014 20:04:33 +0200
 
-onemoresamegame (0.1-1) jessie; urgency=low
+onemoresamegame (0.1-1) trusty; urgency=low
 
   * Initial commit
   * Update README.md
