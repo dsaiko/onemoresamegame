@@ -20,7 +20,6 @@
         <file>BetterImage.qml</file>
         <file>SlidingImage.qml</file>
         <file>PushButton.qml</file>
-        <file>MenuPanelBackground.qml</file>
         <file>MenuPanelButtons.qml</file>
         <file>MenuPanelGames.qml</file>
     </qresource>
@@ -70,8 +69,6 @@
         <file>sprites/level_8.png</file>
         <file>sprites/level_9.png</file>
         <file>sprites/btnMenu.png</file>
-        <file>sprites/menubg_1.png</file>
-        <file>sprites/menubg_2.png</file>
         <file>sprites/digit-0.png</file>
         <file>sprites/digit-1.png</file>
         <file>sprites/digit-2.png</file>
@@ -85,8 +82,6 @@
         <file>sprites/digit-_.png</file>
         <file>sprites/digit--.png</file>
         <file>sprites/digit_B.png</file>
-        <file>sprites/menubg_3.png</file>
-        <file>sprites/menubg_4.png</file>
         <file>sprites/btnMenuQuit.png</file>
         <file>sprites/btnMenuScores.png</file>
         <file>sprites/btnMenuUpdates.png</file>

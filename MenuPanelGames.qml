@@ -32,12 +32,12 @@ Item {
         id: img1
 
         source: Global.spritePath+"btnGame1a.png"
-        width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width, parent.height) / 2.8
+        width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width, parent.height) / 2.4
         height: width * originalSize.height / originalSize.width
         x: horizontalLayout ? parent.width * 1 / 3 + width / 2 : 0
         y: horizontalLayout ? 0 : parent.height * 1 / 3 + height / 2
 
-        onClicked: startGame10x15
+        onClicked: startGame10x15()
     }
 
     PushButton {
@@ -46,10 +46,10 @@ Item {
         source: Global.spritePath+"btnGame2a.png"
         width: img1.width
         height: img1.height
-        x: horizontalLayout ? 0 + width / 2 : (parent.width - 4 * width) / 3 + width
+        x: horizontalLayout ? 0 + width / 2 : parent.width / 2  - width * 1.2
         y: horizontalLayout ? (parent.height - 4 * height) / 3 + height : height / 2
 
-        onClicked: startGame20x15
+        onClicked: startGame20x15()
 
     }
 
@@ -59,10 +59,10 @@ Item {
         source: Global.spritePath+"btnGame3a.png"
         width: img1.width
         height: img1.height
-        x: horizontalLayout ? img2.x : parent.width - 2 * width - (parent.width - 4 * width) / 3
+        x: horizontalLayout ? img2.x : parent.width / 2 + width * 0.2
         y: horizontalLayout ? parent.height - 2 *  height - (parent.height - 4 * height) / 3 : img2.y
 
-        onClicked: startGame20x30
+        onClicked: startGame20x30()
 
     }
 
@@ -75,7 +75,7 @@ Item {
         x: horizontalLayout ? img1.x : parent.width - width
         y: horizontalLayout ? parent.height - height : img1.y
 
-        onClicked: startGame40x30
+        onClicked: startGame40x30()
     }
 
     BetterImage {

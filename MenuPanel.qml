@@ -19,17 +19,12 @@ Rectangle {
     x: 0
     y: -parent.height
     visible: false
-    color: "#e1e1e1"
+    color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
 
     signal startGame10x15
     signal startGame20x15
     signal startGame20x30
     signal startGame40x30
-
-
-    MenuPanelBackground {
-        anchors.fill: parent
-    }
 
 
     MouseArea {
