@@ -54,6 +54,10 @@ Rectangle {
         onStartGame40x30: menuPanel.startGame40x30()
     }
 
+    MenuPanelScore {
+
+    }
+
     Behavior on y {
 
         enabled: yAnimationEnabled

@@ -10,6 +10,7 @@ Item {
     property bool horizontalLayout: parent.width > parent.height
     property real sideRatio: parent.width / parent.height
     property real centerX: width / 2
+    property real topY: btn1.y
 
 
 
