@@ -5,7 +5,7 @@ import "scorebar.js" as ScoreBar
 import "global.js" as Global
 
 Item {
-    id: scoreBar;
+    id: scoreBar
     property alias menuButton: menuButton
 
     signal menuHide
@@ -13,6 +13,7 @@ Item {
     signal resetScore
 
     property int level: 0    
+    property int totalScore: 0
 
     clip: true
 

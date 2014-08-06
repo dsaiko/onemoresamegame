@@ -22,15 +22,15 @@ Item {
     signal getNewImage
 
     x:horizontalLayout ? parent.width / 2 - width * 1.01 : parent.width * 1 / 15
-    y: horizontalLayout ? parent.height * 1 / 20 : (parent.height / 2 - height) / 3
-    width:  horizontalLayout ? Math.min(Math.min(parent.width, parent.height) * 2 / 3, parent.width / 2.1) : parent.width - 2 * parent.width / 15
-    height: horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : Math.min(parent.height, parent.width) / 2
+    y: horizontalLayout ? parent.height * 1 / 20 : ((panelButtons.topY * 0.4 ) - height) / 2
+    width:  horizontalLayout ? Math.min(Math.min(parent.width, parent.height) * 0.8, parent.width / 2.1) : parent.width - 2 * parent.width / 15
+    height: horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : (panelButtons.topY * 0.36 )
 
 
     Rectangle {
         id: header
         width: parent.width
-        height: parent.height / 12
+        height: headerHeight
         x: 0
         y: 0
         radius: Math.min(width, height) / 8
@@ -73,10 +73,10 @@ Item {
             opacity: 0.8
 
             source: Global.spritePath+"btnGame1a.png"
-            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width, parent.height) / 2.4
+            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(Math.min(parent.width, parent.height) / 1.5, parent.width / 2.3)
             height: width * originalSize.height / originalSize.width
-            x: horizontalLayout ? (parent.width - 2 * width) / 3 : 0
-            y: horizontalLayout ? (parent.height - 3 * height) : parent.height * 1 / 3 + height / 2
+            x:  horizontalLayout ? (parent.width - 2 * width) / 3 : parent.width / 2 - width * 1.1
+            y: horizontalLayout ? (parent.height - 3 * height) : (parent.height / 2 - height * 1.1)
 
             onClicked: startGame10x15()
         }
@@ -88,8 +88,8 @@ Item {
             source: Global.spritePath+"btnGame2a.png"
             width: img1.width
             height: img1.height
-            x: horizontalLayout ? (parent.width - 2 * width) * 2 / 3 + width: parent.width / 2  - width * 1.2
-            y: horizontalLayout ? img1.y : height / 2
+            x:  horizontalLayout ? (parent.width - 2 * width) * 2 / 3 + width : parent.width / 2 + width * 0.1
+            y:  img1.y
 
             onClicked: startGame20x15()
 
@@ -102,8 +102,8 @@ Item {
             source: Global.spritePath+"btnGame3a.png"
             width: img1.width
             height: img1.height
-            x: horizontalLayout ? img1.x : parent.width / 2 + width * 0.2
-            y: horizontalLayout ? (parent.height - 1.5 * height) : img2.y
+            x:  img1.x
+            y: horizontalLayout ? (parent.height - 1.5 * height) : (parent.height /2 + height * 0.1)
 
             onClicked: startGame20x30()
 
@@ -116,8 +116,8 @@ Item {
             source: Global.spritePath+"btnGame4a.png"
             width: img1.width
             height: img1.height
-            x: horizontalLayout ? img2.x : parent.width - width
-            y: horizontalLayout ? img3.y : img1.y
+            x:  img2.x
+            y: img3.y
 
             onClicked: startGame40x30()
         }
@@ -127,10 +127,11 @@ Item {
             opacity: 0.7
 
             preserveAspectRatio: true
-            width: Math.min(parent.width, parent.height) / 3
+            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width, parent.height) / 3.2
             height: width * originalSize.height / originalSize.width
-            x: horizontalLayout ? (parent.width - width) / 2 : (parent.width - width) / 2
-            y: horizontalLayout ? (img1.y - height) / 2 : parent.height - height * 1.5
+            x: (parent.width - width) / 2
+            y:  (img1.y - height) / 2
+            visible: horizontalLayout
 
             BetterImage {
                 id: face

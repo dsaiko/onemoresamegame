@@ -5,6 +5,7 @@ import QtQuick.Window 2.0
 
 ApplicationWindow {
     id: mainWindow
+    property alias totalScore: scoreBar.totalScore
 
     visible: true
 

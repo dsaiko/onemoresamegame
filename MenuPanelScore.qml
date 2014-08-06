@@ -5,6 +5,7 @@ import QtQuick.Controls.Styles 1.1
 
 import "global.js" as Global
 import "menupanel.js" as Panel
+import "board.js" as Board
 
 Item {
 
@@ -13,16 +14,19 @@ Item {
     property bool horizontalLayout: parent.width > parent.height
     property real sideRatio: parent.width / parent.height
 
+    property alias playerName: textFieldItem.text
+    property alias headerHeight: inputName.height
+
 
     x:horizontalLayout ? parent.width / 2  + width * 0.01: parent.width * 1 / 15
-    y: horizontalLayout ? parent.height * 1 / 20 : panelGames.y + panelGames.height - panelGames.height / 15
-    width:  horizontalLayout ? Math.min(Math.min(parent.width, parent.height) * 2 / 3, parent.width / 2.1) : parent.width - 2 * parent.width / 15
-    height: horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : panelButtons.topY - (panelGames.y + panelGames.height)
+    y: horizontalLayout ? parent.height * 1 / 20 : panelButtons.topY - height * 1.025
+    width:  horizontalLayout ? Math.min(Math.min(parent.width, parent.height) * 0.8, parent.width / 2.1) : parent.width - 2 * parent.width / 15
+    height: horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : (panelButtons.topY * 0.6 )
 
     Rectangle {
         id: inputName
         width: parent.width
-        height: parent.height / 12
+        height: horizontalLayout ? parent.height / 12 : parent.height / 8
         x: 0
         y: 0
         radius: Math.min(width, height) / 8
@@ -43,6 +47,7 @@ Item {
                 font.bold: true
                 antialiasing: true
                 smooth: true
+                text: playerName
 
                 x: (parent.width - width) / 2
                 y: (parent.height - height) / 2
@@ -53,9 +58,11 @@ Item {
                         color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
                         radius: textFieldItem.height / 5
                         border.color: "#cccccc"
-                        border.width: textFieldItem.height / 15
+                        border.width: horizontalLayout? textFieldItem.height / 15 : textFieldItem.height / 20
                     }
                 }
+
+                onTextChanged: Board.changePlayerName(textFieldItem.text);
             }
 
         }
@@ -112,7 +119,7 @@ Item {
                         color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
                         radius: textFieldItem.height / 5
                         border.color: "#cccccc"
-                        border.width: textFieldItem.height / 15
+                        border.width: horizontalLayout? textFieldItem.height / 15 : textFieldItem.height / 20
                     }
                 }
             }
@@ -146,19 +153,20 @@ Item {
         x: 0
         y: inputRoomNr.y + inputRoomNr.height * 1.1
 
-        property real rowHeight: Math.min(height, width) / 20
+        property real rowHeight: horizontalLayout ? Math.min(height, width) / 15 : Math.min(height, width) / 12
 
         ListModel {
            id: scoreModel
-           ListElement{ place: "1" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "2" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "3" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "4" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "5" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "6" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "7" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "8" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
-           ListElement{ place: "9" ;   score10x15: "???"; score20x15: "???"; score20x30: "???"; score40x30: "???"}
+           ListElement{ place: "1" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "2" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "3" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "4" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "5" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "6" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "7" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "8" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "9" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
+           ListElement{ place: "10" ;   score10x15: "?"; score20x15: "?"; score20x30: "?"; score40x30: "?"}
         }
 
         TableView {

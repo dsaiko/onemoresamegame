@@ -3,7 +3,6 @@ Qt.include("global.js")
 
 var digits = [];
 
-var totalScore = 0;
 var lastAdition = 0;
 var numberofDigits = 60;
 

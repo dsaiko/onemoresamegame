@@ -12,6 +12,8 @@ Rectangle {
     property bool yAnimationEnabled: true
     property bool requestHiding: false
 
+    property alias headerHeight: panelScore.headerHeight
+
     signal getNewImage
 
     width: parent.width
@@ -26,6 +28,7 @@ Rectangle {
     signal startGame20x30
     signal startGame40x30
 
+    property alias playerName: panelScore.playerName
 
     MouseArea {
         id: mouseArea
@@ -55,6 +58,7 @@ Rectangle {
     }
 
     MenuPanelScore {
+        id: panelScore
 
     }
 

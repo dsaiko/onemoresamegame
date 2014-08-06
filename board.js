@@ -1,5 +1,8 @@
-Qt.include("global.js")
+.import QtQuick.LocalStorage 2.0 as Sql
+.import QtQuick 2.0 as Quick
 
+Qt.include("global.js")
+Qt.include("db.js")
 
 var sprites = [];
 var globalSelectionID = 1;
@@ -40,6 +43,9 @@ function init() {
     level = 1;
 
     var defaultSize = PlatformDetails.loadValue('defultSize', "10x15");
+    playerName = PlatformDetails.loadValue('playerName', "?");
+    if(!playerName) playerName="?";
+    menuPanel.playerName = playerName;
 
     if(defaultSize === "20x15") {
         nx = 20;
@@ -201,9 +207,11 @@ function destroyPiece(pieceIndex) {
 
         if(!morePieces) {
             //console.log("GOOD - GAME END");
+            saveScore(playerName, nx, ny, level, mainWindow.totalScore);
             nextLevel();
         } else if(checkGameOver()) {
             //console.log("BAD - GAME END");
+            saveScore(playerName, nx, ny, level, mainWindow.totalScore);
             endOfGame();
         }
     }
@@ -335,4 +343,9 @@ function fallLeft() {
 function onNextLevel() {
     level ++;
     nextLevelAnimation.start()
+}
+
+function changePlayerName(newName) {
+   board.playerName = newName;
+   PlatformDetails.saveValue('playerName', playerName);
 }

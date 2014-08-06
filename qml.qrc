@@ -23,6 +23,7 @@
         <file>MenuPanelButtons.qml</file>
         <file>MenuPanelGames.qml</file>
         <file>MenuPanelScore.qml</file>
+        <file>db.js</file>
     </qresource>
     <qresource prefix="/images">
         <file>sprites/piece_color_1_dust.png</file>

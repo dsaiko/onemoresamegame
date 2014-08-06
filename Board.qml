@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.LocalStorage 2.0
 
 import "global.js" as Global
 import "board.js" as Board
@@ -9,6 +10,8 @@ Item {
     property int nx:    15
     property int ny:    20
     property int level: 1
+
+    property string playerName
 
     signal menuDisplay
     signal resetScore
