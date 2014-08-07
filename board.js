@@ -35,17 +35,24 @@ function startGame(x, y) {
     ny = y;
     create();
     resetScore();
-    PlatformDetails.saveValue('defultSize', x+'x'+y);
+    PlatformDetails.saveValue('defaultSize', x+'x'+y);
 }
 
 
 function init() {
     level = 1;
 
-    var defaultSize = PlatformDetails.loadValue('defultSize', "10x15");
+    var defaultSize = PlatformDetails.loadValue('defaultSize', "10x15");
     playerName = PlatformDetails.loadValue('playerName', "?");
+    roomNumber = PlatformDetails.loadValue('roomNumber', "?");
+
     if(!playerName) playerName="?";
     menuPanel.playerName = playerName;
+
+    if(!validateRoomNumber(roomNumber)) {
+        roomNumber = generateRoomNumber();
+        PlatformDetails.saveValue('roomNumber', roomNumber);
+    }
 
     if(defaultSize === "20x15") {
         nx = 20;

@@ -13,6 +13,7 @@ Item {
 
     property string playerName
     property alias scoreModel: menuPanel.scoreModel
+    property alias roomNumber: menuPanel.roomNumber
 
     signal menuDisplay
     signal resetScore

@@ -12,6 +12,7 @@ Item {
     property bool horizontalLayout: parent.width > parent.height
     property real sideRatio: parent.width / parent.height
     property alias playerName: textFieldItem.text
+    property alias roomNumber: textFieldItem2.text
 
     property int type
 
@@ -109,6 +110,8 @@ Item {
             width: inputRoomNr.width / 1.8
 
             TextField {
+                id: textFieldItem2
+
                 width: parent.width * 0.9
                 height: parent.height * 0.8
                 font:textFieldItem.font

@@ -14,6 +14,8 @@ Rectangle {
 
     property alias headerHeight: panelScore.headerHeight
     property alias scoreModel: panelScore.scoreModel
+    property alias playerName: panelGames.playerName
+    property alias roomNumber: panelGames.roomNumber
 
     signal getNewImage
 
@@ -29,7 +31,6 @@ Rectangle {
     signal startGame20x30
     signal startGame40x30
 
-    property alias playerName: panelGames.playerName
 
     MouseArea {
         id: mouseArea
