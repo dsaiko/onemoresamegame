@@ -3,7 +3,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import "global.js" as Global
 import "menupanel.js" as Panel
-
+import "board.js" as Board
 
 Item {
 
@@ -11,6 +11,7 @@ Item {
 
     property bool horizontalLayout: parent.width > parent.height
     property real sideRatio: parent.width / parent.height
+    property alias playerName: textFieldItem.text
 
     property int type
 
@@ -28,11 +29,132 @@ Item {
 
 
     Rectangle {
-        id: header
+        id: inputName
         width: parent.width
         height: headerHeight
         x: 0
         y: 0
+        radius: Math.min(width, height) / 8
+        color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
+
+        Item {
+            id: textField
+            x: parent.width - width
+            height: parent.height
+            width: inputName.width / 1.8
+
+            TextField {
+                id: textFieldItem
+
+                width: parent.width * 0.9
+                height: parent.height * 0.8
+                font.pixelSize: Math.floor(Math.min(height, width * 0.19) * 0.5)
+                font.bold: true
+                antialiasing: true
+                smooth: true
+                text: playerName
+
+                x: (parent.width - width) / 2
+                y: (parent.height - height) / 2
+
+                style: TextFieldStyle {
+                    textColor: inputNameLabel.color
+                    background: Rectangle {
+                        color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
+                        radius: textFieldItem.height / 5
+                        border.color: "#cccccc"
+                        border.width: horizontalLayout? textFieldItem.height / 15 : textFieldItem.height / 20
+                    }
+                }
+
+                onTextChanged: Board.changePlayerName(textFieldItem.text);
+            }
+
+        }
+
+        Text {
+            id: inputNameLabel
+            text: qsTr("Your Name:")
+
+            color: Qt.rgba(0.9, 0.9, 0.9, 1)
+
+            anchors.right: textField.left
+            anchors.verticalCenter: inputName.verticalCenter
+
+            font:textFieldItem.font
+
+            antialiasing: true
+            smooth: true
+            style: Text.Raised
+            styleColor: "transparent"
+            textFormat: Text.StyledText
+
+        }
+
+    }
+
+    Rectangle {
+        id: inputRoomNr
+        width: inputName.width
+        height: inputName.height
+        x: 0
+        y: inputName.height
+        radius: inputName.radius
+        color: inputName.color
+
+        Item {
+            id: textField2
+            x: parent.width - width
+            height: parent.height
+            width: inputRoomNr.width / 1.8
+
+            TextField {
+                width: parent.width * 0.9
+                height: parent.height * 0.8
+                font:textFieldItem.font
+                antialiasing: true
+                smooth: true
+
+                x: (parent.width - width) / 2
+                y: (parent.height - height) / 2
+
+                style: TextFieldStyle {
+                    textColor: inputNameLabel.color
+                    background: Rectangle {
+                        color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
+                        radius: textFieldItem.height / 5
+                        border.color: "#cccccc"
+                        border.width: horizontalLayout? textFieldItem.height / 15 : textFieldItem.height / 20
+                    }
+                }
+            }
+
+        }
+
+        Text {
+            text: qsTr("Room #:")
+            color: inputNameLabel.color
+
+            anchors.right: textField2.left
+            anchors.verticalCenter: inputRoomNr.verticalCenter
+
+            font:textFieldItem.font
+
+            antialiasing: true
+            smooth: true
+            style: Text.Raised
+            styleColor: "transparent"
+            textFormat: Text.StyledText
+
+        }
+    }
+
+    Rectangle {
+        id: header
+        width: parent.width
+        height: headerHeight
+        x: 0
+        y: inputRoomNr.y + inputRoomNr.height * 1.1
         radius: Math.min(width, height) / 8
         color: Qt.rgba(0.2, 0.2, 0.2, 0.8)
 
@@ -66,17 +188,17 @@ Item {
         width: parent.width
         height: parent.height - y
         x: 0
-        y: header.height
+        y: header.y + header.height
 
         PushButton {
             id: img1
             opacity: 0.8
 
             source: Global.spritePath+"btnGame1a.png"
-            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(Math.min(parent.width, parent.height) / 1.5, parent.width / 2.3)
+            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width / 4, parent.height * originalSize.width / originalSize.height) * 0.9
             height: width * originalSize.height / originalSize.width
-            x:  horizontalLayout ? (parent.width - 2 * width) / 3 : parent.width / 2 - width * 1.1
-            y: horizontalLayout ? (parent.height - 3 * height) : (parent.height / 2 - height * 1.1)
+            x:  horizontalLayout ? (parent.width - 2 * width) / 3 : (parent.width - 4 * width) / 5
+            y: horizontalLayout ? (parent.height - 3 * height) : (parent.height - height) / 2
 
             onClicked: startGame10x15()
         }
@@ -88,7 +210,7 @@ Item {
             source: Global.spritePath+"btnGame2a.png"
             width: img1.width
             height: img1.height
-            x:  horizontalLayout ? (parent.width - 2 * width) * 2 / 3 + width : parent.width / 2 + width * 0.1
+            x:  horizontalLayout ? (parent.width - 2 * width) * 2 / 3 + width : img1.x + width + img1.x
             y:  img1.y
 
             onClicked: startGame20x15()
@@ -102,8 +224,8 @@ Item {
             source: Global.spritePath+"btnGame3a.png"
             width: img1.width
             height: img1.height
-            x:  img1.x
-            y: horizontalLayout ? (parent.height - 1.5 * height) : (parent.height /2 + height * 0.1)
+            x:  horizontalLayout ? img1.x : img2.x + width + img1.x
+            y: horizontalLayout ? (parent.height - 1.5 * height) : img1.y
 
             onClicked: startGame20x30()
 
@@ -116,7 +238,7 @@ Item {
             source: Global.spritePath+"btnGame4a.png"
             width: img1.width
             height: img1.height
-            x:  img2.x
+            x: horizontalLayout ? img2.x : img3.x + width + img1.x
             y: img3.y
 
             onClicked: startGame40x30()

@@ -12,6 +12,7 @@ Item {
     property int level: 1
 
     property string playerName
+    property alias scoreModel: menuPanel.scoreModel
 
     signal menuDisplay
     signal resetScore

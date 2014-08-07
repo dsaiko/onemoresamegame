@@ -60,6 +60,8 @@ function init() {
         nx = 10;
         ny = 15;
     }
+
+    dbInit();
 }
 
 function create() {
