@@ -358,3 +358,14 @@ function changePlayerName(newName) {
    board.playerName = newName;
    PlatformDetails.saveValue('playerName', playerName);
 }
+
+
+function changeRoomNumber() {
+    if(validateRoomNumber(roomNumber)) {
+        PlatformDetails.saveValue('roomNumber', roomNumber);
+        reloadScore();
+        return true;
+    }
+
+    return false;
+}

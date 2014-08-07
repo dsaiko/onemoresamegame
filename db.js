@@ -4,14 +4,14 @@ var db = null;
 function dbInit() {
     if(db) return;
 
-    db = Sql.LocalStorage.openDatabaseSync("OneMoreSameGame", "1.0", "OneMoreSameGame High Scores", 100);
+    db = Sql.LocalStorage.openDatabaseSync("OneMoreSameGame", "2.0", "OneMoreSameGame High Scores", 100);
 
     db.transaction(function(tx) {
         tx.executeSql(
            'CREATE TABLE IF NOT EXISTS \
             topscores(\
                 name TEXT, \
-                isLocalScore BOOL, \
+                roomNumber TEXT, \
                 boardSize TEXT, \
                 level NUMBER, \
                 score NUMBER, \
@@ -26,29 +26,35 @@ function saveScore(playerName, nx, ny, level, totalScore) {
     var boardSize = nx + "x" + ny;
 
     var dataStr = "INSERT INTO topscores VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
-    var data = [playerName, 1, boardSize, level, totalScore];
+    var data = [playerName, roomNumber, boardSize, level, totalScore];
 
     db.transaction(function(tx) {
         tx.executeSql(dataStr, data);
 
-        //clean up the table scores
+        //clean up the scores
+        tx.executeSql(
+            'delete from topscores where roomNumber!=?',
+            [roomNumber]
+        );
+
         tx.executeSql(
             'delete \
              from \
                 topscores \
              where \
-                isLocalScore=1 \
-                and boardSize=? \
+                boardSize=? \
+                and roomNumber=? \
                 and rowid not in ( \
                     select rowid from topscores \
                     where \
-                    isLocalScore=1  \
-                    and boardSize=? \
+                    boardSize=? \
+                    and roomNumber=?  \
                     order by score desc \
-                    limit 10 \
+                    limit 5 \
                 )',
-            [boardSize, boardSize]
+            [boardSize, roomNumber, boardSize, roomNumber]
         );
+
     });
 
     reloadScore();
@@ -62,15 +68,15 @@ function reloadScore() {
 
     db.transaction(function(tx) {
 
-        var boardSizes = tx.executeSql('select distinct boardSize from topscores order by boardSize');
+        var boardSizes = tx.executeSql('select distinct boardSize from topscores where roomNumber=? order by boardSize', [roomNumber]);
         var limit = 3
 
         for(var n=0; n < boardSizes.rows.length; n++) {
             var boardSize = boardSizes.rows.item(n).boardSize;
 
             var rs = tx.executeSql(
-                        'select * from topscores where boardSize=? order by score desc limit ?',
-                        [boardSize, limit]
+                        'select * from topscores where boardSize=? and roomNumber=? order by score desc limit ?',
+                        [boardSize, roomNumber, limit]
             );
 
 

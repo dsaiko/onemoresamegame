@@ -13,6 +13,7 @@ Item {
     property real sideRatio: parent.width / parent.height
     property alias playerName: textFieldItem.text
     property alias roomNumber: textFieldItem2.text
+    property bool isRoomNumberValid: false
 
     property int type
 
@@ -130,18 +131,23 @@ Item {
                         border.width: horizontalLayout? textFieldItem.height / 15 : textFieldItem.height / 20
                     }
                 }
+
+                onTextChanged: isRoomNumberValid = Board.changeRoomNumber()
             }
 
         }
 
         Text {
+            id: roomNumberLabel
             text: qsTr("Room #:")
-            color: inputNameLabel.color
+            color: isRoomNumberValid ? inputNameLabel.color : "#ff1111"
 
             anchors.right: textField2.left
             anchors.verticalCenter: inputRoomNr.verticalCenter
 
-            font:textFieldItem.font
+            font.pixelSize: textFieldItem.font.pixelSize
+            font.bold: true
+            font.strikeout: !isRoomNumberValid
 
             antialiasing: true
             smooth: true
