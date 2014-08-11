@@ -9,7 +9,7 @@ function dbInit() {
     db.transaction(function(tx) {
         tx.executeSql(
            'CREATE TABLE IF NOT EXISTS \
-            topscores(\
+            topten(\
                 name TEXT, \
                 roomNumber TEXT, \
                 boardSize TEXT, \
@@ -25,7 +25,7 @@ function saveScore(playerName, nx, ny, level, totalScore) {
 
     var boardSize = nx + "x" + ny;
 
-    var dataStr = "INSERT INTO topscores VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+    var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
     var data = [playerName, roomNumber, boardSize, level, totalScore];
 
     db.transaction(function(tx) {
@@ -33,19 +33,19 @@ function saveScore(playerName, nx, ny, level, totalScore) {
 
         //clean up the scores
         tx.executeSql(
-            'delete from topscores where roomNumber!=?',
+            'delete from topten where roomNumber!=?',
             [roomNumber]
         );
 
         tx.executeSql(
             'delete \
              from \
-                topscores \
+                topten \
              where \
                 boardSize=? \
                 and roomNumber=? \
                 and rowid not in ( \
-                    select rowid from topscores \
+                    select rowid from topten \
                     where \
                     boardSize=? \
                     and roomNumber=?  \
@@ -68,14 +68,14 @@ function reloadScore() {
 
     db.transaction(function(tx) {
 
-        var boardSizes = tx.executeSql('select distinct boardSize from topscores where roomNumber=? order by boardSize', [roomNumber]);
+        var boardSizes = tx.executeSql('select distinct boardSize from topten where roomNumber=? order by boardSize', [roomNumber]);
         var limit = 3
 
         for(var n=0; n < boardSizes.rows.length; n++) {
             var boardSize = boardSizes.rows.item(n).boardSize;
 
             var rs = tx.executeSql(
-                        'select * from topscores where boardSize=? and roomNumber=? order by score desc limit ?',
+                        'select * from topten where boardSize=? and roomNumber=? and score >= 0 order by score desc limit ?',
                         [boardSize, roomNumber, limit]
             );
 
@@ -86,10 +86,10 @@ function reloadScore() {
                 scoreModel.append({
                                       "place": (i+1),
                                       "board" : row.boardSize,
-                                      "name": row.name,
-                                      "score": row.score,
-                                      "level" : row.level,
-                                      "date":  Qt.formatDate(row.created, "yyyy-MM-dd")})
+                                      "name":   row.name.substring(0,10),
+                                      "score":  row.score,
+                                      "level" : "lv."+row.level,
+                                      "date":   Qt.formatDate(row.created, "yyyy-MM-dd")})
             }
 
             while(i++ < limit) {
@@ -98,10 +98,100 @@ function reloadScore() {
                                       "board" : boardSize,
                                       "name": "?",
                                       "score": 0,
-                                      "level": 0,
+                                      "level": "",
                                       "date": ""
                 })
             }
         }
     });
+}
+
+
+function saveResponse(result) {
+
+    dbInit();
+
+    db.transaction(function(tx) {
+        //clean up the scores
+        tx.executeSql(
+            'delete from topten where roomNumber=?',
+            [roomNumber]
+        );
+
+        var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, ?)";
+
+        for(var i=0; i<result.length; i++) {
+            var row = result[i];
+            var data = [row.name, row.roomNumber, row.boardSize, row.level, row.score, row.created];
+            tx.executeSql(dataStr, data);
+        }
+    });
+
+    reloadScore();
+
+}
+
+function syncScore() {
+    dbInit()
+
+    var postData = ""
+
+    db.transaction(function(tx) {
+
+        var boardSizes = tx.executeSql('select distinct boardSize from topten where roomNumber=? order by boardSize', [roomNumber]);
+        var limit = 3
+
+        var data=[]
+
+
+        for(var n=0; n < boardSizes.rows.length; n++) {
+            var boardSize = boardSizes.rows.item(n).boardSize;
+
+            var rs = tx.executeSql(
+                        'select * from topten where boardSize=? and roomNumber=? order by score desc limit ?',
+                        [boardSize, roomNumber, limit]
+            );
+
+
+            var i = 0;
+
+
+            for(; i < rs.rows.length; i++) {
+                var row = rs.rows.item(i);
+                data.push(row);
+            }
+
+        }
+
+        if(data.length === 0) {
+            //in case there is no data we need to send something
+            var rs = tx.executeSql(
+                        "select '?' as name, ? as roomNumber, '10x15' as boardSize, 1 as level, 0 as score, CURRENT_TIMESTAMP as created",
+                        [roomNumber]
+            );
+            for(var i=0; i < rs.rows.length; i++) {
+                var row = rs.rows.item(i);
+                data.push(row);
+            }
+        }
+
+        postData = JSON.stringify(data);
+    });
+
+
+    var postman = new XMLHttpRequest()
+    postman.open("POST", "http://cgi.samegame.saiko.cz/topten.php", true);
+    postman.setRequestHeader("Content-Type", "application/json");
+    postman.setRequestHeader("Origin", "OneMoreSameGame");
+    postman.onreadystatechange = function() {
+          if (postman.readyState == postman.DONE) {
+              if(postman.status == 200) {
+                  var result = JSON.parse(postman.responseText)
+                  if(result)
+                    saveResponse(result);
+              }
+          }
+    }
+    postman.send(postData);
+
 }

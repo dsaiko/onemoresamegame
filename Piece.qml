@@ -21,6 +21,8 @@ Item {
     property bool xAnimationEnabled: false
     property bool isDestroying: false
 
+    property alias shineAnimation: shine
+
     signal mouseClicked(int pieceIndex)
     signal mouseEntered(int pieceIndex)
     signal mouseExited(int pieceIndex)

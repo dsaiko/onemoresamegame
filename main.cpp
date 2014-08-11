@@ -26,8 +26,6 @@
  * TODO: screenshot/DEB
  * TODO: internationalization + manpages
  * TODO: resize images
- * TODO: png exec flag???
- * TODO: uninstall -remove sqlite?
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

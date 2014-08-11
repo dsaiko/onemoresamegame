@@ -1,7 +1,7 @@
 # Maintainer: Dusan Saiko <dusan.saiko ..at.. gmail ..dot.. com>
 
 pkgname=onemoresamegame
-pkgver=0.9.4
+pkgver=0.9.5
 pkgrel=1
 
 pkgdesc="One more version of a puzzle game where you select the same group of pieces."
@@ -16,10 +16,10 @@ license=('Apache')
 depends=("qt5-base>=5.2.1" "qt5-declarative>" "qt5-graphicaleffects>" "qt5-quickcontrols>" "qt5-script>")
 
 source=(
-	'https://github.com/dsaiko/onemoresamegame/archive/0.9.4.tar.gz'
+	'https://github.com/dsaiko/onemoresamegame/archive/0.9.5.tar.gz'
 )
 
-sha256sums=('8b8ee7d386c644c42e9d2eda7c996d5c5277119ca04ec4ee8000f38e84c55d64')
+sha256sums=('ccf4a3e3bd6bd480b09278df25def0db8d7670cc287930ad0568c9ecf090d740')
 
 build() {
 	 cd "${srcdir}"

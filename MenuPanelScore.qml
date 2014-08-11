@@ -84,7 +84,7 @@ Item {
         x: 0
         y: header.visible ? header.y + header.height : header.y
 
-        property real rowHeight: horizontalLayout ? Math.min(height, width) / 20 : Math.min(height, width) / 16
+        property real rowHeight: horizontalLayout ? Math.min(height, width) / 20 : Math.min(height, width) / 15.5
 
         ListModel {
            id: scoreModel
@@ -93,16 +93,17 @@ Item {
         }
 
         TableView {
-            TableViewColumn{ role: "place"  ; title: "#" ; width: scoreTable.width * 0.1 }
-            TableViewColumn{ role: "name"  ; title: qsTr("Name") ; width: scoreTable.width * 0.225 }
-            TableViewColumn{ role: "score"  ; title: qsTr("Score") ; width: scoreTable.width * 0.225 }
-            TableViewColumn{ role: "level"  ; title: qsTr("Level") ; width: scoreTable.width * 0.225 }
-            TableViewColumn{ role: "date"  ; title: qsTr("Date") ; width: scoreTable.width * 0.225 }
+            TableViewColumn{ role: "place"  ; title: "" ; width: scoreTable.width * 0.1 }
+            TableViewColumn{ role: "name"  ; title: "" ; width: scoreTable.width * 0.225 }
+            TableViewColumn{ role: "score"  ; title: "" ; width: scoreTable.width * 0.225 }
+            TableViewColumn{ role: "level"  ; title: "" ; width: scoreTable.width * 0.225 }
+            TableViewColumn{ role: "date"  ; title: "" ; width: scoreTable.width * 0.225 }
             model: scoreModel
 
             anchors.fill: parent
             backgroundVisible: false
             alternatingRowColors: false
+            headerVisible: false
             frameVisible: false
 
             itemDelegate: Item {

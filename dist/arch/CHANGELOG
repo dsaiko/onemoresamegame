@@ -1,3 +1,12 @@
+2014-08-08 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.9.5 :
+	Creating version 0.9.5
+	Deleting local scores on room number change
+	Added room number generator and validator
+	Finished local scores
+	Creating development version: 0.9.5-SNAPSHOT
+
 2014-08-07 Dusan Saiko <dusan.saiko@gmail.com>
 
      * 0.9.4 :

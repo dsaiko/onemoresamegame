@@ -12,6 +12,7 @@ var offsetY = 0;
 function menuDisplay() {
     menuPanel.yAnimationEnabled = false
     if(!menuPanel.visible || menuPanel.y < -10 ) {
+        startShineAnimation(false);
         menuPanel.requestHiding = false;
         menuPanel.y = - menuPanel.height;
         menuPanel.yAnimationEnabled = true
@@ -19,6 +20,7 @@ function menuDisplay() {
         menuPanel.getNewImage();
         menuPanel.y = 0;
     } else {
+        startShineAnimation(true);
         menuPanel.requestHiding = true;
         menuPanel.yAnimationEnabled = true
         menuPanel.visible = true;
@@ -368,4 +370,16 @@ function changeRoomNumber() {
     }
 
     return false;
+}
+
+function startShineAnimation(enabled) {
+    for(var i=0; i<sprites.length; i++) {
+        if(sprites[i]) {
+            if(enabled) {
+                sprites[i].shineAnimation.resume();
+            } else {
+                sprites[i].shineAnimation.pause();
+            }
+        }
+    }
 }
