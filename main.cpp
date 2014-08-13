@@ -1,3 +1,9 @@
+/**
+  * OneMoreSamegame
+  * http://www.samegame.saiko.cz/
+  * (c) 2014 Dušan Saiko dusan.saiko@gmail
+  * Apache License 2.0
+  */
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -26,6 +32,9 @@
  * TODO: screenshot/DEB
  * TODO: internationalization + manpages
  * TODO: resize images
+ * TODO: face ?
+ * TODO: fix scoring
+ * TODO: send version to server
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

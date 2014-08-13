@@ -2,13 +2,11 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Background.qml</file>
-        <file>BackgroundSprite.qml</file>
         <file>ScoreBar.qml</file>
         <file>Digit.qml</file>
         <file>Board.qml</file>
         <file>Piece.qml</file>
         <file>global.js</file>
-        <file>background.js</file>
         <file>scorebar.js</file>
         <file>piece.js</file>
         <file>board.js</file>

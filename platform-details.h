@@ -1,3 +1,9 @@
+/**
+  * OneMoreSamegame
+  * http://www.samegame.saiko.cz/
+  * (c) 2014 Dušan Saiko dusan.saiko@gmail
+  * Apache License 2.0
+  */
 #ifndef PLATFORMDETAILS_H
 #define PLATFORMDETAILS_H
 

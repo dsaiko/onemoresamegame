@@ -1,3 +1,10 @@
+/**
+  * OneMoreSamegame
+  * http://www.samegame.saiko.cz/
+  * (c) 2014 Dušan Saiko dusan.saiko@gmail
+  * Apache License 2.0
+  */
+
 var db = null;
 
 
@@ -88,7 +95,7 @@ function reloadScore() {
                                       "board" : row.boardSize,
                                       "name":   row.name.substring(0,10),
                                       "score":  row.score,
-                                      "level" : "lv."+row.level,
+                                      "level" : qsTr("lv.")+row.level,
                                       "date":   Qt.formatDate(row.created, "yyyy-MM-dd")})
             }
 

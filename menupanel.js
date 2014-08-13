@@ -1,3 +1,9 @@
+/**
+  * OneMoreSamegame
+  * http://www.samegame.saiko.cz/
+  * (c) 2014 Dušan Saiko dusan.saiko@gmail
+  * Apache License 2.0
+  */
 Qt.include("global.js")
 
 function newFaceImage() {

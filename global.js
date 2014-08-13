@@ -1,3 +1,9 @@
+/**
+  * OneMoreSamegame
+  * http://www.samegame.saiko.cz/
+  * (c) 2014 Dušan Saiko dusan.saiko@gmail
+  * Apache License 2.0
+  */
 .pragma library
 
 
@@ -69,6 +75,24 @@ function generateRoomNumber_() {
     return number;
 }
 
+function generateRandomArray(size) {
+    var array = []
+
+    for(var i=0; i<size; i++)
+        array.push(Math.random())
+
+    return array
+}
+
+function generateRoomNumber() {
+
+    //just to be sure we generate valid numbers
+    while(true) {
+        var number = generateRoomNumber_();
+        if(validateRoomNumber(number)) return number;
+    }
+}
+
 function validateRoomNumber(number) {
     if(! /^([0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3})$/.test(number)) return false;
 
@@ -89,12 +113,5 @@ function validateRoomNumber(number) {
 
 }
 
-function generateRoomNumber() {
 
-    //just to be sure we generate valid numbers
-    while(true) {
-        var number = generateRoomNumber_();
-        if(validateRoomNumber(number)) return number;
-    }
-}
 
