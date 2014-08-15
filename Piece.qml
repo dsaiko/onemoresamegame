@@ -7,19 +7,22 @@
 
 import QtQuick 2.0
 import QtQuick.Particles 2.0
-
 import "global.js" as Global
 import "piece.js" as Piece
 
+/**
+  * Board piece item
+  *
+  */
 Item {
     id: piece
 
-    property int pieceIndex: -1
-    property int pieceIndexX: pieceIndex % board.nx
-    property int pieceIndexY: Math.floor(pieceIndex / board.nx)
+    property int index
+    readonly property int indexX:   index % board.nx
+    readonly property int indexY:   Math.floor(index / board.nx)
 
-    property int color: 0;
-    property int shape: 0;
+    property int color: 0
+    property int shape: 0
     property alias source: sprite.source
     property alias mouseArea: mouseArea
 
@@ -30,12 +33,12 @@ Item {
 
     property alias shineAnimation: shine
 
-    signal mouseClicked(int pieceIndex)
-    signal mouseEntered(int pieceIndex)
-    signal mouseExited(int pieceIndex)
+    signal mouseClicked(int index)
+    signal mouseEntered(int index)
+    signal mouseExited(int index)
 
     signal destroyPiece
-    signal pieceDestroyed(int pieceIndex)
+    signal pieceDestroyed(int index)
 
     Component.onCompleted: Piece.create();
 
@@ -43,8 +46,8 @@ Item {
 
     width: Math.min(board.width / board.nx, board.height / board.ny)
     height: width
-    x: pieceIndexX * width
-    y: board.height - (board.ny - pieceIndexY) * height
+    x: indexX * width
+    y: board.height - (board.ny - indexY) * height
 
     Rectangle {
         id: spriteRect;
@@ -152,11 +155,11 @@ Item {
         anchors.fill: parent
 
         hoverEnabled: !PlatformDetails.isMobile;
-        onEntered:    if(!PlatformDetails.isMobile) mouseEntered(pieceIndex);
-        onExited:     if(!PlatformDetails.isMobile) mouseExited(pieceIndex);
+        onEntered:    if(!PlatformDetails.isMobile) mouseEntered(index);
+        onExited:     if(!PlatformDetails.isMobile) mouseExited(index);
         cursorShape:  Qt.PointingHandCursor
 
-        onClicked:  mouseClicked(pieceIndex);
+        onClicked:  mouseClicked(index);
     }
 
     onDestroyPiece: {
@@ -195,7 +198,7 @@ Item {
         }
 
          onStarted: isDestroying = true;
-         onStopped: pieceDestroyed(pieceIndex);
+         onStopped: pieceDestroyed(index);
     }
 
     ParticleSystem {

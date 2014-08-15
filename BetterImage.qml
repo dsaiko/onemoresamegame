@@ -10,18 +10,25 @@ import QtQuick 2.0
 /**
   * Image with better quality than stock QT Image component
   * you can set "width" or "preferredHeight" property, do not set "height" - that is computed automatically
+  *
+  * code signoff date: 2014-08-15
   */
 Image {
     property real preferredHeight
-
     property real aspectRatio
-    fillMode:       Image.PreserveAspectFit
 
-    onWidthChanged:             onAspectRatioChanged
-    onPreferredHeightChanged:   onAspectRatioChanged
+    signal          reComputeWidth
+    fillMode:       Image.PreserveAspectFit
+    smooth:         true
+    antialiasing:   true
+
+    onWidthChanged:             reComputeWidth()
+    onPreferredHeightChanged:   reComputeWidth()
+    onAspectRatioChanged:       reComputeWidth()
     Component.onCompleted:      aspectRatio = sourceSize.width / sourceSize.height
 
-    onAspectRatioChanged: {
+    onReComputeWidth:
+    {
         if(aspectRatio != 0) {
             if(preferredHeight) {
                 width = preferredHeight * aspectRatio

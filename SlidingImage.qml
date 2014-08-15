@@ -6,59 +6,62 @@
   */
 
 import QtQuick 2.0
+import "global.js" as Global
 
+/**
+  * Image with sliding effect on source change
+  * there is a limitation that backupImage needs to have some image at startup with
+  * the same dimensions as image later on ...
+  *
+  * code signoff date: 2014-08-15
+  */
 Item {
+    property alias  source:         image.source
 
-    id: slidingImage
-
-    property alias  source:         img0.source
-
-    property real preferredHeight
-
-    height: img0.height
-    width: img0.width
+    height:     image.height
+    width:      image.width
 
     BetterImage {
-        id: img0
-        preferredHeight: parent.preferredHeight
+        id:                 image
+        preferredHeight:    parent.parent.height
 
+        onSourceChanged: {
+            backupImage.visible = true
+            animation.restart()
+        }
     }
 
     BetterImage {
-        id: backupImage;
-        visible: false;
+        source:         Global.spritePath+"level_9.png"
+        id:             backupImage
+        preferredHeight:parent.parent.height
+        opacity:        0
     }
 
-    SequentialAnimation {
+    // sliding animation effect which will swap the images at the end
+    ParallelAnimation {
         id: animation
 
-        ParallelAnimation {
-            PropertyAnimation {
-                target: img0
-                property: "y"
-                from: -slidingImage.height
-                to: 0
-                duration: 500
-            }
-            PropertyAnimation {
-                target: backupImage
-                property: "y"
-                from: 0
-                to: slidingImage.height
-                duration: 500
-            }
+        PropertyAnimation {
+            target:     image
+            property:   "y"
+            from:       -image.height
+            to:         0
+            duration:   750
         }
-        ScriptAction {
-            script: {
-                backupImage.source = img0.source
-                backupImage.y = 0
-                backupImage.width = img0.width
-                backupImage.visible = true
-            }
+        PropertyAnimation {
+            target:     backupImage
+            property:   "y"
+            from:       0
+            to:         backupImage.height
+            duration:   750
         }
-    }
 
-    onSourceChanged: {
-        animation.start()
+        onStopped: {
+            backupImage.visible = false
+            backupImage.source = image.source
+            backupImage.reComputeWidth
+            backupImage.opacity = 1
+        }
     }
 }

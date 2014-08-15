@@ -46,22 +46,22 @@ Item {
     }
 
     //piece clicked
-    signal mouseClicked(int pieceIndex)
-    signal mouseEntered(int pieceIndex)
-    signal mouseExited(int pieceIndex)
+    signal mouseClicked(int index)
+    signal mouseEntered(int index)
+    signal mouseExited(int index)
 
     signal scoreChanged(int count, int numberOfColors)
     signal doubleScore
 
-    signal pieceDestroyed(int pieceIndex)
+    signal pieceDestroyed(int index)
 
     property int cx: board.width / nx;
     property int cy: board.height / ny;
 
-    onMouseClicked:     Board.onMouseClicked(pieceIndex)
-    onMouseEntered:     Board.onMouseEntered(pieceIndex)
-    onMouseExited:      Board.onMouseExited(pieceIndex)
-    onPieceDestroyed:   Board.destroyPiece(pieceIndex)
+    onMouseClicked:     Board.onMouseClicked(index)
+    onMouseEntered:     Board.onMouseEntered(index)
+    onMouseExited:      Board.onMouseExited(index)
+    onPieceDestroyed:   Board.destroyPiece(index)
     onMenuDisplay:      Board.menuDisplay()   
 
     onNextLevel: Board.onNextLevel()

@@ -113,7 +113,7 @@ function create() {
             sprite.source =  spritePath+"piece_color_"+colors[rnd]+"_shape_"+shapes[rnd]+".png";
             sprite.opacity=0.8
 
-            sprite.pieceIndex = y * nx + x;
+            sprite.index = y * nx + x;
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
@@ -123,11 +123,11 @@ function create() {
     }
 }
 
-function onMouseExited(pieceIndex) {
+function onMouseExited(index) {
     onMouseEntered(-1);
 }
 
-function onMouseEntered(pieceIndex) {
+function onMouseEntered(index) {
     for(var i=0; i<sprites.length; i++) {
         if(sprites[i]) sprites[i].isSelected = false;
     }
@@ -138,10 +138,10 @@ function onMouseEntered(pieceIndex) {
     }
 
 
-    if(pieceIndex < 0) return;
+    if(index < 0) return;
 
-    var x = pieceIndex % nx;
-    var y = Math.floor(pieceIndex / nx);
+    var x = index % nx;
+    var y = Math.floor(index / nx);
 
     var count = 0;
 
@@ -149,20 +149,20 @@ function onMouseEntered(pieceIndex) {
     // select all other pieces. If there will be at least one
     // more sprite selected, we wil lalso select this one
 
-    sprites[pieceIndex].selectionID = selectionID;
+    sprites[index].selectionID = selectionID;
 
-    count += selectSprites(x, y-1, sprites[pieceIndex].color, selectionID);
-    count += selectSprites(x+1, y, sprites[pieceIndex].color, selectionID);
-    count += selectSprites(x, y+1, sprites[pieceIndex].color, selectionID);
-    count += selectSprites(x-1, y, sprites[pieceIndex].color, selectionID);
+    count += selectSprites(x, y-1, sprites[index].color, selectionID);
+    count += selectSprites(x+1, y, sprites[index].color, selectionID);
+    count += selectSprites(x, y+1, sprites[index].color, selectionID);
+    count += selectSprites(x-1, y, sprites[index].color, selectionID);
 
     if(count > 0) {
-        sprites[pieceIndex].isSelected = true;
+        sprites[index].isSelected = true;
     }
 }
 
-function onMouseClicked(pieceIndex) {
-    if(sprites[pieceIndex].isSelected) {
+function onMouseClicked(index) {
+    if(sprites[index].isSelected) {
         //second click
 
         var count = 0;
@@ -176,7 +176,7 @@ function onMouseClicked(pieceIndex) {
         scoreChanged(count, Math.min(level + 1, 5));
     } else {
         //first click
-        onMouseEntered(pieceIndex);
+        onMouseEntered(index);
     }
 }
 
@@ -203,9 +203,9 @@ function selectSprites(x, y, color, selectionID) {
     return count;
 }
 
-function destroyPiece(pieceIndex) {
-    sprites[pieceIndex].destroy();
-    sprites[pieceIndex] = null;
+function destroyPiece(index) {
+    sprites[index].destroy();
+    sprites[index] = null;
 
     var count = 0;
     for(var i=0; i<sprites.length; i++) {
@@ -304,7 +304,7 @@ function fallDown() {
                     var sprite = sprites[i];
                     sprites[i] = null;
                     sprites[tempI] = sprite;
-                    sprites[tempI].pieceIndex = tempI;
+                    sprites[tempI].index = tempI;
                 }
             }
         }
@@ -325,8 +325,6 @@ function fallLeft() {
         }
 
         if(count == 0) {
-            doubleScore();
-
             var anyFound = false;
 
             for(var ix = x + 1; ix < nx; ix++) {
@@ -339,7 +337,7 @@ function fallLeft() {
                         sprite.xAnimationEnabled = true;
                         sprites[i] = null;
                         sprites[i-1] = sprite;
-                        sprites[i-1].pieceIndex = i - 1;
+                        sprites[i-1].index = i - 1;
                     }
                 }
             }

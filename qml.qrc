@@ -2,17 +2,16 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Background.qml</file>
-        <file>ScoreBar.qml</file>
+        <file>AppStatusBar.qml</file>
         <file>ScoreDigit.qml</file>
         <file>Board.qml</file>
         <file>Piece.qml</file>
         <file>global.js</file>
-        <file>scorebar.js</file>
+        <file>score.js</file>
         <file>piece.js</file>
         <file>board.js</file>
         <file>MenuPanel.qml</file>
         <file>menupanel.js</file>
-        <file>ScoreBarLevel.qml</file>
         <file>icon.ico</file>
         <file>icon.png</file>
         <file>BetterImage.qml</file>

@@ -6,63 +6,61 @@
   */
 
 import QtQuick 2.0
-
-import "scorebar.js" as ScoreBar
 import "global.js" as Global
 
+/**
+  * Image with text support and push button effect
+  *
+  * code signoff date: 2014-08-15
+  */
 BetterImage {
-    property string text
+    property alias text: textItem.text
 
     signal clicked
 
-    x: 0
-    y: 0
-    z: 2
-
     MouseArea {
-        anchors.fill: parent
-
-        hoverEnabled: !PlatformDetails.isMobile
-        cursorShape:  Qt.PointingHandCursor
-
-        onPressed: parent.scale = 0.9
-        onReleased: parent.scale = 1
-        onClicked: parent.clicked()
+        anchors.fill:   parent
+        hoverEnabled:   !PlatformDetails.isMobile
+        cursorShape:    Qt.PointingHandCursor
+        onPressed:      parent.scale = 0.9
+        onReleased:     parent.scale = 1
+        onClicked:      parent.clicked()
     }
 
     Behavior on y {
         PropertyAnimation {
-            property: "y"
-            duration: 100
+            property:   "y"
+            duration:   100
         }
     }
     Behavior on x {
         PropertyAnimation {
-            property: "x"
-            duration: 100
+            property:   "x"
+            duration:   100
         }
     }
     Behavior on scale {
         PropertyAnimation {
-            property: "scale"
-            duration: 100
+            property:   "scale"
+            duration:   100
         }
     }
 
 
     Text {
-        text: parent.text
-
-        x: parent.height * 1.2
+        id:                     textItem
+        x:                      parent.height * 1.2
         anchors.verticalCenter: parent.verticalCenter
 
-        font.pixelSize: Math.floor(parent.height * 2 / 3.5)
-        font.bold: true
+        font.pixelSize:         Math.floor(parent.height * 2 / 3.5)
+        font.bold:              true
 
-        antialiasing: true
-        smooth: true
-        style: Text.Raised
-        styleColor: "transparent"
-        textFormat: Text.StyledText
+        //following probably does not have any effect,
+        //trying to improve text quality
+        antialiasing:           true
+        smooth:                 true
+        style:                  Text.Raised
+        styleColor:             "transparent"
+        textFormat:             Text.StyledText
     }
 }

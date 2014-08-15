@@ -27,7 +27,7 @@ ApplicationWindow {
            anchors.fill: parent
     }
 
-    ScoreBar {
+    AppStatusBar {
          id: scoreBar
          width: parent.width
          height: parent.height / 20
@@ -48,6 +48,5 @@ ApplicationWindow {
 
          onResetScore: scoreBar.resetScore()
          onScoreChanged: scoreBar.scoreAdded(count, numberOfColors)
-         onDoubleScore: scoreBar.doubleScore()
     }
 }
