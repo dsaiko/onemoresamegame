@@ -7,6 +7,12 @@
 .pragma library
 
 
+/**
+  * Global functions
+  *
+  * code signoff date: 2014-08-15
+  */
+
 var digitsPath = "/images/sprites/digit-";
 var spritePath = "/images/sprites/";
 
@@ -14,8 +20,7 @@ var spritePath = "/images/sprites/";
 function shuffle(array) {
   var currentIndex = array.length
     , temporaryValue
-    , randomIndex
-    ;
+    , randomIndex;
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
@@ -33,12 +38,20 @@ function shuffle(array) {
   return array;
 }
 
+function generateRandomArray(size) {
+    var array = []
+
+    for(var i=0; i<size; i++)
+        array.push(Math.random())
+
+    return array
+}
 
 function generateRoomNumber_() {
-  //4 groups of 3 letters separated by dash
-  //rules: no digit can repeat in a group
-  //if group starts with odd digit it needs to end with even and vice versa
-  //group needs to be unique
+    //4 groups of 3 letters separated by dash
+    //rules: no digit can repeat in a group
+    //if group starts with odd digit it needs to end with even and vice versa
+    //group needs to be unique
 
     var number = "";
 
@@ -73,15 +86,6 @@ function generateRoomNumber_() {
     }
 
     return number;
-}
-
-function generateRandomArray(size) {
-    var array = []
-
-    for(var i=0; i<size; i++)
-        array.push(Math.random())
-
-    return array
 }
 
 function generateRoomNumber() {

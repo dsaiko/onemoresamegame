@@ -13,25 +13,38 @@ import "piece.js" as Piece
 /**
   * Board piece item
   *
+  * code signoff date: 2014-08-15
   */
 Item {
     id: piece
 
+    width:                              Math.min(parent.width / boardGridWidth, parent.height / boardGridHeight)
+    height:                             width
+    x:                                  indexX * width
+    y:                                  parent.height - (boardGridHeight - indexY) * height
+
     property int index
-    readonly property int indexX:   index % board.nx
-    readonly property int indexY:   Math.floor(index / board.nx)
+    readonly property int indexX:       index % boardGridWidth
+    readonly property int indexY:       Math.floor(index / boardGridWidth)
 
-    property int color: 0
-    property int shape: 0
-    property alias source: sprite.source
-    property alias mouseArea: mouseArea
+    property int color:                 0
+    property int shape:                 0
 
-    property bool isSelected: false
-    property int  selectionID: 0
-    property bool xAnimationEnabled: false
-    property bool isDestroying: false
+    property alias source:              sprite.source
 
-    property alias shineAnimation: shine
+    //flag if piece is selected
+    property bool isSelected:           false
+    //selection id - to be sure we process only what we have selected (vs fast clicking etc)
+    property int  selectionID:          0
+
+    //is animation of x property enabled? no for spawning new sets
+    property bool xAnimationEnabled:    false
+
+    //if true, piece is playing destroy animation
+    property bool isDestroying:         false
+
+    //to be able to stop shining when menu is on
+    property alias shineAnimation:      shiningStar.shineAnimation
 
     signal mouseClicked(int index)
     signal mouseEntered(int index)
@@ -40,184 +53,109 @@ Item {
     signal destroyPiece
     signal pieceDestroyed(int index)
 
-    Component.onCompleted: Piece.create();
+    onShapeChanged:                     Piece.setScaleAndStarPosition()
+    onWidthChanged:                     Piece.setScaleAndStarPosition()
+    onHeightChanged:                    Piece.setScaleAndStarPosition()
+    onDestroyPiece:                     destroyAnimation.start()
 
-    onIsSelectedChanged: Piece.onSelectionChange();
-
-    width: Math.min(board.width / board.nx, board.height / board.ny)
-    height: width
-    x: indexX * width
-    y: board.height - (board.ny - indexY) * height
-
+    //highlite rectangle
     Rectangle {
-        id: spriteRect;
-        anchors.fill: parent
-        border.color: "black";
-        color: "white"
-        scale: 0.95
-        visible: false;
-
+        anchors.fill:                   parent
+        border.color:                   "black"
+        color:                          "white"
+        scale:                          0.95
+        visible:                        isSelected && !isDestroying
     }
 
+    //piece sprite
     BetterImage {
-        id: sprite
-        anchors.fill: parent
+        id:                             sprite
+        width:                          parent.width
     }
 
 
-
-    onSourceChanged: Piece.setScale()
-    onWidthChanged: Piece.setScale()
-    onHeightChanged: Piece.setScale()
-
-    BetterImage {
-        id: shiningStar
-        width: parent.width / 2
-        height: parent.height / 2
-        opacity: 0
-        source: Global.spritePath+"shine.png"
-        z: 1
+    PieceShiningStar {
+        id:                             shiningStar
     }
 
     Behavior on x {
-        enabled: xAnimationEnabled;
+        enabled:                        xAnimationEnabled
         NumberAnimation {
             easing {
-                type: Easing.OutElastic
-                amplitude: 1
-                period: 1.5
+                type:                   Easing.OutElastic
+                amplitude:              1
+                period:                 1.5
             }
-            duration: 1000
+            duration:                   1000
         }
     }
 
     Behavior on y {
         NumberAnimation {
             easing {
-                type: Easing.OutElastic
-                amplitude: 1
-                period: 1.5
+                type:                   Easing.OutElastic
+                amplitude:              1
+                period:                 1.5
             }
-            duration: 1000
-        }
-    }
-
-
-    SequentialAnimation {
-        id: shine;
-        loops: 1;
-
-        property int delay: Math.random() * 10000;
-        property int duration: Math.random() * 400 + 200;
-
-
-        PropertyAnimation { duration: shine.delay; }
-
-        ParallelAnimation {
-            SequentialAnimation {
-                NumberAnimation {
-                         target: shiningStar
-                         properties: "opacity"
-                         from: 0
-                         to: 0.8
-                         duration: shine.duration
-                         easing {type: Easing.InOutBounce}
-                }
-                NumberAnimation {
-                         target: shiningStar
-                         properties: "opacity"
-                         from: 0.8
-                         to: 0
-                         duration: shine.duration
-                         easing {type: Easing.InOutBounce}
-                }
-            }
-            NumberAnimation {
-                     target: shiningStar
-                     properties: "scale"
-                     from: 0
-                     to: 0.6
-                     duration: 2 * shine.duration
-                     easing {type: Easing.InOutBounce}
-            }
-        }
-
-        onStopped: {
-            shine.delay = Math.random() * 10000;
-            shine.duration = Math.random() * 400 + 200
-            shine.start();
+            duration:                   1000
         }
     }
 
 
     MouseArea {
-        id: mouseArea
-        anchors.fill: parent
+        anchors.fill:                   parent
+        hoverEnabled:                   !PlatformDetails.isMobile
+        onEntered:                      if(!PlatformDetails.isMobile) mouseEntered(index)
+        onExited:                       if(!PlatformDetails.isMobile) mouseExited(index)
+        cursorShape:                    Qt.PointingHandCursor
 
-        hoverEnabled: !PlatformDetails.isMobile;
-        onEntered:    if(!PlatformDetails.isMobile) mouseEntered(index);
-        onExited:     if(!PlatformDetails.isMobile) mouseExited(index);
-        cursorShape:  Qt.PointingHandCursor
-
-        onClicked:  mouseClicked(index);
+        onClicked:                      mouseClicked(index)
     }
 
-    onDestroyPiece: {
-        destroyAnimation.start()
-    }
+
 
     SequentialAnimation {
-
-        id: destroyAnimation;
-        loops: 1;
-
+        id:                             destroyAnimation
 
         NumberAnimation {
-                 target: piece
-                 properties: "scale"
-                 from: 1
+                 target:                piece
+                 properties:            "scale"
                  to: 1.1
-                 duration: Math.random() * 100
-                 easing {type: Easing.OutQuad}
+                 duration:              Math.random() * 100
+                 easing.type:           Easing.OutQuad
         }
 
-         ParallelAnimation {
-
-             ScriptAction {
-                 script: particles.burst(50);
+        ParallelAnimation {
+            ScriptAction {
+                 script:                particles.burst(50)
             }
-
             NumberAnimation {
-                     target: piece
-                     properties: "scale"
-                     from: 1.1
-                     to: 0
-                     duration: 300
-                     easing {type: Easing.InQuad}
+                     target:            piece
+                     properties:        "scale"
+                     to:                0
+                     duration:          300
+                     easing.type:       Easing.InQuad
             }
         }
 
-         onStarted: isDestroying = true;
-         onStopped: pieceDestroyed(index);
+        onStarted:                      isDestroying = true
+        onStopped:                      pieceDestroyed(index)
     }
 
     ParticleSystem {
-        id: particleSystem
-
-        anchors.centerIn: parent
+        anchors.centerIn:               parent
         ImageParticle {
-            source: Global.spritePath + "piece_color_"+ piece.color + "_dust.png"
-            rotationVelocityVariation: 360
+            source:                     Global.spritePath + "piece_color_"+ piece.color + "_dust.png"
+            rotationVelocityVariation:  360
         }
 
         Emitter {
-            id: particles
-            anchors.centerIn: parent
-            emitRate: 0
-            lifeSpan: 400
-            velocity: AngleDirection {angleVariation: 360; magnitude: piece.width * 5; magnitudeVariation: piece.width}
-            size: piece.width / 2
+            id:                         particles
+            anchors.centerIn:           parent
+            emitRate:                   0
+            lifeSpan:                   400
+            velocity:                   AngleDirection {angleVariation: 360; magnitude: piece.width * 5; magnitudeVariation: piece.width}
+            size:                       piece.width / 2
         }
     }
-
 }

@@ -21,6 +21,7 @@
         <file>MenuPanelGames.qml</file>
         <file>MenuPanelScore.qml</file>
         <file>db.js</file>
+        <file>PieceShiningStar.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>sprites/piece_color_1_dust.png</file>

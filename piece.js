@@ -6,66 +6,40 @@
   */
 Qt.include("global.js")
 
-var rotation = 0;
+/**
+  * Javascript functions for Piece
+  *
+  * code signoff date: 2014-08-15
+  */
 
-function create() {
-    shine.start()
-}
-
-
-function isShapeStar() {
-    return shape === 4;
-}
-
-function isShapeSquare() {
-    return shape === 1;
-}
-
-function isShapeCircle() {
-    return shape === 2;
-}
-
-function isShapeTriangle() {
-    return shape === 3;
-}
-
-function isShapePentagon() {
-    return shape === 5;
-}
-
-
-function onSelectionChange() {
-    if(isSelected) {
-        spriteRect.visible = true;
-    } else {
-        spriteRect.visible = false;
+/**
+  * set individual scale for each piece type
+  * and shine star position
+  */
+function setScaleAndStarPosition() {
+    switch(shape) {
+        case 1: //square
+            sprite.scale = 0.8
+            shiningStar.x = - piece.width / 15
+            shiningStar.y = 0
+            break;
+        case 2: //circle
+            sprite.scale = 0.9
+            shiningStar.x = 0
+            shiningStar.y = 0
+            break;
+        case 3: //triangle
+            sprite.scale = 0.9
+            shiningStar.x = piece.width / 10
+            shiningStar.y = piece.height / 6
+            break;
+        case 4: //star
+            sprite.scale = 1
+            shiningStar.x = piece.width / 8
+            shiningStar.y = piece.height / 8
+            break;
+        case 5: //pentagon
+            sprite.scale = 0.9
+            break;
     }
-}
-
-
-function setScale() {
-    if(isShapeStar()) {
-        sprite.scale = 1;
-        shiningStar.x = piece.width / 8;
-        shiningStar.y = piece.height / 8;
-    } else
-    if(isShapeSquare()) {
-        sprite.scale = 0.8;
-        shiningStar.x = - piece.width / 15;
-        shiningStar.y = 0;
-    } else
-    if(isShapeCircle()) {
-        sprite.scale = 0.9;
-        shiningStar.x = 0;
-        shiningStar.y = 0;
-    } else
-    if (isShapeTriangle()) {
-        sprite.scale = 0.9;
-        shiningStar.x = piece.width / 10;
-        shiningStar.y = piece.height / 6;
-    } else
-    if(isShapePentagon()) {
-        sprite.scale = 0.9;
-    }
-
 }

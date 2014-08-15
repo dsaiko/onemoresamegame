@@ -14,17 +14,24 @@ import "board.js" as Board
 Item {
     id: board
 
-    property int nx:    15
-    property int ny:    20
-    property int level: 1
+    property int boardGridWidth:        15
+    property int boardGridHeight:       20
+    property int level:                 1
 
     property string playerName
-    property alias scoreModel: menuPanel.scoreModel
-    property alias roomNumber: menuPanel.roomNumber
+    property alias scoreModel:          menuPanel.scoreModel
+    property alias roomNumber:          menuPanel.roomNumber
 
     signal menuDisplay
     signal resetScore
     signal nextLevel
+
+    signal mouseClicked(int index)
+    signal mouseEntered(int index)
+    signal mouseExited(int index)
+    signal pieceDestroyed(int index)
+
+    signal scoreChanged(int count, int numberOfColors)
 
     Component.onCompleted: {
         Board.init();
@@ -36,27 +43,12 @@ Item {
     MenuPanel {
         id: menuPanel
         visible: false
-        opacity: 1
-
 
         onStartGame10x15: Board.startGame(10,15)
         onStartGame20x15: Board.startGame(20,15)
         onStartGame20x30: Board.startGame(20,30)
         onStartGame40x30: Board.startGame(40,30)
     }
-
-    //piece clicked
-    signal mouseClicked(int index)
-    signal mouseEntered(int index)
-    signal mouseExited(int index)
-
-    signal scoreChanged(int count, int numberOfColors)
-    signal doubleScore
-
-    signal pieceDestroyed(int index)
-
-    property int cx: board.width / nx;
-    property int cy: board.height / ny;
 
     onMouseClicked:     Board.onMouseClicked(index)
     onMouseEntered:     Board.onMouseEntered(index)
@@ -69,7 +61,7 @@ Item {
     ParallelAnimation {
         id: nextLevelAnimation
 
-        property int mainDuration: 2000
+        property int mainDuration: 2500
 
         PropertyAnimation {
             target: board

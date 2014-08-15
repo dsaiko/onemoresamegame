@@ -13,7 +13,7 @@ Qt.include("global.js")
   */
 
 //array of score digits
-var digits = [];
+var digits = []
 
 function init() {
     //load digits[] array
@@ -22,7 +22,7 @@ function init() {
             digits.push(children[i])
     }
 
-    resetScore();
+    resetScore()
 }
 
 function displayLevel() {
@@ -47,7 +47,7 @@ function addScore(count, numberOfColors) {
     }
 
     //disaasemble total score to digits
-    var n = totalScore;
+    var n = totalScore
 
     for(var i=0; i < digits.length; i++) {
         var digit = digits[i]

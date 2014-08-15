@@ -39,8 +39,8 @@ function startGame(x, y) {
     menuPanel.type = 0;
     menuDisplay(false)
     level = 1;
-    nx = x;
-    ny = y;
+    boardGridWidth = x;
+    boardGridHeight = y;
     create();
     resetScore();
     PlatformDetails.saveValue('defaultSize', x+'x'+y);
@@ -63,17 +63,17 @@ function init() {
     }
 
     if(defaultSize === "20x15") {
-        nx = 20;
-        ny = 15;
+        boardGridWidth = 20;
+        boardGridHeight = 15;
     } else if(defaultSize === "20x30") {
-        nx = 20;
-        ny = 30;
+        boardGridWidth = 20;
+        boardGridHeight = 30;
     } else if(defaultSize === "40x30") {
-        nx = 40;
-        ny = 30;
+        boardGridWidth = 40;
+        boardGridHeight = 30;
     } else {
-        nx = 10;
-        ny = 15;
+        boardGridWidth = 10;
+        boardGridHeight = 15;
     }
 
     dbInit();
@@ -95,12 +95,11 @@ function create() {
     shuffle(shapes);
 
     var component = Qt.createComponent("Piece.qml");
-
     var numberOfColors = Math.min(level + 1, 5);
 
-    for(var y = 0; y < ny; y++) {
+    for(var y = 0; y < boardGridHeight; y++) {
         var row = []
-        for(var x = 0; x< nx; x++ ) {
+        for(var x = 0; x< boardGridWidth; x++ ) {
 
             var rnd = Math.floor(Math.random() * numberOfColors);
 
@@ -113,7 +112,7 @@ function create() {
             sprite.source =  spritePath+"piece_color_"+colors[rnd]+"_shape_"+shapes[rnd]+".png";
             sprite.opacity=0.8
 
-            sprite.index = y * nx + x;
+            sprite.index = y * boardGridWidth + x;
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
@@ -140,8 +139,8 @@ function onMouseEntered(index) {
 
     if(index < 0) return;
 
-    var x = index % nx;
-    var y = Math.floor(index / nx);
+    var x = index % boardGridWidth;
+    var y = Math.floor(index / boardGridWidth);
 
     var count = 0;
 
@@ -183,9 +182,9 @@ function onMouseClicked(index) {
 
 function selectSprites(x, y, color, selectionID) {
     if(x < 0 || y < 0) return 0;
-    if(x >= nx || y >= ny) return 0;
+    if(x >= boardGridWidth || y >= boardGridHeight) return 0;
 
-    var i = y * nx + x;
+    var i = y * boardGridWidth + x;
     var count = 0;
 
     var sprite = sprites[i];
@@ -224,11 +223,11 @@ function destroyPiece(index) {
 
         if(!morePieces) {
             //console.log("GOOD - GAME END");
-            saveScore(playerName, nx, ny, level, mainWindow.totalScore);
+            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
             nextLevel();
         } else if(checkGameOver()) {
             //console.log("BAD - GAME END");
-            saveScore(playerName, nx, ny, level, mainWindow.totalScore);
+            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
             endOfGame();
         }
     }
@@ -248,10 +247,10 @@ function checkGameOver() {
     var c = -1;
 
     //check two same colors on top of each other
-    for(var x = 0; x<nx; x++) {
+    for(var x = 0; x<boardGridWidth; x++) {
         c = -1;
-        for(var y = 0; y<ny; y++) {
-            var i = y * nx + x;
+        for(var y = 0; y<boardGridHeight; y++) {
+            var i = y * boardGridWidth + x;
 
             if(sprites[i]) {
                 if(c === sprites[i].color) return false;
@@ -265,10 +264,10 @@ function checkGameOver() {
     }
 
     //check two same colors side by side
-    for(var y = 0; y<ny; y++) {
+    for(var y = 0; y<boardGridHeight; y++) {
         c = -1;
-        for(var x = 0; x<nx; x++) {
-            var i = y * nx + x;
+        for(var x = 0; x<boardGridWidth; x++) {
+            var i = y * boardGridWidth + x;
 
             if(sprites[i]) {
                 if(c === sprites[i].color) return false;
@@ -285,17 +284,17 @@ function checkGameOver() {
 }
 
 function fallDown() {
-    for(var x = 0; x < nx; x++) {
-        for(var y = ny - 2; y >=0; y --) {
-            var i = y*nx + x;
+    for(var x = 0; x < boardGridWidth; x++) {
+        for(var y = boardGridHeight - 2; y >=0; y --) {
+            var i = y*boardGridWidth + x;
             if(sprites[i]) {
 
                 var tempY = y;
                 var tempI = i;
 
-                while(tempY < ny - 1) {
-                    if(sprites[tempI + nx]) break;
-                    tempI += nx;
+                while(tempY < boardGridHeight - 1) {
+                    if(sprites[tempI + boardGridWidth]) break;
+                    tempI += boardGridWidth;
                     tempY ++;
                 }
 
@@ -313,11 +312,11 @@ function fallDown() {
 
 // returns false if there are no more pieces on the board
 function fallLeft() {
-    for(var x = 0; x < nx - 1; x++) {
+    for(var x = 0; x < boardGridWidth - 1; x++) {
         var count = 0;
 
-        for(var y = ny - 1; y >= 0; y--) {
-            var i = y*nx + x;
+        for(var y = boardGridHeight - 1; y >= 0; y--) {
+            var i = y*boardGridWidth + x;
             if(sprites[i]) {
                 count ++;
                 break;
@@ -327,9 +326,9 @@ function fallLeft() {
         if(count == 0) {
             var anyFound = false;
 
-            for(var ix = x + 1; ix < nx; ix++) {
-                for(var y = 0; y < ny; y++) {
-                    var i = y*nx + ix;
+            for(var ix = x + 1; ix < boardGridWidth; ix++) {
+                for(var y = 0; y < boardGridHeight; y++) {
+                    var i = y*boardGridWidth + ix;
 
                     var sprite = sprites[i];
                     if(sprite) {

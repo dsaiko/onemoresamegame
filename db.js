@@ -27,10 +27,10 @@ function dbInit() {
     });
 }
 
-function saveScore(playerName, nx, ny, level, totalScore) {
+function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScore) {
     dbInit();
 
-    var boardSize = nx + "x" + ny;
+    var boardSize = boardGridWidth + "x" + boardGridHeight;
 
     var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
     var data = [playerName, roomNumber, boardSize, level, totalScore];
