@@ -13,35 +13,20 @@ Item {
 
     property alias  source:         img0.source
 
-    property real   margin:         0
-    property real   marginLeft:     0
-    property real   marginRight:    0
-    property real   marginTop:      0
-    property real   marginBottom:   0
+    property real preferredHeight
 
+    height: img0.height
     width: img0.width
 
     BetterImage {
         id: img0
-        height: parent.height
+        preferredHeight: parent.preferredHeight
 
-        margin: parent.margin
-        marginLeft: parent.marginLeft
-        marginRight: parent.marginRight
-        marginTop: parent.marginTop
-        marginBottom: parent.marginBottom
     }
 
     BetterImage {
         id: backupImage;
-        height: parent.height
         visible: false;
-
-        margin: parent.margin
-        marginLeft: parent.marginLeft
-        marginRight: parent.marginRight
-        marginTop: parent.marginTop
-        marginBottom: parent.marginBottom
     }
 
     SequentialAnimation {
@@ -67,6 +52,7 @@ Item {
             script: {
                 backupImage.source = img0.source
                 backupImage.y = 0
+                backupImage.width = img0.width
                 backupImage.visible = true
             }
         }

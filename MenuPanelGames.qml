@@ -212,7 +212,7 @@ Item {
 
             source: Global.spritePath+"btnGame1a.png"
             width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width / 4, parent.height * originalSize.width / originalSize.height) * 0.9
-            height: width * originalSize.height / originalSize.width
+
             x:  horizontalLayout ? (parent.width - 2 * width) / 3 : (parent.width - 4 * width) / 5
             y: horizontalLayout ? (parent.height - 3 * height) : (parent.height - height) / 2
 
@@ -225,7 +225,7 @@ Item {
 
             source: Global.spritePath+"btnGame2a.png"
             width: img1.width
-            height: img1.height
+
             x:  horizontalLayout ? (parent.width - 2 * width) * 2 / 3 + width : img1.x + width + img1.x
             y:  img1.y
 
@@ -239,7 +239,7 @@ Item {
 
             source: Global.spritePath+"btnGame3a.png"
             width: img1.width
-            height: img1.height
+
             x:  horizontalLayout ? img1.x : img2.x + width + img1.x
             y: horizontalLayout ? (parent.height - 1.5 * height) : img1.y
 
@@ -253,7 +253,7 @@ Item {
 
             source: Global.spritePath+"btnGame4a.png"
             width: img1.width
-            height: img1.height
+
             x: horizontalLayout ? img2.x : img3.x + width + img1.x
             y: img3.y
 
@@ -264,17 +264,14 @@ Item {
             id: piece
             opacity: 0.7
 
-            preserveAspectRatio: true
             width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width, parent.height) / 3.2
-            height: width * originalSize.height / originalSize.width
+
             x: (parent.width - width) / 2
             y:  (img1.y - height) / 2
             visible: horizontalLayout
 
             BetterImage {
                 id: face
-
-                preserveAspectRatio: true
                 visible: false
             }
         }

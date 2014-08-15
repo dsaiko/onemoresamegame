@@ -7,41 +7,30 @@
 
 import QtQuick 2.0
 
+/**
+  * Image with better quality than stock QT Image component
+  * you can set "width" or "preferredHeight" property, do not set "height" - that is computed automatically
+  */
+Image {
+    property real preferredHeight
 
-Item {
-    id: betterImage
+    property real aspectRatio
+    fillMode:       Image.PreserveAspectFit
 
-    property alias source:              image.source
-    property bool  preserveAspectRatio: false
-    property alias originalSize:        backupImage.sourceSize
+    onWidthChanged:             onAspectRatioChanged
+    onPreferredHeightChanged:   onAspectRatioChanged
+    Component.onCompleted:      aspectRatio = sourceSize.width / sourceSize.height
 
-    //this should be better than scaling of the image
-    property real margin:       0
-    property real marginLeft:   0
-    property real marginRight:  0
-    property real marginTop:    0
-    property real marginBottom: 0
+    onAspectRatioChanged: {
+        if(aspectRatio != 0) {
+            if(preferredHeight) {
+                width = preferredHeight * aspectRatio
+            }
 
-    width: height * backupImage.sourceSize.width / backupImage.sourceSize.height
-    //height: width * backupImage.sourceSize.height / backupImage.sourceSize.width
-
-    Image {
-        id: image
-
-        sourceSize.width:  parent.width * ( 1 - (margin + marginLeft + marginRight))
-        sourceSize.height: parent.height * ( 1 - (margin + marginTop + marginBottom))
-
-        height: sourceSize.height
-        width: sourceSize.width
-        x: parent.width * (margin + 2*marginLeft) / 2.0
-        y: parent.height * (margin + 2*marginTop) / 2.0
-
-        fillMode: preserveAspectRatio ? Image.PreserveAspectFit : Image.Stretch
+            height = width / aspectRatio
+            sourceSize.width = width
+            sourceSize.height = height
+        }
     }
 
-    Image {
-        id: backupImage
-        visible: false;
-        source: image.source
-    }
 }

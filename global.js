@@ -112,6 +112,3 @@ function validateRoomNumber(number) {
     return true;
 
 }
-
-
-

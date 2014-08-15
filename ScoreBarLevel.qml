@@ -11,7 +11,6 @@ import "global.js" as Global
 
 
 Item {
-
     property int level: 0
 
     BetterImage {
@@ -19,10 +18,8 @@ Item {
         source: Global.spritePath+"level.png"
         x: 0
         y: 0
-        height: scoreBar.height
 
-        marginTop: 0.05
-        marginBottom: marginTop
+        preferredHeight: parent.height
     }
 
     SlidingImage {
@@ -30,12 +27,10 @@ Item {
 
         source: Global.spritePath+"level_0.png";
 
-        x: levelLabel.width
+        x: levelLabel.width + scoreBar.margin /2
         y: 0
 
-        height: scoreBar.height
-        marginTop: 0.05
-        marginBottom: marginTop
+        preferredHeight: parent.height
     }
 
     SlidingImage {
@@ -43,12 +38,10 @@ Item {
 
         source: Global.spritePath+"level_1.png"
 
-        x: levelLabel.width + digit1.width
+        x: digit1.x + digit1.width + scoreBar.margin /2
         y: 0;
 
-        height: scoreBar.height
-        marginTop: 0.05
-        marginBottom: marginTop
+        preferredHeight: parent.height
     }
 
     onLevelChanged: {

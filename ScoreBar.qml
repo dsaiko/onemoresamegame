@@ -21,6 +21,7 @@ Item {
 
     property int level: 0    
     property int totalScore: 0
+    property real margin: height * 0.08
 
     clip: true
 
@@ -31,26 +32,33 @@ Item {
     }
 
 
-    PushButton {
-        id: menuButton
+    Item {
 
-        height: scoreBar.height
-        width: scoreBar.height
-        margin: 0.1
-
-        source: Global.spritePath+"btnMenu.png"
-
-        onClicked: scoreBar.menuDisplay()
-    }
-
-    ScoreBarLevel {
-        id: levelPanel
         z: 1
 
-        x: scoreBar.height;
-        y: 0;
+        x: margin
+        y: margin
 
-        height: scoreBar.height;
+        width:  parent.width - 2 * margin
+        height: parent.height - 2 * margin
+
+        PushButton {
+            id: menuButton
+            preferredHeight: parent.height
+
+            source: Global.spritePath+"btnMenu.png"
+
+           onClicked: scoreBar.menuDisplay()
+        }
+
+        ScoreBarLevel {
+            id: levelPanel
+
+            x: menuButton.width + margin
+            y: 0;
+            height: parent.height
+            width: parent.width - x
+        }
     }
 
 

@@ -21,8 +21,6 @@ Item {
     property real centerX: width / 2
     property real topY: btn1.y
 
-
-
     property real spacing: btn1.height * 2.5 / 3
 
     Item {
@@ -34,7 +32,6 @@ Item {
             id: btn1
 
             width: horizontalLayout ? Math.min(buttons.width / 3, buttons.height / 2.5) : Math.min(buttons.parent.width * 0.9, (buttons.width / 2) / (sideRatio * 1.3))
-            height: width * originalSize.height / originalSize.width
 
             y: horizontalLayout ? btn2.y : btn2.y - 1.2 * height
             x: horizontalLayout ? 0 : centerX - width / 2
@@ -49,8 +46,7 @@ Item {
         PushButton {
             id: btn2
 
-            height: btn1.height
-            width: height * originalSize.width / originalSize.height
+            preferredHeight: btn1.height
 
             y: horizontalLayout ? btn3.y : btn3.y - 1.2 * height
             x: horizontalLayout ? btn1.x + btn1.width + spacing : centerX - width / 2
@@ -62,8 +58,7 @@ Item {
         PushButton {
             id: btn3
 
-            height: btn1.height
-            width: height * originalSize.width / originalSize.height
+            preferredHeight: btn1.height
 
             y: horizontalLayout ? parent.height - 2 * height : parent.height - 1.5 * height
             x: horizontalLayout ? btn2.x + btn2.width + spacing : centerX - width / 2

@@ -59,7 +59,6 @@ Item {
     BetterImage {
         id: sprite
         anchors.fill: parent
-        preserveAspectRatio: true
     }
 
 

@@ -3,7 +3,7 @@
         <file>main.qml</file>
         <file>Background.qml</file>
         <file>ScoreBar.qml</file>
-        <file>Digit.qml</file>
+        <file>ScoreDigit.qml</file>
         <file>Board.qml</file>
         <file>Piece.qml</file>
         <file>global.js</file>

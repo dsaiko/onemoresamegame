@@ -18,9 +18,8 @@ function resetScore() {
     addScore(0, 1);
 }
 
-
 function create() {
-    var component = Qt.createComponent("Digit.qml");
+    var component = Qt.createComponent("ScoreDigit.qml");
 
     for(var i=0; i < numberofDigits; i++) {
         var digit = component.createObject(scoreBar);
@@ -30,7 +29,6 @@ function create() {
 
     resetScore();
 }
-
 
 function addScore(count, numberOfColors) {
 
