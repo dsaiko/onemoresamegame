@@ -34,7 +34,7 @@
  * TODO: resize images
  * TODO: face ?
  * TODO: fix scoring
- * TODO: send version to server
+ * TODO: check files are .gzipping
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

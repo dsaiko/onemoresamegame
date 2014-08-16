@@ -17,7 +17,7 @@ class PlatformDetails : public QObject
 
 public:
 
-    #define APP_BUILD_VERSION "0.9.7-SNAPSHOT"
+    #define APP_BUILD_VERSION "0.9.7"
 
     PlatformDetails(QObject *parent) :QObject(parent), settings("OneMoreSamegame", "onemoresamegame")
     {
