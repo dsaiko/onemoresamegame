@@ -67,7 +67,8 @@ Item {
     //piece sprite
     BetterImage {
         id:                             sprite
-        anchors.fill:                   parent
+        width:                          parent.width
+        source:                         Global.spritePath+"piece_color_1_shape_1.png"
     }
 
     PieceShiningStar {

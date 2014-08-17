@@ -6,52 +6,26 @@
   */
 Qt.include("global.js")
 
+//code signoff date: 2014-08-17
 function newFaceImage() {
 
     //get random piece
-    var shape = Math.floor(Math.random()*5) + 1;
+    var shape = Math.floor(Math.random()*3) + 1;
 
+    //skip 3 and 4 - which are triangle and star
+    if(shape == 3) shape=5;
     var color = Math.floor(Math.random()*5) + 1;
 
     piece.source = spritePath+"piece_color_"+color+"_shape_"+shape+".png";
-
     var cx = piece.width
 
-    if(type == 1) {
-        face.source = spritePath+"happy_face.png";
-        face.visible = true;
-    } else if(type == -1){
+    if(type == -1){
         face.source = spritePath+"sad_face.png";
         face.visible = true;
     } else {
-        face.visible = false;
+        face.source = spritePath+"happy_face.png";
+        face.visible = true;
     }
-
-    if(shape == 1 || shape == 2 || shape == 5) {
-        //rectangle = 1
-        //circle = 2
-        //pentagon = 5
-        var cx2 = (cx * 2) / 3;
-        face.width = cx2;
-        face.height = cx2;
-        face.x = (piece.width - cx2) / 2
-        face.y = cx / 5;
-    } else if (shape == 3){
-        //triagnle
-        var cx2 = (cx * 2) / 5;
-        face.width = cx2;
-        face.height = cx2;
-        face.x = (piece.width - cx2) / 2
-        face.y = cx / 3;
-    } else if (shape == 4){
-            //star
-            var cx2 = (cx * 2) / 5;
-            face.width = cx2;
-            face.height = cx2;
-            face.x = (piece.width - cx2) / 2
-            face.y = cx / 3;
-   }
-
 }
 
 

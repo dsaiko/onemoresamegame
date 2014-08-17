@@ -39,5 +39,4 @@ Image {
             sourceSize.height = height
         }
     }
-
 }

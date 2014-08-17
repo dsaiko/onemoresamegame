@@ -13,7 +13,6 @@ import "menupanel.js" as Panel
 import "board.js" as Board
 
 Item {
-
     id: games
 
     property bool horizontalLayout: parent.width > parent.height
@@ -32,9 +31,9 @@ Item {
     signal getNewImage
 
     x:horizontalLayout ? parent.width / 2 - width * 1.01 : parent.width * 1 / 15
-    y: horizontalLayout ? parent.height * 1 / 20 : ((panelButtons.topY * 0.4 ) - height) / 2
+    y: horizontalLayout ? parent.height * 1 / 20 : panelButtons.topY * 0.04
     width:  horizontalLayout ? Math.min(Math.min(parent.width, parent.height) * 0.8, parent.width / 2.1) : parent.width - 2 * parent.width / 15
-    height: horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : (panelButtons.topY * 0.36 )
+    height: horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : (panelButtons.topY * 0.32 )
 
 
     Rectangle {
@@ -94,10 +93,6 @@ Item {
 
             antialiasing: true
             smooth: true
-            style: Text.Raised
-            styleColor: "transparent"
-            textFormat: Text.StyledText
-
         }
 
     }
@@ -158,10 +153,6 @@ Item {
 
             antialiasing: true
             smooth: true
-            style: Text.Raised
-            styleColor: "transparent"
-            textFormat: Text.StyledText
-
         }
     }
 
@@ -187,10 +178,6 @@ Item {
 
             antialiasing: true
             smooth: true
-            style: Text.Raised
-            styleColor: "transparent"
-            textFormat: Text.StyledText
-
         }
 
     }
@@ -211,10 +198,10 @@ Item {
             opacity: 0.8
 
             source: Global.spritePath+"btnGame1a.png"
-            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width / 4, parent.height * originalSize.width / originalSize.height) * 0.9
+            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width / 4, parent.height * aspectRatio) * 0.9
 
             x:  horizontalLayout ? (parent.width - 2 * width) / 3 : (parent.width - 4 * width) / 5
-            y: horizontalLayout ? (parent.height - 3 * height) : (parent.height - height) / 2
+            y:  horizontalLayout ? smiley.y - 1.3 * height : (parent.height - height) / 2
 
             onClicked: startGame10x15()
         }
@@ -241,7 +228,7 @@ Item {
             width: img1.width
 
             x:  horizontalLayout ? img1.x : img2.x + width + img1.x
-            y: horizontalLayout ? (parent.height - 1.5 * height) : img1.y
+            y: horizontalLayout ? (smiley.y + smiley.height + 0.3*height) : img1.y
 
             onClicked: startGame20x30()
 
@@ -260,19 +247,28 @@ Item {
             onClicked: startGame40x30()
         }
 
-        BetterImage {
-            id: piece
-            opacity: 0.7
-
-            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.width, parent.height) / 3.2
-
+        Item {
+            id: smiley
             x: (parent.width - width) / 2
-            y:  (img1.y - height) / 2
+            width: Math.min(parent.width, parent.height) / 3
+            height: width
+            y:  (parent.height*0.9 - height) / 2
             visible: horizontalLayout
+            opacity: 0.8
+
+
+            BetterImage {
+                id: piece
+                width: parent.width
+                source: Global.spritePath+"piece_color_1_shape_1.png"
+            }
 
             BetterImage {
                 id: face
                 visible: false
+                anchors.fill: parent
+                scale: 0.5
+                source: Global.spritePath+"happy_face.png"
             }
         }
     }
