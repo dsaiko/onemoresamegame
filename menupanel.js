@@ -17,15 +17,17 @@ function newFaceImage() {
     var color = Math.floor(Math.random()*5) + 1;
 
     piece.source = spritePath+"piece_color_"+color+"_shape_"+shape+".png";
+    piece.reComputeAspectRatio();
+
     var cx = piece.width
 
     if(type == -1){
         face.source = spritePath+"sad_face.png";
-        face.visible = true;
     } else {
         face.source = spritePath+"happy_face.png";
-        face.visible = true;
     }
+    face.reComputeAspectRatio()
+    face.visible = true;
 }
 
 

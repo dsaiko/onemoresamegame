@@ -119,6 +119,7 @@ function create() {
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
+            sprite.reComputeAspectRatio()
             sprites.push(sprite)
         }
     }

@@ -260,7 +260,6 @@ Item {
             BetterImage {
                 id: piece
                 width: parent.width
-                source: Global.spritePath+"piece_color_1_shape_1.png"
             }
 
             BetterImage {
@@ -268,7 +267,6 @@ Item {
                 visible: false
                 anchors.fill: parent
                 scale: 0.5
-                source: Global.spritePath+"happy_face.png"
             }
         }
     }

@@ -18,6 +18,8 @@ Image {
     property real aspectRatio
 
     signal          reComputeWidth
+    signal          reComputeAspectRatio
+
     fillMode:       Image.PreserveAspectFit
     smooth:         true
     antialiasing:   true
@@ -25,11 +27,11 @@ Image {
     onWidthChanged:             reComputeWidth()
     onPreferredHeightChanged:   reComputeWidth()
     onAspectRatioChanged:       reComputeWidth()
-    Component.onCompleted:      aspectRatio = sourceSize.width / sourceSize.height
+    Component.onCompleted:      reComputeAspectRatio()
 
     onReComputeWidth:
     {
-        if(aspectRatio != 0) {
+        if(aspectRatio && aspectRatio != 0) {
             if(preferredHeight) {
                 width = preferredHeight * aspectRatio
             }
@@ -39,4 +41,6 @@ Image {
             sourceSize.height = height
         }
     }
+
+    onReComputeAspectRatio: aspectRatio = sourceSize.width / sourceSize.height
 }

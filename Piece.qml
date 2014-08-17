@@ -49,6 +49,7 @@ Item {
     signal mouseEntered(int index)
     signal mouseExited(int index)
     signal destroyPiece
+    signal reComputeAspectRatio
 
     onShapeChanged:                     Piece.setScaleAndStarPosition()
     onWidthChanged:                     Piece.setScaleAndStarPosition()
@@ -68,7 +69,7 @@ Item {
     BetterImage {
         id:                             sprite
         width:                          parent.width
-        source:                         Global.spritePath+"piece_color_1_shape_1.png"
+//        source:                         Global.spritePath+"piece_color_1_shape_1.png"
     }
 
     PieceShiningStar {
@@ -154,4 +155,6 @@ Item {
             size:                       piece.width / 2
         }
     }
+
+    onReComputeAspectRatio:             sprite.reComputeAspectRatio()
 }
