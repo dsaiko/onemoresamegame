@@ -7,12 +7,12 @@
 
 var db = null;
 
+//code signoff date: 2014-08-16
 
 function dbInit() {
     if(db) return;
 
-    db = Sql.LocalStorage.openDatabaseSync("OneMoreSameGame", "2.0", "OneMoreSameGame High Scores", 100);
-
+    db = Sql.LocalStorage.openDatabaseSync("OneMoreSameGame", "3.0", "OneMoreSameGame TopTen Scores", 100);
     db.transaction(function(tx) {
         tx.executeSql(
            'CREATE TABLE IF NOT EXISTS \
@@ -22,7 +22,8 @@ function dbInit() {
                 boardSize TEXT, \
                 level NUMBER, \
                 score NUMBER, \
-                created TEXT\
+                created TEXT, \
+                UNIQUE (roomnumber, boardsize, name, level, score, created) ON CONFLICT REPLACE \
             )');
     });
 }
@@ -36,22 +37,14 @@ function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScor
     var data = [playerName, roomNumber, boardSize, level, totalScore];
 
     db.transaction(function(tx) {
+        //insert score
         tx.executeSql(dataStr, data);
 
-        //clean up the scores
-        tx.executeSql(
-            'delete from topten where roomNumber!=?',
-            [roomNumber]
-        );
+        //remove records from previous room nubmers
+        tx.executeSql('delete from topten where roomNumber!=?', [roomNumber]);
 
         tx.executeSql(
-            'delete \
-             from \
-                topten \
-             where \
-                boardSize=? \
-                and roomNumber=? \
-                and rowid not in ( \
+            'delete from topten where boardSize=? and roomNumber=? and rowid not in ( \
                     select rowid from topten \
                     where \
                     boardSize=? \
@@ -120,10 +113,10 @@ function saveResponse(result) {
 
     db.transaction(function(tx) {
         //clean up the scores
-        tx.executeSql(
-            'delete from topten where roomNumber=?',
-            [roomNumber]
-        );
+//        tx.executeSql(
+//            'delete from topten where roomNumber=?',
+//            [roomNumber]
+//        );
 
         var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, ?)";
 
@@ -171,7 +164,7 @@ function syncScore() {
         }
 
         if(data.length === 0) {
-            //in case there is no data we need to send something
+            //in case there is no data we need to send something to provide room number
             var rs = tx.executeSql(
                         "select '?' as name, ? as roomNumber, '10x15' as boardSize, 1 as level, 0 as score, CURRENT_TIMESTAMP as created",
                         [roomNumber]

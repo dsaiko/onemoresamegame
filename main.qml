@@ -9,44 +9,42 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.0
 
-
+//code signoff date: 2014-08-16
 ApplicationWindow {
-    id: mainWindow
-    property alias totalScore: scoreBar.totalScore
+    id:                                     mainWindow
+    visible:                                true
+    height:                                 Screen.height * 2 / 3
+    width:                                  Screen.width / 2
 
-    visible: true
+    minimumWidth:                           200
+    minimumHeight:                          200
+    title:                                  qsTr("One More SameGame") + " " + PlatformDetails.appVersion
 
-    height: Screen.height * 2 / 3
-    width: Screen.width / 2
-
-    minimumWidth: 200
-    minimumHeight: 300
-    title: qsTr("One More SameGame") + " " + PlatformDetails.appVersion
+    property alias totalScore:              scoreBar.totalScore
 
     Background {
-           anchors.fill: parent
+           anchors.fill:                    parent
     }
 
     AppStatusBar {
-         id: scoreBar
-         width: parent.width
-         height: parent.height / 20
-         anchors.bottom: parent.bottom
+         id:                                scoreBar
 
-         onMenuDisplay: board.menuDisplay()
-         onMenuHide: board.menuDisplay()
+         width:                             parent.width
+         height:                            parent.height / 20
+         anchors.bottom:                    parent.bottom
 
-         level: board.level
+         onMenuDisplay:                     board.menuDisplay()
+         onMenuHide:                        board.menuDisplay()
+
+         level:                             board.level
     }
 
     Board {
-         id: board
-         width: parent.width
-         height: parent.height - scoreBar.height
-         x:0
-         y:0
+         id:                                board
 
-         onResetScore: scoreBar.resetScore()
-         onScoreChanged: scoreBar.scoreAdded(count, numberOfColors)
+         width:                             parent.width
+         height:                            parent.height - scoreBar.height
+         onResetScore:                      scoreBar.resetScore()
+         onScoreChanged:                    scoreBar.scoreAdded(count, numberOfColors)
     }
 }

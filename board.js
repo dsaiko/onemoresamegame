@@ -10,6 +10,8 @@
 Qt.include("global.js")
 Qt.include("db.js")
 
+// code signoff date: 2014-08-16
+
 var sprites = [];
 var globalSelectionID = 1;
 var offsetY = 0;
@@ -77,6 +79,7 @@ function init() {
     }
 
     dbInit();
+    create();
 }
 
 function create() {
@@ -116,7 +119,6 @@ function create() {
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
-            sprite.pieceDestroyed.connect(pieceDestroyed)
             sprites.push(sprite)
         }
     }
@@ -138,6 +140,9 @@ function onMouseEntered(index) {
 
 
     if(index < 0) return;
+    var sprite = sprites[index];
+    if(!sprite) return;
+
 
     var x = index % boardGridWidth;
     var y = Math.floor(index / boardGridWidth);
@@ -148,30 +153,36 @@ function onMouseEntered(index) {
     // select all other pieces. If there will be at least one
     // more sprite selected, we wil lalso select this one
 
-    sprites[index].selectionID = selectionID;
+    sprite.selectionID = selectionID;
 
-    count += selectSprites(x, y-1, sprites[index].color, selectionID);
-    count += selectSprites(x+1, y, sprites[index].color, selectionID);
-    count += selectSprites(x, y+1, sprites[index].color, selectionID);
-    count += selectSprites(x-1, y, sprites[index].color, selectionID);
+    count += selectSprites(x, y-1, sprite.color, selectionID);
+    count += selectSprites(x+1, y, sprite.color, selectionID);
+    count += selectSprites(x, y+1, sprite.color, selectionID);
+    count += selectSprites(x-1, y, sprite.color, selectionID);
 
     if(count > 0) {
-        sprites[index].isSelected = true;
+        sprite.isSelected = true;
     }
 }
 
 function onMouseClicked(index) {
-    if(sprites[index].isSelected) {
+    var sprite = sprites[index];
+    if(!sprite) return;
+    if(sprite.destroying) return;
+
+    if(sprite.isSelected) {
         //second click
 
         var count = 0;
         for(var i=0; i<sprites.length; i++) {
             if(sprites[i] && sprites[i].isSelected) {
                 sprites[i].destroyPiece();
+                sprites[i] = null;
                 count ++;
             }
         }
 
+        if(count > 0) board.fallTimer.restart()
         scoreChanged(count, Math.min(level + 1, 5));
     } else {
         //first click
@@ -179,6 +190,20 @@ function onMouseClicked(index) {
     }
 }
 
+function fallPieces() {
+        fallDown();
+        var morePieces = fallLeft();
+
+        if(!morePieces) {
+            //console.log("GOOD - GAME END");
+            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
+            nextLevel();
+        } else if(checkGameOver()) {
+            //console.log("BAD - GAME END");
+            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
+            endOfGame();
+        }
+}
 
 function selectSprites(x, y, color, selectionID) {
     if(x < 0 || y < 0) return 0;
@@ -200,37 +225,6 @@ function selectSprites(x, y, color, selectionID) {
     }
 
     return count;
-}
-
-function destroyPiece(index) {
-    sprites[index].destroy();
-    sprites[index] = null;
-
-    var count = 0;
-    for(var i=0; i<sprites.length; i++) {
-        if(sprites[i]) {
-            sprites[i].isSelected = false;
-            if(sprites[i].isDestroying) {
-                count++;
-                break;
-            }
-        }
-    }
-
-    if(count == 0) {
-        fallDown();
-        var morePieces = fallLeft();
-
-        if(!morePieces) {
-            //console.log("GOOD - GAME END");
-            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
-            nextLevel();
-        } else if(checkGameOver()) {
-            //console.log("BAD - GAME END");
-            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
-            endOfGame();
-        }
-    }
 }
 
 function endOfGame() {

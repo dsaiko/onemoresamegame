@@ -46,26 +46,21 @@ function addScore(count, numberOfColors) {
         totalScore += Math.pow(count - 1, numberOfColors)
     }
 
-    //disaasemble total score to digits
-    var n = totalScore
+    var n = number_format(totalScore);
 
-    for(var i=0; i < digits.length; i++) {
-        var digit = digits[i]
+    var d = 0;
+    for(var i = n.length - 1; i>=0; i--) {
+        var digit = digits[d ++];
 
-        if(i>0 && i % 3 == 0 && n > 0) {
-            //display thousands separator
+        if(n[i] === ",") {
             digit.source = digitsPath+"_.png"
         } else {
-            var d = n % 10
-            n = Math.floor(n / 10)
-
-            if(n == 0 && d == 0 && i > 0) {
-                //no more characters to print
-                digit.source = digitsPath + "-.png"
-            } else {
-                digit.source = digitsPath + d + ".png"
-            }
+            digit.source = digitsPath + n[i] + ".png"
         }
+    }
+
+    while(d < digits.length) {
+            digits[d ++].source = digitsPath+"-.png"
     }
 }
 

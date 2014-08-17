@@ -40,18 +40,15 @@ Item {
     //is animation of x property enabled? no for spawning new sets
     property bool xAnimationEnabled:    false
 
-    //if true, piece is playing destroy animation
-    property bool isDestroying:         false
-
     //to be able to stop shining when menu is on
     property alias shineAnimation:      shiningStar.shineAnimation
+
+    property alias destroying:          destroyAnimation.running
 
     signal mouseClicked(int index)
     signal mouseEntered(int index)
     signal mouseExited(int index)
-
     signal destroyPiece
-    signal pieceDestroyed(int index)
 
     onShapeChanged:                     Piece.setScaleAndStarPosition()
     onWidthChanged:                     Piece.setScaleAndStarPosition()
@@ -64,15 +61,14 @@ Item {
         border.color:                   "black"
         color:                          "white"
         scale:                          0.95
-        visible:                        isSelected && !isDestroying
+        visible:                        isSelected && !destroying
     }
 
     //piece sprite
     BetterImage {
         id:                             sprite
-        width:                          parent.width
+        anchors.fill:                   parent
     }
-
 
     PieceShiningStar {
         id:                             shiningStar
@@ -138,8 +134,7 @@ Item {
             }
         }
 
-        onStarted:                      isDestroying = true
-        onStopped:                      pieceDestroyed(index)
+        onStopped:                      piece.destroy()
     }
 
     ParticleSystem {

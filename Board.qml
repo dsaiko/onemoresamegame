@@ -11,6 +11,11 @@ import QtQuick.LocalStorage 2.0
 import "global.js" as Global
 import "board.js" as Board
 
+/**
+  * Board component
+  *
+  * code signoff date: 2014-08-16
+  */
 Item {
     id: board
 
@@ -21,6 +26,7 @@ Item {
     property string playerName
     property alias scoreModel:          menuPanel.scoreModel
     property alias roomNumber:          menuPanel.roomNumber
+    property alias fallTimer:           fallTimer
 
     signal menuDisplay
     signal resetScore
@@ -28,85 +34,85 @@ Item {
 
     signal mouseClicked(int index)
     signal mouseEntered(int index)
-    signal mouseExited(int index)
-    signal pieceDestroyed(int index)
+    signal mouseExited(int index)  
 
     signal scoreChanged(int count, int numberOfColors)
 
-    Component.onCompleted: {
-        Board.init();
-        Board.create();
-    }
+    Component.onCompleted:              Board.init()
 
-    onLevelChanged: Board.create()
+    onLevelChanged:                     Board.create()
 
     MenuPanel {
         id: menuPanel
         visible: false
 
-        onStartGame10x15: Board.startGame(10,15)
-        onStartGame20x15: Board.startGame(20,15)
-        onStartGame20x30: Board.startGame(20,30)
-        onStartGame40x30: Board.startGame(40,30)
+        onStartGame10x15:               Board.startGame(10,15)
+        onStartGame20x15:               Board.startGame(20,15)
+        onStartGame20x30:               Board.startGame(20,30)
+        onStartGame40x30:               Board.startGame(40,30)
     }
 
-    onMouseClicked:     Board.onMouseClicked(index)
-    onMouseEntered:     Board.onMouseEntered(index)
-    onMouseExited:      Board.onMouseExited(index)
-    onPieceDestroyed:   Board.destroyPiece(index)
-    onMenuDisplay:      Board.menuDisplay()   
+    onMouseClicked:                     Board.onMouseClicked(index)
+    onMouseEntered:                     Board.onMouseEntered(index)
+    onMouseExited:                      Board.onMouseExited(index)
+    onMenuDisplay:                      Board.menuDisplay()
 
-    onNextLevel: Board.onNextLevel()
+    onNextLevel:                        Board.onNextLevel()
+
+
+    Timer {
+            id:                         fallTimer
+            interval:                   300
+            onTriggered:                Board.fallPieces()
+    }
 
     ParallelAnimation {
         id: nextLevelAnimation
 
-        property int mainDuration: 2500
+        readonly property int mainDuration: 2500
 
         PropertyAnimation {
-            target: board
-            property: "y"
-            from: - board.height
-            to: 0
+            target:                     board
+            property:                   "y"
+            from:                       -board.height
+            to:                         0
 
             easing {
-                type: Easing.OutElastic
-                amplitude: 1
-                period: 1.5
+                type:                   Easing.OutElastic
+                amplitude:              1
+                period:                 1.5
             }
-            duration: nextLevelAnimation.mainDuration
+            duration:                   nextLevelAnimation.mainDuration
         }
 
 
         PropertyAnimation {
-            target: board
-            property: "rotation"
-            from: -360
-            to: 0
+            target:                     board
+            property:                   "rotation"
+            from:                       -360
+            to:                         0
 
             easing {
-                type: Easing.OutElastic
-                amplitude: 1
-                period: 1.5
+                type:                   Easing.OutElastic
+                amplitude:              1
+                period:                 1.5
             }
-            duration: nextLevelAnimation.mainDuration
+            duration:                   nextLevelAnimation.mainDuration
         }
-
 
 
         PropertyAnimation {
-            target: board
-            property: "scale"
-            from: 0
-            to: 1
+            target:                     board
+            property:                   "scale"
+            from:                       0
+            to:                         1
 
             easing {
-                type: Easing.OutElastic
-                amplitude: 1
-                period: 1.5
+                type:                   Easing.OutElastic
+                amplitude:              1
+                period:                 1.5
             }
-            duration: nextLevelAnimation.mainDuration
+            duration:                   nextLevelAnimation.mainDuration
         }
-
     }
 }
