@@ -250,11 +250,10 @@ Item {
         Item {
             id: smiley
             x: (parent.width - width) / 2
-            width: Math.min(parent.width, parent.height) / 3
+            width: horizontalLayout ? Math.min(parent.width, parent.height) / 3 : Math.min(parent.parent.parent.width, parent.parent.parent.height) / 3
             height: width
-            y:  (parent.height*0.9 - height) / 2
-            visible: horizontalLayout
-            opacity: 0.8
+            y:  horizontalLayout ? (parent.height*0.9 - height) / 2 : (parent.parent.parent.height - height) / 3
+            opacity: horizontalLayout ? 0.8 : 1
 
 
             BetterImage {

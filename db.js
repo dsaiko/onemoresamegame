@@ -108,27 +108,20 @@ function reloadScore() {
 
 
 function saveResponse(result) {
-
     dbInit();
 
     db.transaction(function(tx) {
         //clean up the scores
-//        tx.executeSql(
-//            'delete from topten where roomNumber=?',
-//            [roomNumber]
-//        );
-
         var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, ?)";
 
         for(var i=0; i<result.length; i++) {
             var row = result[i];
-            var data = [row[0], row[1], row[2], row[3], row[4], row[5]];
+            var data = [row.name, row.roomNumber, row.boardSize, row.level, row.score, row.created];
             tx.executeSql(dataStr, data);
         }
     });
 
     reloadScore();
-
 }
 
 function syncScore() {
@@ -180,7 +173,7 @@ function syncScore() {
 
 
     var postman = new XMLHttpRequest()
-    postman.open("POST", "http://cgi.samegame.saiko.cz/topten3.php", true);
+    postman.open("POST", "http://cgi.samegame.saiko.cz/topten4.php", true);
     postman.setRequestHeader("Content-Type", "application/json");
     postman.setRequestHeader("Origin", "OneMoreSameGame");
     postman.setRequestHeader("AppVersion", PlatformDetails.appVersion);
@@ -196,5 +189,4 @@ function syncScore() {
           }
     }
     postman.send(postData);
-
 }

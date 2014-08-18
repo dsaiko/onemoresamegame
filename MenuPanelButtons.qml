@@ -13,60 +13,58 @@ import "global.js" as Global
 import "menupanel.js" as Panel
 import "board.js" as Board
 
+//code signoff date: 2014-08-15
 Item {
-    id: buttons
+    id:                                             buttons
 
-    property bool horizontalLayout: parent.width > parent.height
-    property real sideRatio: parent.width / parent.height
-    property real centerX: width / 2
-    property real topY: btn1.y
-
-    property real spacing: btn1.height * 2.5 / 3
+    property bool horizontalLayout:                 parent.width > parent.height
+    property real sideRatio:                        parent.width / parent.height
+    property real centerX:                          width / 2
+    property real topY:                             btn1.y
+    property real spacing:                          btn1.height * 2.5 / 3
 
     Item {
-        height: parent.height
-        x: horizontalLayout ?  (width - (btn1.width + btn2.width + btn3.width + 2 * spacing)) / 2: 0
-        width: parent.width
+        x:                                          horizontalLayout ?  (width - (btn1.width + btn2.width + btn3.width + 2 * spacing)) / 2: 0
+        height:                                     parent.height
+        width:                                      parent.width
 
         PushButton {
-            id: btn1
+            id:                                     btn1
 
-            width: horizontalLayout ? Math.min(buttons.width / 3, buttons.height / 2.5) : Math.min(buttons.parent.width * 0.9, (buttons.width / 2) / (sideRatio * 1.3))
+            y:                                      horizontalLayout ? btn2.y : btn2.y - 1.2 * height
+            x:                                      horizontalLayout ? 0 : centerX - width / 2
+            width:                                  horizontalLayout ? Math.min(buttons.width / 3, buttons.height / 2.5) : Math.min(buttons.parent.width * 0.9, (buttons.width / 2) / (sideRatio * 1.3))
 
-            y: horizontalLayout ? btn2.y : btn2.y - 1.2 * height
-            x: horizontalLayout ? 0 : centerX - width / 2
+            source:                                 Global.spritePath+"btnMenuScores.png"
+            text:                                   qsTr("Sync Scores")
 
-
-            source: Global.spritePath+"btnMenuScores.png"
-            text:qsTr("Sync Scores")
-
-            onClicked: Board.syncScore();
+            onClicked:                              Board.syncScore();
         }
 
         PushButton {
-            id: btn2
+            id:                                     btn2
 
-            preferredHeight: btn1.height
+            y:                                      horizontalLayout ? btn3.y : btn3.y - 1.2 * height
+            x:                                      horizontalLayout ? btn1.x + btn1.width + spacing : centerX - width / 2
+            preferredHeight:                        btn1.height
 
-            y: horizontalLayout ? btn3.y : btn3.y - 1.2 * height
-            x: horizontalLayout ? btn1.x + btn1.width + spacing : centerX - width / 2
+            source:                                 Global.spritePath+"btnMenuUpdates.png"
+            text:                                   qsTr("Check Updates")
 
-            source: Global.spritePath+"btnMenuUpdates.png"
-            text:qsTr("Check Updates")
+            onClicked:                              Qt.openUrlExternally("http://www.samegame.saiko.cz/?checkVersion=" + PlatformDetails.appVersion + "&locale="+Qt.locale().name)
         }
 
         PushButton {
-            id: btn3
+            id:                                     btn3
 
-            preferredHeight: btn1.height
+            y:                                      horizontalLayout ? parent.height - 2 * height : parent.height - 1.5 * height
+            x:                                      horizontalLayout ? btn2.x + btn2.width + spacing : centerX - width / 2
+            preferredHeight:                        btn1.height
 
-            y: horizontalLayout ? parent.height - 2 * height : parent.height - 1.5 * height
-            x: horizontalLayout ? btn2.x + btn2.width + spacing : centerX - width / 2
+            source:                                 Global.spritePath+"btnMenuQuit.png"
+            text:                                   qsTr("Quit")
 
-            source: Global.spritePath+"btnMenuQuit.png"
-            text:qsTr("Quit")
-
-            onClicked: Qt.quit()
+            onClicked:                              Qt.quit()
         }
     }
 }

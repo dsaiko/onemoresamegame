@@ -8,6 +8,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
+import QtGraphicalEffects 1.0
 import QtQuick.LocalStorage 2.0 as Sql
 
 
@@ -69,8 +70,26 @@ Item {
             Repeater {
                 model:                                      16
                 Rectangle {
-                    color:                                  sectionHeader.visible ? "#888888" : "transparent"
                     radius:                                 height / 8
+                    color:                                  "transparent"
+
+                    LinearGradient {
+                            visible:                        sectionHeader.visible
+                            anchors.fill:                   parent
+                            start:                          Qt.point(0, 0)
+                            end:                            Qt.point(parent.height * 2, parent.height / 4)
+                            gradient: Gradient {
+                                GradientStop {
+                                                            position: 0.0;
+                                                            color: Qt.rgba(1,1,1,0.7)
+                                }
+                                GradientStop {
+                                                            position: 1.0;
+                                                            color: "transparent"
+                                }
+                            }
+                        }
+
 
                     height:                                 scoreTable.rowHeight
                     width:                                  scoreTable.width * 0.95
