@@ -4,7 +4,6 @@
   * (c) 2014 Dušan Saiko dusan.saiko@gmail
   * Apache License 2.0
   */
-
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.LocalStorage 2.0 as Sql
@@ -13,7 +12,7 @@ import "global.js" as Global
 import "menupanel.js" as Panel
 import "board.js" as Board
 
-//code signoff date: 2014-08-15
+//code signoff date: 2014-08-21
 Item {
     id:                                             buttons
 

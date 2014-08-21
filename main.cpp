@@ -13,28 +13,16 @@
 #include "platform-details.h"
 
 /**
- * TODO: select proper number of pieces on startup, allow changing number of pieces, saving layout and settings
- * TODO: counter - keep aspect ratio
- * TODO: animation, settings
- * TODO: performance, test fullscreen 75*50
  * TODO: sound
- * TODO: beautifull the code, licence etc
  * TODO: android deployment + android layouts
- * TODO: onMouseOut
- * TODO: FullScreen
  * TODO: resize, mobile resize, mobile layout for 20x15s
- * TODO: Window icon?!
  * TODO: wikipedia: samegame
  * TODO: translation - including app launcher
- * TODO: version in header
  * TODO: man page?
  * TODO: ubuntu, debian, redhat/fedora
  * TODO: screenshot/DEB
  * TODO: internationalization + manpages
  * TODO: resize images
- * TODO: face ?
- * TODO: fix scoring
- * TODO: check files are .gzipping
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

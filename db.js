@@ -4,7 +4,6 @@
   * (c) 2014 Dušan Saiko dusan.saiko@gmail
   * Apache License 2.0
   */
-
 var db = null;
 
 //code signoff date: 2014-08-16
@@ -116,7 +115,7 @@ function saveResponse(result) {
 
         for(var i=0; i<result.length; i++) {
             var row = result[i];
-            var data = [row.name, row.roomNumber, row.boardSize, row.level, row.score, row.created];
+            var data = [row[0], row[1], row[2], row[3], row[4], row[5]];
             tx.executeSql(dataStr, data);
         }
     });
@@ -173,7 +172,7 @@ function syncScore() {
 
 
     var postman = new XMLHttpRequest()
-    postman.open("POST", "http://cgi.samegame.saiko.cz/topten4.php", true);
+    postman.open("POST", "http://cgi.samegame.saiko.cz/topten.php", true);
     postman.setRequestHeader("Content-Type", "application/json");
     postman.setRequestHeader("Origin", "OneMoreSameGame");
     postman.setRequestHeader("AppVersion", PlatformDetails.appVersion);

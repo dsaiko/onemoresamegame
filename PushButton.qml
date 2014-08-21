@@ -4,7 +4,6 @@
   * (c) 2014 Dušan Saiko dusan.saiko@gmail
   * Apache License 2.0
   */
-
 import QtQuick 2.0
 import "global.js" as Global
 
@@ -59,8 +58,5 @@ BetterImage {
         //trying to improve text quality
         antialiasing:                       true
         smooth:                             true
-        style:                              Text.Raised
-        styleColor:                         "transparent"
-        textFormat:                         Text.StyledText
     }
 }

@@ -4,7 +4,6 @@
   * (c) 2014 Dušan Saiko dusan.saiko@gmail
   * Apache License 2.0
   */
-
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.0

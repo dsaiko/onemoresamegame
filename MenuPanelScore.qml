@@ -4,7 +4,6 @@
   * (c) 2014 Dušan Saiko dusan.saiko@gmail
   * Apache License 2.0
   */
-
 import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
@@ -21,27 +20,23 @@ import "db.js" as DB
 
 Item {
     id: score
-    x:                                                      horizontalLayout ? parent.width / 2  + width * 0.01: parent.width * 1 / 15
-    y:                                                      horizontalLayout ? parent.height * 1 / 20 : panelButtons.topY - height * 1.025
-    width:                                                  horizontalLayout ? Math.min(Math.min(parent.width, parent.height) * 0.8, parent.width / 2.1) : parent.width - 2 * parent.width / 15
-    height:                                                 horizontalLayout ? parent.height * 3.5 / 5 + parent.height * 1 / 30 : (panelButtons.topY * 0.62 )
     clip:                                                   true
 
-    readonly property bool horizontalLayout:                parent.width > parent.height
-    property alias headerHeight:                            header.height
     property alias scoreModel:                              scoreModel
 
+    signal getNewImage
+    onGetNewImage: Panel.newFaceImage()
 
     Rectangle {
         id:                                                 header
         width:                                              parent.width
-        height:                                             horizontalLayout ? parent.height / 13 : parent.height / 10
-        radius:                                             Math.min(width, height) / 8
-        color:                                              Qt.rgba(0.2, 0.2, 0.2, 0.8)
+        height:                                             titleHeight
+        radius:                                             titleRadius
+        color:                                              menuPanel.color
 
         Text {
             text:                                           qsTr("Top Scores:")
-            color:                                          Qt.rgba(0.9, 0.9, 0.9, 1)
+            color:                                          "white"
             x:                                              parent.height / 2
             anchors.verticalCenter:                         parent.verticalCenter
             font.pixelSize:                                 Math.floor(Math.min(parent.height * 0.8, parent.width * 0.9 * 0.19) * 0.5)
@@ -52,19 +47,44 @@ Item {
     }
 
 
+    Item {
+         id: smiley
+         x: (scoreTable.width - width) / 2
+         width: Math.min(scoreTable.width, scoreTable.height) / 2.5
+         height: width
+         y:  (scoreTable.height - height) / 2
+         //opacity: horizontalLayout ? 0.8 : 1
+
+
+         BetterImage {
+             id: piece
+             width: parent.width
+             source: Global.spritePath+"piece_color_1_shape_1.png"
+         }
+
+         BetterImage {
+             id: face
+             visible: false
+             anchors.fill: parent
+             scale: 0.5
+             source: Global.spritePath+"happy_face.png"
+         }
+    }
+
     Rectangle {
         id:                                                 scoreTable
         width:                                              header.width
         height:                                             parent.height - y
-        radius:                                             header.radius
+        radius:                                             titleRadius
         color:                                              header.color
         y:                                                  header.visible ? header.y + header.height : header.y
 
-        readonly property real rowHeight:                   horizontalLayout ? Math.min(height, width) / 20 : Math.min(height, width) / 16
+        readonly property real rowHeight:                   isLandscapeLayout ? Math.min(height, width) / 20 : Math.min(height, width) / 16
 
         ListModel {
                 id:                                         scoreModel
         }
+
 
         Column {
             Repeater {
@@ -113,6 +133,8 @@ Item {
                         font.pixelSize:                     scoreTable.rowHeight * 0.6
                         color:                              "#000000"
                         horizontalAlignment:                Text.AlignHCenter
+                        antialiasing:                       true
+                        smooth:                             true
                     }
 
                     Row {
