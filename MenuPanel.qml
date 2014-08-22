@@ -34,6 +34,7 @@ Rectangle {
     readonly property int titleSpacing:         titleHeight / 15
 
     property alias scoreModel:                  panelScore.scoreModel
+    property alias loadingAnimation:            panelScore.loadingAnimation
     property alias playerName:                  menuPanelInputs.playerName
     property alias roomNumber:                  menuPanelInputs.roomNumber
 

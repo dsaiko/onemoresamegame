@@ -19,10 +19,11 @@ import "db.js" as DB
 //code signoff date: 2014-08-17
 
 Item {
-    id: score
+    id:                                                     score
     clip:                                                   true
 
     property alias scoreModel:                              scoreModel
+    property alias loadingAnimation:                        loadingAnimation
 
     signal getNewImage
     onGetNewImage: Panel.newFaceImage()
@@ -44,6 +45,12 @@ Item {
             antialiasing:                                   true
             smooth:                                         true
         }
+
+        MenuPanelScoreLoadingAnimation {
+            id:                                             loadingAnimation
+            visible:                                        false
+        }
+
     }
 
 
@@ -197,4 +204,7 @@ Item {
             Component.onCompleted:                          DB.reloadScore()
         }
     }
+
+
+
 }

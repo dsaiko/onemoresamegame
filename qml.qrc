@@ -23,6 +23,7 @@
         <file>db.js</file>
         <file>PieceShiningStar.qml</file>
         <file>MenuPanelInputs.qml</file>
+        <file>MenuPanelScoreLoadingAnimation.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>sprites/piece_color_1_dust.png</file>
@@ -90,5 +91,6 @@
         <file>sprites/btnGame2a.png</file>
         <file>sprites/btnGame3a.png</file>
         <file>sprites/btnGame4a.png</file>
+        <file>sprites/wheel.png</file>
     </qresource>
 </RCC>

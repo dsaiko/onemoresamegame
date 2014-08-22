@@ -30,6 +30,7 @@ function dbInit() {
 function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScore) {
     dbInit();
 
+console.log("SCORE: ", totalScore)
     var boardSize = boardGridWidth + "x" + boardGridHeight;
 
     var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
@@ -124,6 +125,7 @@ function saveResponse(result) {
 }
 
 function syncScore() {
+    loadingAnimation.visible = true;
     dbInit()
 
     var postData = ""
@@ -178,6 +180,7 @@ function syncScore() {
     postman.setRequestHeader("AppVersion", PlatformDetails.appVersion);
     postman.onreadystatechange = function() {
           if (postman.readyState == postman.DONE) {
+              loadingAnimation.visible = false;
               if(postman.status == 200) {
                   if(postman.responseText && postman.responseText !== "[]") {
                       var result = JSON.parse(postman.responseText)
