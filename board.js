@@ -10,13 +10,13 @@
 Qt.include("global.js")
 Qt.include("db.js")
 
-// code signoff date: 2014-08-16
+// code signoff date: 2014-08-24
 
 var sprites = [];
 var globalSelectionID = 1;
 var offsetY = 0;
 var colorStats = []
-var preliminaryEnd = false
+var selectedSprites = []
 
 function menuDisplay() {
     menuPanel.yAnimationEnabled = false
@@ -137,9 +137,10 @@ function onMouseExited(index) {
 }
 
 function onMouseEntered(index) {
-    for(var i=0; i<sprites.length; i++) {
-        if(sprites[i]) sprites[i].isSelected = false;
+    for(var i=0; i<selectedSprites.length; i++) {
+        if(selectedSprites[i]) selectedSprites[i].isSelected = false;
     }
+    selectedSprites = []
 
     if(PlatformDetails.isMobile == false && PlatformDetails.isMouseButtonPressed) {
         // this is a fix to behaviour when pieces move and mouse stays on the same place and user clicks
@@ -170,6 +171,7 @@ function onMouseEntered(index) {
 
     if(count > 0) {
         sprite.isSelected = true;
+        selectedSprites.push(sprite)
     }
 }
 
@@ -179,21 +181,15 @@ function onMouseClicked(index) {
     if(!sprite) return;
     if(sprite.destroying) return;
 
-    preliminaryEnd = false
-
     if(sprite.isSelected) {
         //second click
 
-        var count = 0;
-        for(var i=0; i<sprites.length; i++) {
-            sprite = sprites[i];
-            if(sprite && sprite.isSelected) {
-                if(( -- colorStats[sprite.color - 1]) == 1) preliminaryEnd = true;
-                sprite.destroyPiece();
-                sprites[i] = null;
-
-                count ++;
-            }
+        var count = selectedSprites.length;
+        for(var i=0; i < count; i++) {
+            sprite = selectedSprites[i];
+            colorStats[sprite.color - 1] --;
+            sprites[sprite.index] = null;
+            sprite.destroyPiece();
         }
 
         if(count > 0) board.fallTimer.restart()
@@ -206,9 +202,17 @@ function onMouseClicked(index) {
 
 function fallPieces() {
         fallDown();
-        var morePieces = fallLeft();
+        fallLeft();
 
-        if(!morePieces) {
+        var preliminaryEnd = false;
+        var totalCount = 0;
+
+        for(var i=0; i< colorStats.length; i++) {
+            totalCount += colorStats[i]
+            if(colorStats[i] === 1) preliminaryEnd = true
+        }
+
+        if(totalCount == 0) {
             //console.log("GOOD - GAME END");
             saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
             nextLevel();
@@ -229,6 +233,7 @@ function selectSprites(x, y, color, selectionID) {
     var sprite = sprites[i];
     if(sprite && sprite.color === color && sprite.selectionID !== selectionID) {
         sprite.isSelected = true;
+        selectedSprites.push(sprite)
         sprite.selectionID = selectionID;
 
         count ++;
@@ -242,7 +247,7 @@ function selectSprites(x, y, color, selectionID) {
 }
 
 function endOfGame() {
-    if(level > 1) {
+    if(level > 2) {
         menuPanel.type = 1;
     } else {
         menuPanel.type = -1;
@@ -255,7 +260,6 @@ function endOfGame() {
         }
     }
 }
-
 
 function getSpriteColor(x, y) {
     if(x < 0 || x >= boardGridWidth) return -1;
@@ -271,13 +275,13 @@ function getSpriteColor(x, y) {
 function checkGameOver() {
      //check two same colors on top of each other or side by side
     for(var x = 0; x<boardGridWidth; x++) {
-        for(var y = 0; y<boardGridHeight; y++) {
+        for(var y = boardGridHeight - 1; y >= 0; y--) {
             var c = getSpriteColor(x, y)
             if(c !== -1) {
                 var c1 = getSpriteColor(x + 1, y)
                 if(c === c1) return false;
 
-                var c2 = getSpriteColor(x, y + 1)
+                var c2 = getSpriteColor(x, y - 1)
                 if(c === c2) return false;
             }
         }
@@ -287,77 +291,48 @@ function checkGameOver() {
 }
 
 function fallDown() {
-    for(var x = 0; x < boardGridWidth; x++) {
-        for(var y = boardGridHeight - 2; y >=0; y --) {
-            var i = y*boardGridWidth + x;
+    for (var x = 0; x < boardGridWidth; x ++) {
+        var emptyCount = 0;
+        for (var y = boardGridHeight - 1; y >= 0; y --) {
+            var i = y * boardGridWidth + x;
             var sprite = sprites[i];
+
             if(sprite) {
-
-                var tempY = y;
-                var tempI = i;
-
-                while(tempY < boardGridHeight - 1) {
-                    if(sprites[tempI + boardGridWidth]) break;
-                    tempI += boardGridWidth;
-                    tempY ++;
-                }
-
-                //can we fall down?
-                if(tempY != y) {
+                if(emptyCount > 0) {
+                    sprite.index = (y + emptyCount) * boardGridWidth + x
                     sprites[i] = null;
-                    sprites[tempI] = sprite;
-                    sprites[tempI].index = tempI;
+                    sprites[sprite.index] = sprite;
                 }
+
+            } else {
+                emptyCount ++;
             }
         }
     }
 }
 
-// returns false if there are no more pieces on the board
 function fallLeft() {
-
-    for(var x = 0; x < boardGridWidth - 1; x++) {
-        var count = 0;
-
-        for(var y = boardGridHeight - 1; y >= 0; y--) {
-            var i = y*boardGridWidth + x;
-            var sprite = sprites[i];
-            if(sprite) {
-                count ++;
-                break;
-            }
-        }
-
-        if(count == 0) {
-            var anyFound = false;
-
-            for(var ix = x + 1; ix < boardGridWidth; ix++) {
-                for(var y = 0; y < boardGridHeight; y++) {
-                    var i = y*boardGridWidth + ix;
-
+    var emptyCount = 0;
+    for (x = 0; x < boardGridWidth; x++) {
+        var maxY = (boardGridHeight - 1) * boardGridWidth + x;
+        if(sprites[maxY]) {
+            if(emptyCount > 0) {
+                for(var y = 0; y < boardGridHeight; y ++) {
+                    var i = y * boardGridWidth + x;
                     var sprite = sprites[i];
                     if(sprite) {
-                        anyFound = true;
                         sprite.xAnimationEnabled = true;
+                        sprite.index = y * boardGridWidth + x - emptyCount
                         sprites[i] = null;
-                        sprites[i-1] = sprite;
-                        sprites[i-1].index = i - 1;
+                        sprites[sprite.index] = sprite;
                     }
                 }
             }
-
-            //make sure we process the same row if again to check if it is still empty
-            if(anyFound) {
-                x--;
-            } else if(x == 0) {
-                return false;
-            }
+        } else {
+            emptyCount ++;
         }
     }
-
-    return true;
 }
-
 
 function onNextLevel() {
     level ++;
@@ -438,8 +413,8 @@ function designBoard(numberOfColors, level) {
             //put a blob inside a grid to random position
             var blobStartX = Math.floor((Math.random() * boardGridWidth) - blobSize)
             var blobStartY = Math.floor((Math.random() * boardGridHeight) - blobSize)
-            for(var blobY = 0; blobY < blobSize; blobY++) {
-                for(var blobX = 0; blobX < blobSize; blobX++) {
+            for(blobY = 0; blobY < blobSize; blobY++) {
+                for(blobX = 0; blobX < blobSize; blobX++) {
                     var c = blob[blobY * blobSize + blobX];
                     if(c >= 0)
                         grid[(blobY + blobStartY) * boardGridWidth + (blobX + blobStartX)] = c
