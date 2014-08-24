@@ -29,8 +29,6 @@ function dbInit() {
 
 function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScore) {
     dbInit();
-
-console.log("SCORE: ", totalScore)
     var boardSize = boardGridWidth + "x" + boardGridHeight;
 
     var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";

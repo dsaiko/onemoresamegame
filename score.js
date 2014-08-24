@@ -42,8 +42,9 @@ function resetScore() {
 
 function addScore(count, numberOfColors) {
 
-    if(count > 0) { //check overflow
-        totalScore += Math.pow(count - 1, numberOfColors)
+    if(count > 0) {
+        //formula for total score
+        totalScore += Math.pow(count - 1, 2) * (numberOfColors - 1)
     }
 
     var n = number_format(totalScore);

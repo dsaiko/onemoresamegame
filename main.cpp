@@ -23,6 +23,9 @@
  * TODO: screenshot/DEB
  * TODO: internationalization + manpages
  * TODO: resize images
+ * TODO: check two - from left bottom
+ * TODO: check one - continously
+ * TODO: falldown/left
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

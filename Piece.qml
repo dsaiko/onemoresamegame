@@ -43,6 +43,7 @@ Item {
     property alias shineAnimation:      shiningStar.shineAnimation
 
     property alias destroying:          destroyAnimation.running
+    property alias mouseEnabled:        mouseArea.enabled
 
     signal mouseClicked(int index)
     signal mouseEntered(int index)
@@ -100,11 +101,12 @@ Item {
 
 
     MouseArea {
+        id:                             mouseArea
         anchors.fill:                   parent
         hoverEnabled:                   !PlatformDetails.isMobile
         onEntered:                      if(!PlatformDetails.isMobile) mouseEntered(index)
         onExited:                       if(!PlatformDetails.isMobile) mouseExited(index)
-        cursorShape:                    Qt.PointingHandCursor
+        cursorShape:                    enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
 
         onClicked:                      mouseClicked(index)
     }
