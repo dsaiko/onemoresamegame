@@ -7,15 +7,17 @@
 var db = null;
 
 //code signoff date: 2014-08-16
+var gameID = "?"
 
 function dbInit() {
     if(db) return;
 
-    db = Sql.LocalStorage.openDatabaseSync("OneMoreSameGame", "3.0", "OneMoreSameGame TopTen Scores", 100);
+    db = Sql.LocalStorage.openDatabaseSync("OneMoreSameGame", "1.0", "OneMoreSameGame TopTen Scores", 100);
     db.transaction(function(tx) {
         tx.executeSql(
            'CREATE TABLE IF NOT EXISTS \
             topten(\
+                gameID TEXT, \
                 name TEXT, \
                 roomNumber TEXT, \
                 boardSize TEXT, \
@@ -29,17 +31,28 @@ function dbInit() {
 
 function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScore) {
     dbInit();
+    if(level === 1) {
+        gameID =  generateUUID("????-????");
+    }
+
     var boardSize = boardGridWidth + "x" + boardGridHeight;
 
-    var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
-    var data = [playerName, roomNumber, boardSize, level, totalScore];
-
     db.transaction(function(tx) {
-        //insert score
-        tx.executeSql(dataStr, data);
-
         //remove records from previous room nubmers
         tx.executeSql('delete from topten where roomNumber!=?', [roomNumber]);
+
+        if(level === 1) {
+            //reset games in db
+            tx.executeSql('update topten set gameID=? where roomNumber=?', ['N/A', roomNumber]);
+        } else {
+            //remove previous scores from the same game
+            tx.executeSql('delete from topten where roomNumber=? and gameID=?', [roomNumber,gameID]);
+        }
+
+        //insert score
+        tx.executeSql("INSERT INTO topten VALUES(?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
+                      [gameID, playerName, roomNumber, boardSize, level, totalScore]
+        );
 
         tx.executeSql(
             'delete from topten where boardSize=? and roomNumber=? and rowid not in ( \
@@ -110,11 +123,11 @@ function saveResponse(result) {
 
     db.transaction(function(tx) {
         //clean up the scores
-        var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, ?)";
+        var dataStr = "INSERT INTO topten VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         for(var i=0; i<result.length; i++) {
             var row = result[i];
-            var data = [row[0], row[1], row[2], row[3], row[4], row[5]];
+            var data = ['N/A', row[0], row[1], row[2], row[3], row[4], row[5]];
             tx.executeSql(dataStr, data);
         }
     });

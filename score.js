@@ -54,14 +54,14 @@ function addScore(count, numberOfColors) {
         var digit = digits[d ++];
 
         if(n[i] === ",") {
-            digit.source = digitsPath+"_.png"
+            digit.source = spritePath+"score_comma.png"
         } else {
-            digit.source = digitsPath + n[i] + ".png"
+            digit.source = spritePath+"score_" + n[i] + ".png"
         }
     }
 
     while(d < digits.length) {
-            digits[d ++].source = digitsPath+"-.png"
+            digits[d ++].source = spritePath+"score.png"
     }
 }
 

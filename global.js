@@ -13,7 +13,6 @@
   * code signoff date: 2014-08-15
   */
 
-var digitsPath = "/images/sprites/digit-";
 var spritePath = "/images/sprites/";
 
 //http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -120,4 +119,20 @@ function validateRoomNumber(number) {
 
 function number_format(number) {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
+
+function generateUUID(pattern) {
+    var digits = "0123456789abcdef";
+    var result = [];
+
+    for(var i=0; i<pattern.length; i++) {
+        var c = pattern[i];
+        if(c === "?") {
+            c = digits[Math.floor(Math.random() * digits.length)];
+        }
+        result.push(c)
+    }
+
+    return result.join("");
 }

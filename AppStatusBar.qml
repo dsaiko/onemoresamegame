@@ -29,7 +29,7 @@ Item {
     //background
     Image {
         anchors.fill:           parent
-        source:                 Global.spritePath+"digit_B.png";
+        source:                 Global.spritePath+"score.png";
     }
 
     //digits
@@ -39,16 +39,23 @@ Item {
     }
 
     Row {
-        spacing:                parent.height * 0.04
-        x:                      spacing * 2
-        y:                      spacing * 2
-        width:                  parent.width - 2 * x
-        height:                 parent.height - 2 * y
+        spacing:                parent.height * 0.1
+        x:                      - parent.width * 0.598
+        y:                      - parent.height / 2
+        width:                  parent.width * 2
+        height:                 parent.height * 2
+        scale:                  0.40
 
-        PushButton {
-            source:             Global.spritePath+"btnMenu.png"
-            preferredHeight:    parent.height
-            onClicked:          menuDisplay()
+        Item {
+            height: parent.height
+            width: height
+            scale: 0.95
+
+            PushButton {
+                source:             Global.spritePath+"icon.png"
+                preferredHeight:    parent.height
+                onClicked:          menuDisplay()
+            }
         }
 
         BetterImage {

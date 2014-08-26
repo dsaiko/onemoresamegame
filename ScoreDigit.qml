@@ -16,7 +16,7 @@ BetterImage {
 
     id:                 digit
     objectName:         "ScoreDigit"
-    source:             Global.digitsPath+"-.png"
+    source:             Global.spritePath+"score.png"
     preferredHeight:    parent.height
     onSourceChanged:    animation.start()
 

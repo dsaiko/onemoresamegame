@@ -34,7 +34,7 @@ Item {
             x:                                      horizontalLayout ? 0 : centerX - width / 2
             width:                                  horizontalLayout ? Math.min(buttons.width / 3, buttons.height / 2.5) : Math.min(buttons.parent.width * 0.9, (buttons.width / 2) / (sideRatio * 1.3))
 
-            source:                                 Global.spritePath+"btnMenuScores.png"
+            source:                                 Global.spritePath+"btn_synchronize.png"
             text:                                   qsTr("Sync Scores")
 
             onClicked:                              Board.syncScore();
@@ -47,7 +47,7 @@ Item {
             x:                                      horizontalLayout ? btn1.x + btn1.width + spacing : centerX - width / 2
             preferredHeight:                        btn1.height
 
-            source:                                 Global.spritePath+"btnMenuUpdates.png"
+            source:                                 Global.spritePath+"btn_update.png"
             text:                                   qsTr("Check Updates")
 
             onClicked:                              Qt.openUrlExternally("http://www.samegame.saiko.cz/?checkVersion=" + PlatformDetails.appVersion + "&locale="+Qt.locale().name)
@@ -60,7 +60,7 @@ Item {
             x:                                      horizontalLayout ? btn2.x + btn2.width + spacing : centerX - width / 2
             preferredHeight:                        btn1.height
 
-            source:                                 Global.spritePath+"btnMenuQuit.png"
+            source:                                 Global.spritePath+"btn_quit.png"
             text:                                   qsTr("Quit")
 
             onClicked:                              Qt.quit()

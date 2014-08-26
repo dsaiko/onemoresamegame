@@ -313,7 +313,7 @@ function fallDown() {
 
 function fallLeft() {
     var emptyCount = 0;
-    for (x = 0; x < boardGridWidth; x++) {
+    for (var x = 0; x < boardGridWidth; x++) {
         var maxY = (boardGridHeight - 1) * boardGridWidth + x;
         if(sprites[maxY]) {
             if(emptyCount > 0) {

@@ -22,7 +22,7 @@
  * TODO: ubuntu, debian, redhat/fedora
  * TODO: screenshot/DEB
  * TODO: internationalization + manpages
- * TODO: resize images
+ * TODO: BUG?
  */
 
 Q_DECL_EXPORT int main(int argc, char *argv[])

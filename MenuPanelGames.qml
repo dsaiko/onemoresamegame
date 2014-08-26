@@ -52,7 +52,7 @@ Item {
 
         PushButton {
             id:                                     img1
-            source:                                 Global.spritePath+"btnGame1a.png"
+            source:                                 Global.spritePath+"btn_game_10x15.png"
 
             x:                                      isLandscapeLayout ? (parent.width - width)/ 2 : (parent.width - 4 * width) / 5
             y:                                      isLandscapeLayout ? (parent.height - 4 * height) / 5 : (parent.height - height) / 2
@@ -64,7 +64,7 @@ Item {
 
         PushButton {
             id:                                     img2
-            source:                                 Global.spritePath+"btnGame2a.png"
+            source:                                 Global.spritePath+"btn_game_20x15.png"
 
             x:                                      isLandscapeLayout ? img1.x : img1.x + width + img1.x
             y:                                      isLandscapeLayout ? img1.y + height + img1.y : img1.y
@@ -76,19 +76,19 @@ Item {
 
         PushButton {
             id:                                     img3
-            source:                                 Global.spritePath+"btnGame3a.png"
+            source:                                 Global.spritePath+"btn_game_20x30.png"
 
             x:                                      isLandscapeLayout ? img1.x : img2.x + width + img1.x
             y:                                      isLandscapeLayout ? img2.y + height + img1.y : img1.y
             width:                                  img1.width
 
             opacity:                                0.8
-            onClicked: startGame20x30()
+            onClicked:                              startGame20x30()
         }
 
         PushButton {
             id:                                     img4
-            source:                                 Global.spritePath+"btnGame4a.png"
+            source:                                 Global.spritePath+"btn_game_40x30.png"
 
             x:                                      isLandscapeLayout ? img2.x : img3.x + width + img1.x
             y:                                      isLandscapeLayout ? img3.y + height + img1.y : img3.y

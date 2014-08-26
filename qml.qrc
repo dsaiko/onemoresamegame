@@ -26,6 +26,26 @@
         <file>MenuPanelScoreLoadingAnimation.qml</file>
     </qresource>
     <qresource prefix="/images">
+        <file>sprites/btn_game_10x15.png</file>
+        <file>sprites/btn_game_20x15.png</file>
+        <file>sprites/btn_game_20x30.png</file>
+        <file>sprites/btn_game_40x30.png</file>
+        <file>sprites/btn_quit.png</file>
+        <file>sprites/btn_synchronize.png</file>
+        <file>sprites/btn_update.png</file>
+        <file>sprites/happy_face.png</file>
+        <file>sprites/icon.png</file>
+        <file>sprites/level.png</file>
+        <file>sprites/level_0.png</file>
+        <file>sprites/level_1.png</file>
+        <file>sprites/level_2.png</file>
+        <file>sprites/level_3.png</file>
+        <file>sprites/level_4.png</file>
+        <file>sprites/level_5.png</file>
+        <file>sprites/level_6.png</file>
+        <file>sprites/level_7.png</file>
+        <file>sprites/level_8.png</file>
+        <file>sprites/level_9.png</file>
         <file>sprites/piece_color_1_dust.png</file>
         <file>sprites/piece_color_1_shape_1.png</file>
         <file>sprites/piece_color_1_shape_2.png</file>
@@ -56,41 +76,21 @@
         <file>sprites/piece_color_5_shape_3.png</file>
         <file>sprites/piece_color_5_shape_4.png</file>
         <file>sprites/piece_color_5_shape_5.png</file>
-        <file>sprites/shine.png</file>
-        <file>sprites/happy_face.png</file>
         <file>sprites/sad_face.png</file>
-        <file>sprites/level.png</file>
-        <file>sprites/level_0.png</file>
-        <file>sprites/level_1.png</file>
-        <file>sprites/level_2.png</file>
-        <file>sprites/level_3.png</file>
-        <file>sprites/level_4.png</file>
-        <file>sprites/level_5.png</file>
-        <file>sprites/level_6.png</file>
-        <file>sprites/level_7.png</file>
-        <file>sprites/level_8.png</file>
-        <file>sprites/level_9.png</file>
-        <file>sprites/btnMenu.png</file>
-        <file>sprites/digit-0.png</file>
-        <file>sprites/digit-1.png</file>
-        <file>sprites/digit-2.png</file>
-        <file>sprites/digit-3.png</file>
-        <file>sprites/digit-4.png</file>
-        <file>sprites/digit-5.png</file>
-        <file>sprites/digit-6.png</file>
-        <file>sprites/digit-7.png</file>
-        <file>sprites/digit-8.png</file>
-        <file>sprites/digit-9.png</file>
-        <file>sprites/digit-_.png</file>
-        <file>sprites/digit--.png</file>
-        <file>sprites/digit_B.png</file>
-        <file>sprites/btnMenuQuit.png</file>
-        <file>sprites/btnMenuScores.png</file>
-        <file>sprites/btnMenuUpdates.png</file>
-        <file>sprites/btnGame1a.png</file>
-        <file>sprites/btnGame2a.png</file>
-        <file>sprites/btnGame3a.png</file>
-        <file>sprites/btnGame4a.png</file>
+        <file>sprites/score.png</file>
+        <file>sprites/score_0.png</file>
+        <file>sprites/score_1.png</file>
+        <file>sprites/score_2.png</file>
+        <file>sprites/score_3.png</file>
+        <file>sprites/score_4.png</file>
+        <file>sprites/score_5.png</file>
+        <file>sprites/score_6.png</file>
+        <file>sprites/score_7.png</file>
+        <file>sprites/score_8.png</file>
+        <file>sprites/score_9.png</file>
+        <file>sprites/score_comma.png</file>
+        <file>sprites/score_dash.png</file>
+        <file>sprites/shine.png</file>
         <file>sprites/wheel.png</file>
     </qresource>
 </RCC>
