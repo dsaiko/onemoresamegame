@@ -24,9 +24,12 @@ public:
     }
 
 
-    Q_PROPERTY(bool isMobile READ isMobile CONSTANT)
-    Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
-    Q_PROPERTY(bool isMouseButtonPressed READ isMouseButtonPressed CONSTANT)
+    Q_PROPERTY(bool     isMobile                READ isMobile               CONSTANT)
+    Q_PROPERTY(QString  buildDate               READ buildDate              CONSTANT)
+    Q_PROPERTY(QString  osType                  READ osType                 CONSTANT)
+    Q_PROPERTY(QString  osVersion               READ osVersion              CONSTANT)
+    Q_PROPERTY(QString  appVersion              READ appVersion             CONSTANT)
+    Q_PROPERTY(bool     isMouseButtonPressed    READ isMouseButtonPressed)
 
     Q_INVOKABLE void saveValue(const QString & key, const QVariant & value) {
         settings.setValue(key, value);
@@ -37,15 +40,14 @@ public:
     }
 
 
-    bool isMobile() {
-#ifdef Q_OS_ANDROID
-   return true;
-#elifdef Q_OS_IOS
-   return true;
-#else
-   return false;
-#endif
+    bool isMobile();
+    QString osType();
+    QString osVersion();
+
+    QString buildDate() {
+        return __DATE__ " " __TIME__;
     }
+
 
     QString appVersion() {
         return APP_BUILD_VERSION;

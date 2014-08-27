@@ -185,10 +185,18 @@ function syncScore() {
 
 
     var postman = new XMLHttpRequest()
+    //note: these system info headers do not query OS for any kind of information,
+    //they just use pre defined macros from standard QT, see osversion.cpp
+    //if you want ot use cgi.samegame.saiko.cz for storing topten results,
+    //you should keep the headers in place
     postman.open("POST", "http://cgi.samegame.saiko.cz/topten.php", true);
     postman.setRequestHeader("Content-Type", "application/json");
     postman.setRequestHeader("Origin", "OneMoreSameGame");
     postman.setRequestHeader("AppVersion", PlatformDetails.appVersion);
+    postman.setRequestHeader("BuildDate", PlatformDetails.buildDate);
+    postman.setRequestHeader("OsType", PlatformDetails.osType);
+    postman.setRequestHeader("OsVersion", PlatformDetails.osVersion);
+
     postman.onreadystatechange = function() {
           if (postman.readyState == postman.DONE) {
               loadingAnimation.visible = false;

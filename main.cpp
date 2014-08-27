@@ -9,8 +9,12 @@
 #include <QQmlContext>
 #include <QIcon>
 #include <QWindow>
+#include <QDebug>
 
 #include "platform-details.h"
+#ifdef Q_OS_UNIX
+    #include <sys/utsname.h>
+#endif
 
 /**
  * TODO: sound
@@ -30,6 +34,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     PlatformDetails platformDetails(&app);
+    qDebug() << "One More Samegame"
+             << platformDetails.appVersion()
+             << platformDetails.buildDate()
+             << platformDetails.osType() + "/" + platformDetails.osVersion()
+    ;
+
     QIcon icon(":/icon.png");
 
 #if QT_VERSION >= 0x050301
@@ -48,5 +58,17 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }
 
     return app.exec();
+}
+
+
+bool PlatformDetails::isMobile() {
+#if defined(Q_OS_BLACKBERRY)
+    return true;
+#elif defined(Q_OS_ANDROID)
+    return true;
+#elif defined(Q_OS_IOS)
+    return true;
+#endif
+    return false;
 }
 
