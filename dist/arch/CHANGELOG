@@ -1,3 +1,13 @@
+2014-08-27 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.9.10 :
+	Creating man page
+	Creating man page
+	Aded Czech and German translation
+	Added OS type detection (using Q_OS_* macros only)
+	Finalized and optimized images
+	Creating development version: 1.0.0-SNAPSHOT
+
 2014-08-24 Dusan Saiko <dusan.saiko@gmail.com>
 
      * 0.9.9 :

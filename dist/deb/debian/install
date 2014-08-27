@@ -3,3 +3,4 @@
 onemoresamegame.png usr/share/pixmaps
 onemoresamegame.xpm usr/share/pixmaps
 onemoresamegame.desktop usr/share/applications
+dist/onemoresamegame.6.gz usr/share/man/man6
