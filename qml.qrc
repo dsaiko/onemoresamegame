@@ -93,4 +93,9 @@
         <file>sprites/shine.png</file>
         <file>sprites/wheel.png</file>
     </qresource>
+    <qresource prefix="/translations">
+        <file>translations/onemoresamegame_de.qm</file>
+        <file>translations/onemoresamegame_fr.qm</file>
+        <file>translations/onemoresamegame_cs.qm</file>
+    </qresource>
 </RCC>

@@ -17,7 +17,7 @@ ApplicationWindow {
 
     minimumWidth:                           200
     minimumHeight:                          200
-    title:                                  qsTr("One More SameGame") + " " + PlatformDetails.appVersion
+    title:                                  "One More SameGame " + PlatformDetails.appVersion
 
     property alias totalScore:              scoreBar.totalScore
 

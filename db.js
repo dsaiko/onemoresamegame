@@ -196,6 +196,7 @@ function syncScore() {
     postman.setRequestHeader("BuildDate", PlatformDetails.buildDate);
     postman.setRequestHeader("OsType", PlatformDetails.osType);
     postman.setRequestHeader("OsVersion", PlatformDetails.osVersion);
+    postman.setRequestHeader("Locale", Qt.locale().name);
 
     postman.onreadystatechange = function() {
           if (postman.readyState == postman.DONE) {
