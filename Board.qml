@@ -45,10 +45,10 @@ Item {
         id: menuPanel
         visible: false
 
-        onStartGame10x15:               Board.startGame(10,15)
-        onStartGame20x15:               Board.startGame(20,15)
-        onStartGame20x30:               Board.startGame(20,30)
-        onStartGame40x30:               Board.startGame(40,30)
+        onStartGame1:                   Board.startGame(10,15, '*')
+        onStartGame2:                   Board.startGame(22,14, '**')
+        onStartGame3:                   Board.startGame(20,30, '***')
+        onStartGame4:                   Board.startGame(40,30, '****')
     }
 
     onMouseClicked:                     Board.onMouseClicked(index)

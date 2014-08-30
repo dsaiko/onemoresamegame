@@ -15,10 +15,10 @@ import "board.js" as Board
 Item {
     id:                                             games
 
-    signal startGame10x15
-    signal startGame20x15
-    signal startGame20x30
-    signal startGame40x30
+    signal startGame1
+    signal startGame2
+    signal startGame3
+    signal startGame4
 
     Rectangle {
         id:                                         header
@@ -52,50 +52,50 @@ Item {
 
         PushButton {
             id:                                     img1
-            source:                                 Global.spritePath+"btn_game_10x15.png"
+            source:                                 Global.spritePath+"btn_game_1.png"
 
             x:                                      isLandscapeLayout ? (parent.width - width)/ 2 : (parent.width - 4 * width) / 5
             y:                                      isLandscapeLayout ? (parent.height - 4 * height) / 5 : (parent.height - height) / 2
             width:                                  isLandscapeLayout ? Math.min(parent.width * 1.3, parent.height * 0.9) / 2.7 : Math.min(parent.width / 4, parent.height * aspectRatio) * 0.9
 
             opacity:                                0.8
-            onClicked:                              startGame10x15()
+            onClicked:                              startGame1()
         }
 
         PushButton {
             id:                                     img2
-            source:                                 Global.spritePath+"btn_game_20x15.png"
+            source:                                 Global.spritePath+"btn_game_2.png"
 
             x:                                      isLandscapeLayout ? img1.x : img1.x + width + img1.x
             y:                                      isLandscapeLayout ? img1.y + height + img1.y : img1.y
             width:                                  img1.width
 
             opacity:                                0.8
-            onClicked:                              startGame20x15()
+            onClicked:                              startGame2()
         }
 
         PushButton {
             id:                                     img3
-            source:                                 Global.spritePath+"btn_game_20x30.png"
+            source:                                 Global.spritePath+"btn_game_3.png"
 
             x:                                      isLandscapeLayout ? img1.x : img2.x + width + img1.x
             y:                                      isLandscapeLayout ? img2.y + height + img1.y : img1.y
             width:                                  img1.width
 
             opacity:                                0.8
-            onClicked:                              startGame20x30()
+            onClicked:                              startGame3()
         }
 
         PushButton {
             id:                                     img4
-            source:                                 Global.spritePath+"btn_game_40x30.png"
+            source:                                 Global.spritePath+"btn_game_4.png"
 
             x:                                      isLandscapeLayout ? img2.x : img3.x + width + img1.x
             y:                                      isLandscapeLayout ? img3.y + height + img1.y : img3.y
             width:                                  img1.width
 
             opacity:                                0.8
-            onClicked:                              startGame40x30()
+            onClicked:                              startGame4()
         }
     }
 }

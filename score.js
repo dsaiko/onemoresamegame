@@ -53,10 +53,12 @@ function addScore(count, numberOfColors) {
     for(var i = n.length - 1; i>=0; i--) {
         var digit = digits[d ++];
 
-        if(n[i] === ",") {
-            digit.source = spritePath+"score_comma.png"
-        } else {
-            digit.source = spritePath+"score_" + n[i] + ".png"
+        if(digit) {
+            if(n[i] === ",") {
+                digit.source = spritePath+"score_comma.png"
+            } else {
+                digit.source = spritePath+"score_" + n[i] + ".png"
+            }
         }
     }
 

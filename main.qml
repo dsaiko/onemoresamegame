@@ -29,7 +29,7 @@ ApplicationWindow {
          id:                                scoreBar
 
          width:                             parent.width
-         height:                            parent.height / 20
+         height:                            parent.height / 17
          anchors.bottom:                    parent.bottom
 
          onMenuDisplay:                     board.menuDisplay()

@@ -17,6 +17,7 @@ var globalSelectionID = 1;
 var offsetY = 0;
 var colorStats = []
 var selectedSprites = []
+var currentBoardSize = '*'
 
 function menuDisplay() {
     menuPanel.yAnimationEnabled = false
@@ -38,22 +39,24 @@ function menuDisplay() {
 }
 
 
-function startGame(x, y) {
+function startGame(x, y, boardSize) {
     menuPanel.type = 0;
-    menuDisplay(false)
+    if(menuPanel.visible)
+        menuDisplay(false)
     level = 1;
     boardGridWidth = x;
     boardGridHeight = y;
     create();
     resetScore();
-    PlatformDetails.saveValue('defaultSize', x+'x'+y);
+    currentBoardSize = boardSize;
+    PlatformDetails.saveValue('defaultSize', boardSize);
 }
 
 
 function init() {
     level = 1;
 
-    var defaultSize = PlatformDetails.loadValue('defaultSize', "10x15");
+    var defaultSize = PlatformDetails.loadValue('defaultSize', "*");
     playerName = PlatformDetails.loadValue('playerName', "?");
     roomNumber = PlatformDetails.loadValue('roomNumber', "?");
 
@@ -65,21 +68,16 @@ function init() {
         PlatformDetails.saveValue('roomNumber', roomNumber);
     }
 
-    if(defaultSize === "20x15") {
-        boardGridWidth = 20;
-        boardGridHeight = 15;
-    } else if(defaultSize === "20x30") {
-        boardGridWidth = 20;
-        boardGridHeight = 30;
-    } else if(defaultSize === "40x30") {
-        boardGridWidth = 40;
-        boardGridHeight = 30;
+    if(defaultSize === "**") {
+        menuPanel.startGame2()
+    } else if(defaultSize === "***") {
+        menuPanel.startGame3()
+    } else if(defaultSize === "**") {
+        menuPanel.startGame4()
     } else {
-        boardGridWidth = 10;
-        boardGridHeight = 15;
+        menuPanel.startGame1()
     }
 
-    dbInit();
     create();
 }
 
@@ -214,11 +212,11 @@ function fallPieces() {
 
         if(totalCount == 0) {
             //console.log("GOOD - GAME END");
-            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
+            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore, currentBoardSize);
             nextLevel();
         } else if(preliminaryEnd || checkGameOver()) {
             //console.log("BAD - GAME END");
-            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore);
+            saveScore(playerName, boardGridWidth, boardGridHeight, level, mainWindow.totalScore, currentBoardSize);
             endOfGame();
         }
 }

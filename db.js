@@ -29,13 +29,11 @@ function dbInit() {
     });
 }
 
-function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScore) {
+function saveScore(playerName, boardGridWidth, boardGridHeight, level, totalScore, boardSize) {
     dbInit();
     if(level === 1) {
         gameID =  generateUUID("????-????");
     }
-
-    var boardSize = boardGridWidth + "x" + boardGridHeight;
 
     db.transaction(function(tx) {
         //remove records from previous room nubmers
@@ -79,11 +77,11 @@ function reloadScore() {
 
     db.transaction(function(tx) {
 
-        var boardSizes = tx.executeSql('select distinct boardSize from topten where roomNumber=? order by boardSize', [roomNumber]);
+        var boardSizes = [ "*", "**", "***", "****"]
         var limit = 3
 
-        for(var n=0; n < boardSizes.rows.length; n++) {
-            var boardSize = boardSizes.rows.item(n).boardSize;
+        for(var n=0; n < boardSizes.length; n++) {
+            var boardSize = boardSizes[n];
 
             var rs = tx.executeSql(
                         'select * from topten where boardSize=? and roomNumber=? and score >= 0 order by score desc limit ?',

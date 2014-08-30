@@ -26,10 +26,6 @@
         <file>MenuPanelScoreLoadingAnimation.qml</file>
     </qresource>
     <qresource prefix="/images">
-        <file>sprites/btn_game_10x15.png</file>
-        <file>sprites/btn_game_20x15.png</file>
-        <file>sprites/btn_game_20x30.png</file>
-        <file>sprites/btn_game_40x30.png</file>
         <file>sprites/btn_quit.png</file>
         <file>sprites/btn_synchronize.png</file>
         <file>sprites/btn_update.png</file>
@@ -92,6 +88,11 @@
         <file>sprites/score_dash.png</file>
         <file>sprites/shine.png</file>
         <file>sprites/wheel.png</file>
+        <file>sprites/btn_game_1.png</file>
+        <file>sprites/btn_game_2.png</file>
+        <file>sprites/btn_game_3.png</file>
+        <file>sprites/btn_game_4.png</file>
+        <file>sprites/rank_star.png</file>
     </qresource>
     <qresource prefix="/translations">
         <file>translations/onemoresamegame_de.qm</file>

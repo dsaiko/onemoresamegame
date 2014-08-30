@@ -38,10 +38,10 @@ Rectangle {
     property alias playerName:                  menuPanelInputs.playerName
     property alias roomNumber:                  menuPanelInputs.roomNumber
 
-    signal startGame10x15
-    signal startGame20x15
-    signal startGame20x30
-    signal startGame40x30
+    signal startGame1
+    signal startGame2
+    signal startGame3
+    signal startGame4
     signal getNewImage
 
     onGetNewImage:                              panelScore.getNewImage()
@@ -80,10 +80,10 @@ Rectangle {
         width:                                  isLandscapeLayout ? lanscapeWidth / 3: parent.width * 0.9
         height:                                 isLandscapeLayout ? panelButtons.topY - titleHeight - y: titleHeight * 3.5
 
-        onStartGame10x15:                       menuPanel.startGame10x15()
-        onStartGame20x15:                       menuPanel.startGame20x15()
-        onStartGame20x30:                       menuPanel.startGame20x30()
-        onStartGame40x30:                       menuPanel.startGame40x30()
+        onStartGame1:                           menuPanel.startGame1()
+        onStartGame2:                           menuPanel.startGame2()
+        onStartGame3:                           menuPanel.startGame3()
+        onStartGame4:                           menuPanel.startGame4()
     }
 
     MenuPanelScore {

@@ -108,7 +108,7 @@ Item {
                             gradient: Gradient {
                                 GradientStop {
                                                             position: 0.0;
-                                                            color: Qt.rgba(1,1,1,0.7)
+                                                            color: Qt.rgba(0.8,0.8,0.8,0.7)
                                 }
                                 GradientStop {
                                                             position: 1.0;
@@ -129,19 +129,25 @@ Item {
 
                     property var rowData:                   (scoreModel.count > dataIndex) ? scoreModel.get(dataIndex) : null
 
-                    Text {
+                    Row {
                         id:                                 sectionHeader
                         visible:                            index % 4 == 0 && (scoreModel.count > headerIndex)
+                        spacing:                            height / 10
 
-                        anchors.verticalCenter:             parent.verticalCenter
+                        anchors.fill:                       parent
+                        anchors.leftMargin:                 spacing
 
-                        text:                               " "+ header
-                        font.bold:                          true
-                        font.pixelSize:                     scoreTable.rowHeight * 0.6
-                        color:                              "#000000"
-                        horizontalAlignment:                Text.AlignHCenter
-                        antialiasing:                       true
-                        smooth:                             true
+
+                        Repeater {
+                            model: header.length
+
+                            Image {
+                                source: Global.spritePath+"rank_star.png"
+                                height: sectionHeader.height * 0.75
+                                width:  height
+                                anchors.verticalCenter: sectionHeader.verticalCenter
+                            }
+                        }
                     }
 
                     Row {
