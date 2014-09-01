@@ -100,6 +100,8 @@ function create() {
     var grid = []
 
     while(true) {
+        var isOK = true;
+
         grid = designBoard(numberOfColors, level)
         colorStats = [0, 0, 0, 0, 0]
         for(i=0; i< boardGridHeight * boardGridWidth; i++) {
@@ -110,12 +112,14 @@ function create() {
 
         //bugfix: do not allow designing board with only one piece of a color
         for(i=0; i<colorStats.length; i++) {
-            if(colorStats[i] < 2) {
-                continue;
+            if(colorStats[i] > 0 && colorStats[i] < 2) {
+                isOK = false;
+                break;
             }
         }
 
-        break;
+        if(isOK)
+            break;
     }
 
     for(i=0; i< boardGridHeight * boardGridWidth; i++) {
