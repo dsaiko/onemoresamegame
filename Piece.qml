@@ -59,7 +59,8 @@ Item {
     //highlite rectangle
     Rectangle {
         anchors.fill:                   parent
-        border.color:                   "black"
+//        border.color:                   "black"
+//        border.width:                   2
         color:                          "white"
         scale:                          0.95
         visible:                        isSelected && !destroying
@@ -69,7 +70,8 @@ Item {
     BetterImage {
         id:                             sprite
         width:                          parent.width
-//        source:                         Global.spritePath+"piece_color_1_shape_1.png"
+        opacity:                        0.8
+        source:                         Global.spritePath+"piece_color_"+color+"_shape_"+shape+".png"
     }
 
     PieceShiningStar {

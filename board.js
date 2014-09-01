@@ -77,8 +77,6 @@ function init() {
     } else {
         menuPanel.startGame1()
     }
-
-    create();
 }
 
 function create() {
@@ -99,35 +97,44 @@ function create() {
     var component = Qt.createComponent("Piece.qml");
     var numberOfColors = Math.min(level + 1, 5);
 
-    var grid = designBoard(numberOfColors, level)
+    var grid = []
 
+    while(true) {
+        grid = designBoard(numberOfColors, level)
+        colorStats = [0, 0, 0, 0, 0]
+        for(i=0; i< boardGridHeight * boardGridWidth; i++) {
+            var rnd = grid[i]
+            var color = colors[rnd]
+            colorStats[color -1]++;
+        }
 
-    for(var y = 0; y < boardGridHeight; y++) {
-        var row = []
-        for(var x = 0; x< boardGridWidth; x++ ) {
+        //bugfix: do not allow designing board with only one piece of a color
+        for(i=0; i<colorStats.length; i++) {
+            if(colorStats[i] < 2) {
+                continue;
+            }
+        }
 
-            var rnd = grid[y * boardGridWidth + x]
-            var sprite = component.createObject(board);
+        break;
+    }
 
-            sprite.color = colors[rnd];
-            sprite.shape = shapes[rnd];
-            sprite.source =  spritePath+"piece_color_"+colors[rnd]+"_shape_"+shapes[rnd]+".png";
-            sprite.opacity=0.8
+    for(i=0; i< boardGridHeight * boardGridWidth; i++) {
+            var rnd = grid[i]
+            var color = colors[rnd]
+            var shape = shapes[rnd];
 
-            sprite.index = y * boardGridWidth + x;
+            var sprite = component.createObject(board, {
+                "color": color,
+                "shape": shape,
+            });
+
+            sprite.index = i;
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
             sprite.reComputeAspectRatio()
             sprites.push(sprite)
-        }
     }
-
-    colorStats = [0, 0, 0, 0, 0]
-    for (var i = 0; i < sprites.length; i++) {
-        colorStats[sprites[i].color - 1]++;
-    }
-
 }
 
 function onMouseExited(index) {
@@ -377,11 +384,11 @@ function designBoard(numberOfColors, level) {
     var grid = [];
 
 
-    var arrayMaxRandomBase =  [ 1,  2,  2,  2,  3, 3, 3, 3, 4, 4] //random base per level
+    var arrayMaxRandomBase =  [ 1,  2,  2,  2,  3, 3, 3, 3, 4, 5] //random base per level
     var arrayBlobSize =       [ 4,  4,  4,  3,  3, 3, 3, 2, 2, 2] //blob size per level
     var arrayBlobRandomness = [20, 20, 15, 15, 10, 5, 4, 3, 2, 2] // reverse blob randomnes
 
-    var maxRadomBase = getLevelConfig(arrayMaxRandomBase, level)
+    var maxRadomBase = getLevelConfig(arrayMaxRandomBase, level - 1)
     for(var y = 0; y < boardGridHeight; y++) {
         for(var x = 0; x< boardGridWidth; x++ ) {
             var rnd = Math.floor(Math.random() * maxRadomBase)
@@ -391,9 +398,9 @@ function designBoard(numberOfColors, level) {
 
     //after lv 10 - the base is fully random
     if(level < 10) {
-        var blobSize = getLevelConfig(arrayBlobSize, level)
+        var blobSize = getLevelConfig(arrayBlobSize, level - 1)
         var blobCount = Math.max(boardGridHeight, boardGridWidth)
-        var blobRandomness = getLevelConfig(arrayBlobRandomness, level)
+        var blobRandomness = getLevelConfig(arrayBlobRandomness, level - 1)
         for(var blobIndex = 0; blobIndex < blobCount; blobIndex ++) {
             //create blob
             var color = Math.floor(Math.random() * numberOfColors)
@@ -409,8 +416,8 @@ function designBoard(numberOfColors, level) {
             }
 
             //put a blob inside a grid to random position
-            var blobStartX = Math.floor((Math.random() * boardGridWidth) - blobSize)
-            var blobStartY = Math.floor((Math.random() * boardGridHeight) - blobSize)
+            var blobStartX = Math.floor(Math.random() * (boardGridWidth - blobSize))
+            var blobStartY = Math.floor(Math.random() * (boardGridHeight - blobSize))
             for(blobY = 0; blobY < blobSize; blobY++) {
                 for(blobX = 0; blobX < blobSize; blobX++) {
                     var c = blob[blobY * blobSize + blobX];

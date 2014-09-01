@@ -46,9 +46,9 @@ Item {
         visible: false
 
         onStartGame1:                   Board.startGame(10,15, '*')
-        onStartGame2:                   Board.startGame(22,14, '**')
+        onStartGame2:                   Board.startGame(23,14, '**')
         onStartGame3:                   Board.startGame(20,30, '***')
-        onStartGame4:                   Board.startGame(40,30, '****')
+        onStartGame4:                   Board.startGame(45,30, '****')
     }
 
     onMouseClicked:                     Board.onMouseClicked(index)
