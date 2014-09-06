@@ -23,7 +23,7 @@ Item {
     property real spacing:                          btn1.height * 2.5 / 3
 
     Item {
-        x:                                          horizontalLayout ?  (width - (btn1.width + btn2.width + btn3.width + 2 * spacing)) / 2: 0
+        x:                                          horizontalLayout ?  (width - (btn1.width + btn2.width + spacing)) / 2: 0
         height:                                     parent.height
         width:                                      parent.width
 
@@ -43,27 +43,14 @@ Item {
         PushButton {
             id:                                     btn2
 
-            y:                                      horizontalLayout ? btn3.y : btn3.y - 1.2 * height
+            y:                                      horizontalLayout ? parent.height - 2 * height : parent.height - 1.5 * height
             x:                                      horizontalLayout ? btn1.x + btn1.width + spacing : centerX - width / 2
             preferredHeight:                        btn1.height
 
             source:                                 Global.spritePath+"btn_update.png"
             text:                                   qsTr("Check Updates")
 
-            onClicked:                              Qt.openUrlExternally("http://www.samegame.saiko.cz/?checkVersion=" + PlatformDetails.appVersion + "&locale="+Qt.locale().name)
-        }
-
-        PushButton {
-            id:                                     btn3
-
-            y:                                      horizontalLayout ? parent.height - 2 * height : parent.height - 1.5 * height
-            x:                                      horizontalLayout ? btn2.x + btn2.width + spacing : centerX - width / 2
-            preferredHeight:                        btn1.height
-
-            source:                                 Global.spritePath+"btn_quit.png"
-            text:                                   qsTr("Quit")
-
-            onClicked:                              Qt.quit()
+            onClicked:                              Qt.openUrlExternally("http://www.samegame.saiko.cz/?checkVersion=" + PlatformDetails.appVersion + "&locale="+Qt.locale().name + "&platform="+PlatformDetails.osType)
         }
     }
 }
