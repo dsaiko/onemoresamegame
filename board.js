@@ -377,8 +377,8 @@ function startShineAnimation(enabled) {
 }
 
 
-function getLevelConfig(arr, level) {
-    if(level < arr.length) return arr[level];
+function getLevelConfig(arr, index) {
+    if(index - 1 < arr.length) return arr[index - 1];
     return arr[arr.length - 1];
 }
 
@@ -392,7 +392,7 @@ function designBoard(numberOfColors, level) {
     var arrayBlobSize =       [ 4,  4,  4,  3,  3, 3, 3, 2, 2, 2] //blob size per level
     var arrayBlobRandomness = [20, 20, 15, 15, 10, 5, 4, 3, 2, 2] // reverse blob randomnes
 
-    var maxRadomBase = getLevelConfig(arrayMaxRandomBase, level - 1)
+    var maxRadomBase = getLevelConfig(arrayMaxRandomBase, level)
     for(var y = 0; y < boardGridHeight; y++) {
         for(var x = 0; x< boardGridWidth; x++ ) {
             var rnd = Math.floor(Math.random() * maxRadomBase)
@@ -402,9 +402,9 @@ function designBoard(numberOfColors, level) {
 
     //after lv 10 - the base is fully random
     if(level < 10) {
-        var blobSize = getLevelConfig(arrayBlobSize, level - 1)
+        var blobSize = getLevelConfig(arrayBlobSize, level)
         var blobCount = Math.max(boardGridHeight, boardGridWidth)
-        var blobRandomness = getLevelConfig(arrayBlobRandomness, level - 1)
+        var blobRandomness = getLevelConfig(arrayBlobRandomness, level)
         for(var blobIndex = 0; blobIndex < blobCount; blobIndex ++) {
             //create blob
             var color = Math.floor(Math.random() * numberOfColors)
