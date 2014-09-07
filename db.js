@@ -151,7 +151,7 @@ function syncScore() {
             var boardSize = boardSizes.rows.item(n).boardSize;
 
             var rs = tx.executeSql(
-                        'select * from topten where boardSize=? and roomNumber=? order by score desc limit ?',
+                        'select name, roomNumber, boardSize, level, score, created from topten where boardSize=? and roomNumber=? order by score desc limit ?',
                         [boardSize, roomNumber, limit]
             );
 
@@ -169,7 +169,7 @@ function syncScore() {
         if(data.length === 0) {
             //in case there is no data we need to send something to provide room number
             var rs = tx.executeSql(
-                        "select '?' as name, ? as roomNumber, '10x15' as boardSize, 1 as level, 0 as score, CURRENT_TIMESTAMP as created",
+                        "select '?' as name, ? as roomNumber, '*' as boardSize, 1 as level, 0 as score, CURRENT_TIMESTAMP as created",
                         [roomNumber]
             );
             for(var i=0; i < rs.rows.length; i++) {
