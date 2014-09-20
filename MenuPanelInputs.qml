@@ -134,7 +134,7 @@ Item {
 
                 anchors.verticalCenter:         inputRoomNr.verticalCenter
                 height:                         parent.height * 0.7
-                width:                          height
+                width:                          parent.height * 0.7
                 anchors.right:                  roomNumberLabel.left
                 anchors.rightMargin:            height / 2
                 onClicked:                      {
