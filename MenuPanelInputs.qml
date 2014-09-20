@@ -128,6 +128,20 @@ Item {
                 antialiasing:                   true
                 smooth:                         true
             }
+
+            PushButton {
+                source:                            "/images/sprites/new_room.png"
+
+                anchors.verticalCenter:         inputRoomNr.verticalCenter
+                height:                         parent.height * 0.7
+                width:                          height
+                anchors.right:                  roomNumberLabel.left
+                anchors.rightMargin:            height / 2
+                onClicked:                      {
+                    textFieldItem2.text = Board.generateRoomNumber()
+
+                }
+            }
         }
     }
 }

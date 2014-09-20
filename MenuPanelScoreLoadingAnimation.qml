@@ -24,12 +24,14 @@ Row {
     anchors.right:              parent.right
     anchors.rightMargin:        spacing
     spacing:                    parent.height * 0.3
+    property bool error:        false
+    property alias hideTimer:   hideTimer
 
     Repeater {
         model:                  3
         BetterImage {
             id:                 img
-            source:             Global.spritePath+"wheel.png"
+            source:             error ? Global.spritePath+"wheel_error.png" : Global.spritePath+"wheel.png"
             preferredHeight:    spacing * 2
             visible:            loading.visible
 
@@ -45,5 +47,13 @@ Row {
 
             onVisibleChanged:  visible ? animation.start() : animation.stop()
         }
+    }
+
+    Timer {
+        id: hideTimer
+            interval: 1500;
+            running: false;
+            repeat: false
+            onTriggered: loading.visible = false
     }
 }

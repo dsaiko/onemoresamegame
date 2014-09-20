@@ -93,6 +93,8 @@
         <file>sprites/btn_game_3.png</file>
         <file>sprites/btn_game_4.png</file>
         <file>sprites/rank_star.png</file>
+        <file>sprites/wheel_error.png</file>
+        <file>sprites/new_room.png</file>
     </qresource>
     <qresource prefix="/translations">
         <file>translations/onemoresamegame_de.qm</file>

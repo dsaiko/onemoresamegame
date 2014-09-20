@@ -134,6 +134,7 @@ function saveResponse(result) {
 }
 
 function syncScore() {
+    loadingAnimation.error = false;
     loadingAnimation.visible = true;
     dbInit()
 
@@ -197,14 +198,17 @@ function syncScore() {
     postman.setRequestHeader("Locale", Qt.locale().name);
 
     postman.onreadystatechange = function() {
-          if (postman.readyState == postman.DONE) {
-              loadingAnimation.visible = false;
+          if (postman.readyState == postman.DONE) {              
               if(postman.status == 200) {
+                  loadingAnimation.visible = false;
                   if(postman.responseText && postman.responseText !== "[]") {
                       var result = JSON.parse(postman.responseText)
                       if(result && result.length > 0)
                         saveResponse(result);
                   }
+              } else {
+                  loadingAnimation.error = true;
+                  loadingAnimation.hideTimer.start();
               }
           }
     }
