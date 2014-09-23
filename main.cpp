@@ -23,7 +23,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-//    QLocale::setDefault(QLocale::German);
+//    QLocale::setDefault(QLocale::Hindi);
 
     QLocale locale;
 

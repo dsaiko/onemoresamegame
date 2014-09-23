@@ -133,10 +133,10 @@ Item {
                 source:                            "/images/sprites/new_room.png"
 
                 anchors.verticalCenter:         inputRoomNr.verticalCenter
-                height:                         parent.height * 0.7
-                width:                          parent.height * 0.7
-                anchors.right:                  roomNumberLabel.left
-                anchors.rightMargin:            height / 2
+                height:                         parent.height * 0.8
+                width:                          parent.height * 0.8
+                anchors.left:                   inputRoomNr.left
+                anchors.leftMargin:             height / 2
                 onClicked:                      {
                     textFieldItem2.text = Board.generateRoomNumber()
 

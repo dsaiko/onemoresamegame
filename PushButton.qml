@@ -51,7 +51,7 @@ BetterImage {
         x:                                  parent.height * 1.2
         anchors.verticalCenter:             parent.verticalCenter
 
-        font.pixelSize:                     Math.floor(parent.height * 2 / 3.7)
+        font.pixelSize:                     parent.height * 2 / 4.5
         font.bold:                          true
 
         //following probably does not have any effect,

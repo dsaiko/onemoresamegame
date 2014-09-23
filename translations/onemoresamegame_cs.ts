@@ -6,12 +6,12 @@
     <message>
         <location filename="../MenuPanelButtons.qml" line="38"/>
         <source>Sync Scores</source>
-        <translation>Synch. skóre</translation>
+        <translation>Synchronizace skóre</translation>
     </message>
     <message>
         <location filename="../MenuPanelButtons.qml" line="51"/>
         <source>Check Updates</source>
-        <translation>Aktualizovat</translation>
+        <translation>Zjistit aktualizace</translation>
     </message>
     <message>
         <location filename="../MenuPanelButtons.qml" line="64"/>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../MenuPanelInputs.qml" line="119"/>
         <source>Room #:</source>
-        <translation>Číslo místnosti:</translation>
+        <translation>Místnost č.:</translation>
     </message>
 </context>
 <context>
