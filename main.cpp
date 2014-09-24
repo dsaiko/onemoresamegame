@@ -23,9 +23,28 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-//    QLocale::setDefault(QLocale::Hindi);
+//    QLocale::setDefault(QLocale(QLocale::Japanese, QLocale::Taiwan));
 
     QLocale locale;
+
+    const QString translations[] = {
+        ":/translations/translations/onemoresamegame_" + locale.name() + ".qm",
+        ":/translations/translations/onemoresamegame_" + locale.name().left(2) + ".qm",
+        ":/translations/translations/onemoresamegame_en.qm"
+    };
+
+    QTranslator translator;
+
+    for(int i=0; i<2; i++) {
+        QString translation = translations[i];
+//qDebug() << translation;
+        if(QFile(translation).exists()) {
+            qDebug() << "Setting translation:" << locale.name();
+            translator.load(translation);
+            app.installTranslator(&translator);
+            break;
+        }
+    }
 
     PlatformDetails platformDetails(&app);
     qDebug() << "One More Samegame"
@@ -34,16 +53,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
              << platformDetails.osType() + "/" + platformDetails.osVersion()
              << locale.name()
     ;
-
-
-    QString translation = ":/translations/translations/onemoresamegame_" + locale.name().left(2) + ".qm";
-    QTranslator translator;
-
-    if(QFile(translation).exists()) {
-        qDebug() << "Setting translation:" << locale.name();
-        translator.load(translation);
-        app.installTranslator(&translator);
-    }
 
     QIcon icon(":/icon.png");
 

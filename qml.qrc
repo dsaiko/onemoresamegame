@@ -103,5 +103,10 @@
         <file>translations/onemoresamegame_en.qm</file>
         <file>translations/onemoresamegame_pl.qm</file>
         <file>translations/onemoresamegame_hi.qm</file>
+        <file>translations/onemoresamegame_zh_CN.qm</file>
+        <file>translations/onemoresamegame_zh_TW.qm</file>
+        <file>translations/onemoresamegame_es.qm</file>
+        <file>translations/onemoresamegame_it.qm</file>
+        <file>translations/onemoresamegame_ja.qm</file>
     </qresource>
 </RCC>
