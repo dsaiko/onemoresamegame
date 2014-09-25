@@ -108,5 +108,6 @@
         <file>translations/onemoresamegame_es.qm</file>
         <file>translations/onemoresamegame_it.qm</file>
         <file>translations/onemoresamegame_ja.qm</file>
+        <file>translations/onemoresamegame_ru.qm</file>
     </qresource>
 </RCC>
