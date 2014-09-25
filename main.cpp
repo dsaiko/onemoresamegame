@@ -25,7 +25,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 //    QLocale::setDefault(QLocale(QLocale::Russian, QLocale::Taiwan));
 
-    QLocale locale;
+    QLocale locale = QLocale::system();
 
     const QString translations[] = {
         ":/translations/translations/onemoresamegame_" + locale.name() + ".qm",
