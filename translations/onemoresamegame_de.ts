@@ -4,56 +4,47 @@
 <context>
     <name>MenuPanelButtons</name>
     <message>
-        <location filename="../MenuPanelButtons.qml" line="38"/>
+        <location filename="../MenuPanelButtons.qml" line="32"/>
         <source>Sync Scores</source>
-        <translation>Ergebnisse sync.</translation>
+        <translation type="unfinished">Punkte synchronisieren</translation>
     </message>
     <message>
-        <location filename="../MenuPanelButtons.qml" line="51"/>
+        <location filename="../MenuPanelButtons.qml" line="60"/>
         <source>Check Updates</source>
-        <translation>Aktualisieren</translation>
+        <translation>Updates überprüfen</translation>
     </message>
     <message>
-        <location filename="../MenuPanelButtons.qml" line="64"/>
         <source>Quit</source>
-        <translation>Beenden</translation>
+        <translation type="vanished">Beenden</translation>
     </message>
 </context>
 <context>
     <name>MenuPanelGames</name>
     <message>
-        <location filename="../MenuPanelGames.qml" line="31"/>
+        <location filename="../MenuPanelGames.qml" line="18"/>
         <source>Start a New Game:</source>
-        <translation>Neue Spiele:</translation>
+        <translation>Ein neues Spiel starten:</translation>
     </message>
 </context>
 <context>
     <name>MenuPanelInputs</name>
     <message>
-        <location filename="../MenuPanelInputs.qml" line="67"/>
+        <location filename="../MenuPanelInputs.qml" line="57"/>
         <source>Your Name:</source>
         <translation>Dein Name:</translation>
     </message>
     <message>
-        <location filename="../MenuPanelInputs.qml" line="119"/>
+        <location filename="../MenuPanelInputs.qml" line="107"/>
         <source>Room #:</source>
-        <translation>Zimmer #</translation>
+        <translation>Zimmer-Nr.:</translation>
     </message>
 </context>
 <context>
     <name>MenuPanelScore</name>
     <message>
-        <location filename="../MenuPanelScore.qml" line="39"/>
+        <location filename="../MenuPanelScore.qml" line="25"/>
         <source>Top Scores:</source>
-        <translation>Beste Ergebnisse:</translation>
-    </message>
-</context>
-<context>
-    <name>db</name>
-    <message>
-        <location filename="../db.js" line="102"/>
-        <source>lv.</source>
-        <translation type="unfinished"></translation>
+        <translation>Höchstpunktzahlen:</translation>
     </message>
 </context>
 </TS>
