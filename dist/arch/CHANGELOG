@@ -1,3 +1,42 @@
+2014-10-03 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 1.2 :
+	Translation finished
+	Adding French translation
+	German translation
+	Changing default locale to system locale
+	Translating to RU
+	Adding Chinese, Japanese, Italian and Spanish translation
+	Translating to Polish and Hindu
+	Creating development version: 1.2-SNAPSHOT
+
+2014-09-20 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 1.1 :
+	Fixing binding loop
+	Creating development version: 1.1-SNAPSHOT
+
+2014-09-20 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 1.0 :
+	Releasing version 1.0
+	Last code finilization
+	Code finalization
+	Removing Quit button
+	Bugfixing level creation
+	Bugfixing level creation
+	Redesigning levels
+	Adding sql module to .pro file
+	Fixing debian vs ubuntu installation package
+	Creating development version: 0.9.12-SNAPSHOT
+
+2014-08-27 Dusan Saiko <dusan.saiko@gmail.com>
+
+     * 0.9.11 :
+	Dist packages for Linux
+	Adjusting rpm, arch and deb deployment
+	Creating development version: 0.9.11-SNAPSHOT
+
 2014-08-27 Dusan Saiko <dusan.saiko@gmail.com>
 
      * 0.9.10 :

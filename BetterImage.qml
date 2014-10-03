@@ -35,11 +35,16 @@ Image {
                 width = preferredHeight * aspectRatio
             }
 
-            height = width / aspectRatio
-            sourceSize.width = width
-            sourceSize.height = height
+            if(width != 0) {
+                height = width / aspectRatio
+                sourceSize.width = width
+                sourceSize.height = height
+            }
+
         }
     }
 
-    onReComputeAspectRatio: aspectRatio = sourceSize.width / sourceSize.height
+    onReComputeAspectRatio: {
+        aspectRatio = sourceSize.width / sourceSize.height
+    }
 }

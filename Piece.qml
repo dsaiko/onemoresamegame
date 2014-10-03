@@ -26,8 +26,8 @@ Item {
     readonly property int indexX:       index % boardGridWidth
     readonly property int indexY:       Math.floor(index / boardGridWidth)
 
-    property int color:                 0
-    property int shape:                 0
+    property int color:                 1
+    property int shape:                 1
 
     property alias source:              sprite.source
 
@@ -70,6 +70,7 @@ Item {
     BetterImage {
         id:                             sprite
         width:                          parent.width
+        height:                         parent.width
         opacity:                        0.8
         source:                         Global.spritePath+"piece_color_"+color+"_shape_"+shape+".png"
     }

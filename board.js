@@ -132,12 +132,14 @@ function create() {
                 "shape": shape,
             });
 
-            sprite.index = i;
             sprite.mouseClicked.connect(mouseClicked)
             sprite.mouseEntered.connect(mouseEntered)
             sprite.mouseExited.connect(mouseExited)
             sprite.reComputeAspectRatio()
+            sprite.visible = true
+            sprite.index = i
             sprites.push(sprite)
+
     }
 }
 
